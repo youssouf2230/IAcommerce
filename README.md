@@ -125,3 +125,6 @@ FONCTIONNALITÉS INTELLIGENTES :
     
     Interface adaptée
 
+# Conception :
+    .....
+    .....
