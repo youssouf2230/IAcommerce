@@ -1,5 +1,5 @@
 # -IAcommerce
- IAcommerce(commerce intelligent 90% automatisé)
+IAcommerce(commerce intelligent 90% automatisé).
 
 FONCTIONNALITÉS INTELLIGENTES :
     🧠 1. Moteur de Recommandation Intelligent
