@@ -124,6 +124,11 @@ FONCTIONNALITÉS INTELLIGENTES :
     Push notifications IA
     
     Interface adaptée
+📱 Multilinguistique:
+
+    Français
+    Anglais
+    Arabe
 
 # Conception :
     .....
