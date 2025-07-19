@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/footer'
 import Header from '@/components/layout/header'
+import ChatBot from '@/components/shared/chat-bot'
 import React from 'react'
 
 export default function layout({ children }: { children: React.ReactElement }) {
@@ -9,6 +10,8 @@ export default function layout({ children }: { children: React.ReactElement }) {
             <div className=' '>
                 {children}
             </div>
+
+            <ChatBot/>
             <Footer />
         </div>
     )

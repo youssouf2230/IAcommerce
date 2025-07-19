@@ -40,6 +40,8 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {children}
+
+          
         </ThemeProvider>
 
          </NextIntlClientProvider>
