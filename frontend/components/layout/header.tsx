@@ -17,8 +17,8 @@ import ToggleTheme from "../shared/toggle-theme"
 import { ShoppingCart } from "lucide-react"
 
 const navigationLinks = [
-  { href: "#", label: "Home", active: true },
-  { href: "#", label: "Shop" },
+  { href: "/", label: "Home", active: true },
+  { href: "/shop", label: "Shop" },
   { href: "#", label: "Categories" },
   { href: "#", label: "Deals" },
   { href: "#", label: "Contact" },
