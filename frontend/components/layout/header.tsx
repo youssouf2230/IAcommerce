@@ -76,7 +76,7 @@ export default function Header() {
 
           {/* Auth Buttons */}
           <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link href="/signin">{t('auth.signIn')}</Link>
+            <Link href="/login">{t('auth.signIn')}</Link>
           </Button>
           <ToggleTheme />
           <LanguageSwitcher />
