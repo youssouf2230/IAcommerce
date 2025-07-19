@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import { Heart, Plus, ShoppingCart, Star } from 'lucide-react';
+import { Heart, Plus, Star } from 'lucide-react';
 import { Button } from '../ui/button';
+import SectionLayout from '../layout/section-layout';
 
 const FeaturesProducts = () => {
     const products = [
@@ -36,14 +37,8 @@ const FeaturesProducts = () => {
         'https://resource.logitech.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s-mac-bluetooth-mouse/gallery/space-grey/mx-master-3s-for-mac-mouse-top-view-space-grey.png';
 
     return (
-        <div className='py-8'>
-            
-            <div className=' mb-8'>
-                <h1 className='text-4xl font-bold'>Our Featured Products</h1>
-                <p className='text-muted-foreground-600 mt-2'>Discover our best-selling accessories crafted for comfort, style, and performance.</p>
-            </div>
-
-            
+        <SectionLayout title='Featured Products' description='Discover our best-selling accessories crafted for comfort, style, and performance.'>
+             
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
                 {products.map((product, index) => (
                     <div key={index} className=' p-6 relative  bg-card group rounded-lg '>
@@ -56,7 +51,7 @@ const FeaturesProducts = () => {
                             alt={product.name}
                             width={300}
                             height={300}
-                            className=' aspect-square object-cover'
+                            className=' aspect-square object-cover  m-auto'
                         />
                         <h3 className='mt-3 font-semibold text-xl'>{product.name}</h3>
                         <div className='flex items-center gap-2 mt-1'>
@@ -77,7 +72,7 @@ const FeaturesProducts = () => {
                     </div>
                 ))}
             </div>
-        </div>
+        </SectionLayout>
     );
 };
 

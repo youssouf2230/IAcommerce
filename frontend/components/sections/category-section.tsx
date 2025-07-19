@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import React from 'react';
+import SectionLayout from '../layout/section-layout';
 
 const CategorySection = () => {
     const category = [{
@@ -53,14 +54,8 @@ const CategorySection = () => {
     }]
     return (
 
-        <div className=''>
-            <div className='flex flex-col mb-10 gap-1'>
-            <h1 className='text-4xl font-semibold '>Shop by product category</h1>
-            <p className='text-muted-foreground '>Find the perfect device for your needs from our curated collections</p>
-
-            </div>
-
-
+        <SectionLayout description='Find the perfect device for your needs from our curated collections' title='Shop by product category'>
+           
             <div className='grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4 gap-y-10 '>
                 {category.map((item: any, index) => {
                  
@@ -81,7 +76,7 @@ const CategorySection = () => {
 
             </div>
 
-        </div>
+        </SectionLayout>
     );
 }
 

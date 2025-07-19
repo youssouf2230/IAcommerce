@@ -50,7 +50,7 @@ const HeroSection = () => {
         // ScrollTrigger animation for text overlay
         gsap.to(textRef.current, {
             y: -50,
-            scale: 1.1,
+            scale:1.1,
             scrollTrigger: {
                 trigger: animationRef.current,
                 start: "top top",
@@ -66,7 +66,7 @@ const HeroSection = () => {
     }, { scope: animationRef });
 
     return (
-        <section ref={animationRef} className="w-full px-4 py-20 md:py-28 bg-background text-center relative ">
+        <section ref={animationRef} className="w-full px-4 pt-20 bg-background text-center relative  ">
             <div className="max-w-3xl mx-auto space-y-6">
                 <h1 className="text-5xl md:text-6xl font-bold tracking-tight md:leading-18 animate">
                     Your One-Stop Shop for Everything Tech
@@ -100,7 +100,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Text Overlay */}
-                <div ref={textRef} className='bg-secondary/25 backdrop-blur-3xl md:text-[2.4rem] text-2xl rounded-md text-foreground/90 md:leading-18 leading-12 z-20 p-7 py-20 relative'>
+                <div ref={textRef} className=' bg-secondary/25 backdrop-blur-3xl md:text-[2.5rem] font-medium text-2xl rounded-md text-foreground/90 md:leading-18 leading-12 z-20 px-7 py-20 relative'>
                     Discover next-generation electronics designed for powerful performance, sleek style, and everyday reliability — wherever life takes you.
                 </div>
             </div>
