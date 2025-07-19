@@ -1,0 +1,100 @@
+{
+  "HeroSection": {
+    "title": "Votre guichet unique pour tout ce qui est tech",
+    "subtitle": "Découvrez des produits premium à des prix compétitifs, avec une livraison rapide et un service client exceptionnel.",
+    "ctaPrimary": {
+      "text": "Acheter maintenant"
+    },
+    "ctaSecondary": {
+      "text": "Voir la vitrine"
+    },
+    "highlights": [
+      {
+        "icon": "Truck",
+        "text": "Livraison gratuite dès 50€"
+      },
+      {
+        "icon": "Clock3",
+        "text": "Support client 24h/24 et 7j/7"
+      }
+    ],
+    "overlayText": "Découvrez l’électronique de nouvelle génération conçue pour des performances puissantes, un style élégant et une fiabilité quotidienne — où que la vie vous mène."
+  },
+  "FeaturesProducts": {
+    "title": "Produits phares",
+    "description": "Découvrez nos accessoires les plus vendus, conçus pour le confort, le style et la performance."
+  },
+  "LatestSections": {
+    "title": "Derniers produits",
+    "description": "Découvrez nos derniers produits"
+  },
+  "BannerSection": {
+    "title": "Découvrez des offres qui inspirent",
+    "subtitle": "Achetez les dernières tendances à des prix imbattables. Élevez votre style de vie en un clic.",
+    "buttonText": "Commencer à acheter"
+  },
+  "Header": {
+    "nav": {
+      "home": "Accueil",
+      "shop": "Boutique",
+      "categories": "Catégories",
+      "deals": "Offres",
+      "contact": "Contact"
+    },
+    "cart": {
+      "ariaLabel": "Panier",
+      "itemsCount": "{count} articles"
+    },
+    "auth": {
+      "signIn": "Se connecter"
+    },
+    "brand": "Reeltek"
+  },
+  "Footer": {
+    "menuItems": [
+      {
+        "title": "Produit",
+        "links": [
+          { "text": "Présentation", "url": "#" },
+          { "text": "Tarifs", "url": "#" },
+          { "text": "Place de marché", "url": "#" },
+          { "text": "Fonctionnalités", "url": "#" },
+          { "text": "Intégrations", "url": "#" },
+          { "text": "Tarifs", "url": "#" }
+        ]
+      },
+      {
+        "title": "Entreprise",
+        "links": [
+          { "text": "À propos", "url": "#" },
+          { "text": "Équipe", "url": "#" },
+          { "text": "Blog", "url": "#" },
+          { "text": "Carrières", "url": "#" },
+          { "text": "Contact", "url": "#" },
+          { "text": "Confidentialité", "url": "#" }
+        ]
+      },
+      {
+        "title": "Ressources",
+        "links": [
+          { "text": "Aide", "url": "#" },
+          { "text": "Ventes", "url": "#" },
+          { "text": "Publicité", "url": "#" }
+        ]
+      },
+      {
+        "title": "Réseaux sociaux",
+        "links": [
+          { "text": "Twitter", "url": "#" },
+          { "text": "Instagram", "url": "#" },
+          { "text": "LinkedIn", "url": "#" }
+        ]
+      }
+    ],
+    "copyright": "© 2024 Reeltek. Tous droits réservés.",
+    "bottomLinks": [
+      { "text": "Conditions générales", "url": "#" },
+      { "text": "Politique de confidentialité", "url": "#" }
+    ]
+  }
+}

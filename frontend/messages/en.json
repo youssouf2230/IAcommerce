@@ -1,0 +1,104 @@
+{
+  "HeroSection": {
+    "title": "Your One-Stop Shop for Everything Tech",
+    "subtitle": "Discover premium products at competitive prices, with fast shipping and exceptional customer service.",
+    "ctaPrimary": {
+      "text": "Shop Now"
+    },
+    "ctaSecondary": {
+      "text": "View Showcase"
+    },
+    "highlights": [
+      {
+        "icon": "Truck",
+        "text": "Free shipping over $50"
+      },
+      {
+        "icon": "Clock3",
+        "text": "24/7 Customer Support"
+      }
+    ],
+    "overlayText": "Discover next-generation electronics designed for powerful performance, sleek style, and everyday reliability — wherever life takes you."
+  },
+  "FeaturesProducts": {
+    "title": "Featured Products",
+    "description": "Discover our best-selling accessories crafted for comfort, style, and performance."
+  },
+  "LatestSections": {
+    "title": "Latest",
+    "description": "Check out our latest products"
+  },
+  "BannerSection": {
+    "title": "Discover Deals That Inspire",
+    "subtitle": "Shop the latest trends and unbeatable prices. Elevate your lifestyle with just one click.",
+    "buttonText": "Start Shopping"
+  }
+  
+  ,"Header": {
+    "nav": {
+      "home": "Home",
+      "shop": "Shop",
+      "categories": "Categories",
+      "deals": "Deals",
+      "contact": "Contact"
+    },
+    "cart": {
+      "ariaLabel": "Cart",
+      "itemsCount": "{count} items"
+    },
+    "auth": {
+      "signIn": "Sign In"
+    },
+    "brand": "Reeltek"
+  },
+  
+  "Footer": {
+    "menuItems": [
+      {
+        "title": "Product",
+        "links": [
+          { "text": "Overview", "url": "#" },
+          { "text": "Pricing", "url": "#" },
+          { "text": "Marketplace", "url": "#" },
+          { "text": "Features", "url": "#" },
+          { "text": "Integrations", "url": "#" },
+          { "text": "Pricing", "url": "#" }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          { "text": "About", "url": "#" },
+          { "text": "Team", "url": "#" },
+          { "text": "Blog", "url": "#" },
+          { "text": "Careers", "url": "#" },
+          { "text": "Contact", "url": "#" },
+          { "text": "Privacy", "url": "#" }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          { "text": "Help", "url": "#" },
+          { "text": "Sales", "url": "#" },
+          { "text": "Advertise", "url": "#" }
+        ]
+      },
+      {
+        "title": "Social",
+        "links": [
+          { "text": "Twitter", "url": "#" },
+          { "text": "Instagram", "url": "#" },
+          { "text": "LinkedIn", "url": "#" }
+        ]
+      }
+    ],
+    "copyright": "© 2024 Reeltek. All rights reserved.",
+    "bottomLinks": [
+      { "text": "Terms and Conditions", "url": "#" },
+      { "text": "Privacy Policy", "url": "#" }
+    ]
+  }
+
+
+}
