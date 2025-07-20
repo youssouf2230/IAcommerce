@@ -1,5 +1,6 @@
 'use client';
 
+
 import { products } from '@/components/data/products';
 import ProductCard from '@/components/product/product-card';
 import { Button } from '@/components/ui/button';

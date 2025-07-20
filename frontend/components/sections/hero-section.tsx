@@ -20,18 +20,18 @@ const iconMap: Record<string, JSX.Element> = {
 
 // Predefined positions for category items (12 positions)
 const categoryPositions = [
-  { side: 'left', left: '50px', top: '80px' },
-  { side: 'right', right: '150px', top: '100px' },
-  { side: 'left', left: '180px', top: '140px' },
-  { side: 'right', right: '60px', top: '260px' },
-  { side: 'left', left: '90px', top: '320px' },
-  { side: 'right', right: '200px', top: '230px' },
-  { side: 'left', left: '240px', top: '280px' },
-  { side: 'right', right: '90px', top: '420px' },
-  { side: 'left', left: '140px', top: '410px' },
-  { side: 'right', right: '180px', top: '350px' },
-  { side: 'left', left: '210px', top: '520px' },
-  { side: 'right', right: '110px', top: '550px' },
+  { side: 'left', left: '20px', top: '80px' },
+  { side: 'right', right: '100px', top: '100px' },
+  { side: 'left', left: '120px', top: '140px' },
+  { side: 'right', right: '30px', top: '260px' },
+  { side: 'left', left: '40px', top: '320px' },
+  { side: 'right', right: '170px', top: '230px' },
+  { side: 'left', left: '140px', top: '280px' },
+  { side: 'right', right: '40px', top: '420px' },
+  { side: 'left', left: '80px', top: '410px' },
+  { side: 'right', right: '130px', top: '350px' },
+  { side: 'left', left: '110px', top: '520px' },
+  { side: 'right', right: '60px', top: '520px' },
 ];
 
 const HeroSection = () => {
@@ -111,27 +111,30 @@ const HeroSection = () => {
 
   return (
     <section ref={animationRef} className="w-full px-4 pt-20 bg-background text-center relative">
-      <div className="max-w-3xl mx-auto space-y-6">
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight md:leading-18 animate">
-          {t('title')}
-        </h1>
-        <p className="text-muted-foreground text-base md:text-lg animate">
-          {t('subtitle')}
-        </p>
+      <div className="max-w-3xl mx-auto">
 
-        <div className="flex animate justify-center items-center gap-4">
-          <Button size="lg">{t('ctaPrimary.text')}</Button>
-          <Button size="lg" variant="outline">{t('ctaSecondary.text')}</Button>
+        <div className=' space-y-6 relative z-50   max-lg:bg-background/50  max-lg:backdrop-blur-md rounded-2xl p-6  ' >
+
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight md:leading-18 animate">
+            {t('title')}
+          </h1>
+          <p className="text-muted-foreground text-base md:text-lg animate">
+            {t('subtitle')}
+          </p>
+
+          <div className="flex animate justify-center items-center gap-4">
+            <Button size="lg">{t('ctaPrimary.text')}</Button>
+            <Button size="lg" variant="outline">{t('ctaSecondary.text')}</Button>
+          </div>
+
+          <div className="mt-6 animate m-auto w-fit text-sm text-muted-foreground flex flex-col sm:flex-row justify-center gap-4">
+            {t.raw('highlights').map((item: any, index: number) => (
+              <span className="flex gap-2" key={index}>
+                {iconMap[item.icon]} {item.text}
+              </span>
+            ))}
+          </div>
         </div>
-
-        <div className="mt-6 animate m-auto w-fit text-sm text-muted-foreground flex flex-col sm:flex-row justify-center gap-4">
-          {t.raw('highlights').map((item: any, index: number) => (
-            <span className="flex gap-2" key={index}>
-              {iconMap[item.icon]} {item.text}
-            </span>
-          ))}
-        </div>
-
         {/* Category items with predefined positions */}
         {category.map((item, index) => {
           // Get position from predefined array, cycle through if more categories than positions
@@ -144,7 +147,7 @@ const HeroSection = () => {
           return (
             <div
               key={index}
-              className="category-item w-fit dark:bg-neutral-800  bg-accent rounded-full p-3 absolute z-0"
+              className="category-item w-fit dark:bg-neutral-800  bg-accent rounded-full p-3 absolute "
               style={positionStyle}
             >
               <Image
