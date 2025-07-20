@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import SectionLayout from '../layout/section-layout';
+import { category } from '../data/categories';
 
 interface CategoryItem {
   id: number;

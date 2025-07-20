@@ -9,6 +9,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
+import { category } from '../data/categories';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,6 +17,22 @@ const iconMap: Record<string, JSX.Element> = {
   Truck: <Truck size={18} />,
   Clock3: <Clock3 size={18} />,
 };
+
+// Predefined positions for category items (12 positions)
+const categoryPositions = [
+  { side: 'left', left: '50px', top: '80px' },
+  { side: 'right', right: '150px', top: '100px' },
+  { side: 'left', left: '180px', top: '140px' },
+  { side: 'right', right: '60px', top: '260px' },
+  { side: 'left', left: '90px', top: '320px' },
+  { side: 'right', right: '200px', top: '230px' },
+  { side: 'left', left: '240px', top: '280px' },
+  { side: 'right', right: '90px', top: '420px' },
+  { side: 'left', left: '140px', top: '410px' },
+  { side: 'right', right: '180px', top: '350px' },
+  { side: 'left', left: '210px', top: '520px' },
+  { side: 'right', right: '110px', top: '550px' },
+];
 
 const HeroSection = () => {
   const t = useTranslations('HeroSection');
@@ -33,13 +50,28 @@ const HeroSection = () => {
       ease: 'power2.out',
     });
 
+    // Animate category items with predefined positions
+    gsap.set('.category-item', {
+      opacity: 0,
+      scale: 0.8,
+    });
+
+    gsap.to('.category-item', {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'back.out(1.7)',
+      delay: 0.5,
+    });
+
     gsap.to(imageRef.current, {
       y: 200,
       scale: 1.2,
       duration: 10,
       scrollTrigger: {
         trigger: animationRef.current,
-        start:  "center center",
+        start: "center center",
         end: "bottom bottom",
         scrub: 1,
         markers: false,
@@ -57,6 +89,24 @@ const HeroSection = () => {
         markers: false,
       },
     });
+    gsap.utils.toArray('.category-item').forEach((item: any) => {
+      gsap.to(".category-item", {
+        y: 50,
+        filter: 'blur(4px)',
+
+        x: () => gsap.utils.random(-40, 40),
+
+        scrollTrigger: {
+          trigger: ".category-item",
+          start: "top top",
+          end: "bottom center",
+          scrub: 1,
+
+        },
+      })
+    });
+
+
   }, { scope: animationRef });
 
   return (
@@ -75,12 +125,38 @@ const HeroSection = () => {
         </div>
 
         <div className="mt-6 animate m-auto w-fit text-sm text-muted-foreground flex flex-col sm:flex-row justify-center gap-4">
-          {t.raw('highlights').map((item:any, index:number) => (
+          {t.raw('highlights').map((item: any, index: number) => (
             <span className="flex gap-2" key={index}>
               {iconMap[item.icon]} {item.text}
             </span>
           ))}
         </div>
+
+        {/* Category items with predefined positions */}
+        {category.map((item, index) => {
+          // Get position from predefined array, cycle through if more categories than positions
+          const position = categoryPositions[index % categoryPositions.length];
+
+          const positionStyle = position.side === 'left'
+            ? { left: position.left, top: position.top }
+            : { right: position.right, top: position.top };
+
+          return (
+            <div
+              key={index}
+              className="category-item w-fit dark:bg-neutral-800  bg-accent rounded-full p-3 absolute z-0"
+              style={positionStyle}
+            >
+              <Image
+                src={item.image}
+                alt={item.category}
+                width={40}
+                height={40}
+                className="object-contain size-16"
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div>
