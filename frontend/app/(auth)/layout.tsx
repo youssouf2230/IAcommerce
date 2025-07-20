@@ -9,7 +9,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-between  items-center">
-          <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
+            <Link href="/" className="flex items-center gap-2 text-2xl font-semibold">
            Reeltek
           </Link>
           <ToggleTheme/>
