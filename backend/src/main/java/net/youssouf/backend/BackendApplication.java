@@ -3,9 +3,11 @@ package net.youssouf.backend;
 import net.youssouf.backend.entities.Category;
 import net.youssouf.backend.entities.Product;
 import net.youssouf.backend.entities.ProductColor;
+import net.youssouf.backend.entities.Role;
 import net.youssouf.backend.repositories.CategoryRepository;
 import net.youssouf.backend.repositories.ProductColorRepository;
 import net.youssouf.backend.repositories.ProductRepository;
+import net.youssouf.backend.repositories.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
@@ -27,9 +29,17 @@ public class BackendApplication {
     CommandLineRunner initData(
             ProductRepository productRepo,
             CategoryRepository categoryRepo,
-            ProductColorRepository productColorRepository
+            ProductColorRepository productColorRepository,
+            RoleRepository roleRepo
     ) {
         return args -> {
+            // Initialisation des rôles
+            if (roleRepo.findByName("ROLE_CLIENT").isEmpty()) {
+                Role roleClient = new Role();
+                roleClient.setName("ROLE_CLIENT");
+                roleRepo.save(roleClient);
+                System.out.println("ROLE_CLIENT created");
+            }
             // Create Categories
             Category smartphones = categoryRepo.save(new Category(null, "Smartphones","https://img.freepik.com/premium-photo/smartphone-frameless-display-edgetoedge-screen-blank-screen-mockup_1243992-22427.jpg?w=2000"));
             Category laptops = categoryRepo.save(new Category(null, "Laptops","https://www.hp.com/content/dam/sites/worldwide/homepage/images/pcs-main.png"));

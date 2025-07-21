@@ -1,5 +1,6 @@
 package net.youssouf.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,6 @@ public class ProductColor {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonIgnore // Empêche la boucle infinie
+    @JsonBackReference
     private Product product;
 }

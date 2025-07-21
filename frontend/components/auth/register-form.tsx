@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Facebook } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";  // <-- Correct import
+import { useRouter } from "next/navigation";
 
 export default function DataRegister() {
   const router = useRouter();
@@ -21,9 +21,16 @@ export default function DataRegister() {
     const password = dataForm.get("password") as string;
     const confirmPassword = dataForm.get("confirmPassword") as string;
 
+    console.log("==============================================================");
+    console.log(username);
+    console.log(password);
+    console.log(email);
+    console.log(confirmPassword);
+    console.log("==============================================================");
+
     if (password !== confirmPassword) {
       alert("Passwords must be identical.");
-      return;  // Arrête la fonction si mot de passe pas identique
+      return;
     }
 
     try {
@@ -32,16 +39,25 @@ export default function DataRegister() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),  // Envoi du corps JSON
+        body: JSON.stringify({ username, email, password }),
       });
 
-      if (!response.ok) {  // Correction de la condition
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Unknown error occurred.");
+      if (!response.ok) {
+        const text = await response.text();
+        console.log("Response status:", response.status);
+        console.log("Raw error text:", text);
+        let errorMessage = "Unknown error occurred.";
+        try {
+          const json = JSON.parse(text);
+          errorMessage = json.error || errorMessage;
+        } catch (err) {
+          if (text) errorMessage = text;
+        }
+        throw new Error(errorMessage);
       }
 
       alert("Account was created successfully");
-      router.push("/login");  // Redirection après succès
+      router.push("/login");
 
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -71,35 +87,24 @@ export function RegisterForm({
         </div>
 
         <div className="grid gap-4">
-
-          {/* Username */}
           <div className="grid gap-3">
             <Label htmlFor="username">Username</Label>
             <Input id="username" name="username" type="text" placeholder="johndoe123" required />
           </div>
 
-          {/* Email */}
           <div className="grid gap-3">
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" type="email" placeholder="m@example.com" required />
           </div>
 
-          {/* Password */}
           <div className="grid gap-3">
             <Label htmlFor="password">Password</Label>
             <Input id="password" name="password" type="password" placeholder="********" required />
           </div>
 
-          {/* Confirm Password */}
           <div className="grid gap-3">
             <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="********"
-                required
-            />
+            <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="********" required />
           </div>
 
           <Button type="submit" className="w-full">
