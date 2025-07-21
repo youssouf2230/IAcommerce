@@ -20,29 +20,9 @@ public class RestCategoryController {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping("/with-image")
-    public List<Map<String, Object>> getCategoriesWithImages() {
-        List<Category> categories = categoryRepository.findAll();
-        List<Map<String, Object>> response = new ArrayList<>();
-
-        for (Category category : categories) {
-            List<Product> products = productRepository.findByCategoryId(category.getId());
-
-            // Préparer image
-            String imageUrl = "";
-            if (!products.isEmpty() && !products.get(0).getColors().isEmpty()) {
-                imageUrl = products.get(0).getColors().get(0).getUrlImage();
-            }
-
-            // Construction du résultat
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", category.getId());
-            map.put("name", category.getName());
-            map.put("imageUrl", imageUrl);
-
-            response.add(map);
-        }
-
-        return response;
+    @GetMapping("/images")
+    public  List<Category> findAllWithImage(){
+        return categoryRepository.findAll();
     }
+
 }

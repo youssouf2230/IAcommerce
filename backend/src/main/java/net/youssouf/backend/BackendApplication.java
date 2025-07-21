@@ -8,8 +8,11 @@ import net.youssouf.backend.repositories.ProductColorRepository;
 import net.youssouf.backend.repositories.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,10 +31,12 @@ public class BackendApplication {
     ) {
         return args -> {
             // Create Categories
-            Category smartphones = categoryRepo.save(new Category(null, "Smartphones"));
-            Category laptops = categoryRepo.save(new Category(null, "Laptops"));
-            Category audio = categoryRepo.save(new Category(null, "Audio"));
-            Category accessories = categoryRepo.save(new Category(null, "Accessories"));
+            Category smartphones = categoryRepo.save(new Category(null, "Smartphones","https://img.freepik.com/premium-photo/smartphone-frameless-display-edgetoedge-screen-blank-screen-mockup_1243992-22427.jpg?w=2000"));
+            Category laptops = categoryRepo.save(new Category(null, "Laptops","https://www.hp.com/content/dam/sites/worldwide/homepage/images/pcs-main.png"));
+            Category audio = categoryRepo.save(new Category(null, "Audio","https://resource.logitech.com/w_300,h_300,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/homepage/delorean-hp/products-with-background/new-images/speakers.png"));
+            Category accessories = categoryRepo.save(new Category(null, "Accessories","https://resource.logitech.com/w_300,h_300,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/homepage/delorean-hp/products-with-background/new-images/accessories.png"));
+            Category cameras = categoryRepo.save(new Category(null, "Cameras","https://resource.logitech.com/w_300,h_300,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/homepage/delorean-hp/products-with-background/new-images/conference-room-cameras.png"));
+
 
             // Create Products
             List<Product> products = productRepo.saveAll(List.of(
@@ -222,6 +227,10 @@ public class BackendApplication {
                     new ProductColor(null, "White", "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111851_sp880-airpods-Pro-2nd-gen.png", products.get(9))
             ));
         };
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 
