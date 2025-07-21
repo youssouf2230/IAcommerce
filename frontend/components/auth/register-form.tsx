@@ -1,16 +1,21 @@
+'use client';
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Facebook } from "lucide-react";
 import Link from "next/link";
+import { handelRegister } from "../actions/auth-action";
 
-export function RegisterForm({
-  className,
-  ...props
-}: React.ComponentProps<"form">) {
+
+export function RegisterForm({ className, ...props }: React.ComponentProps<"form">) {
+  const handelSybmit =  async (formData: FormData) => {
+    const res = await handelRegister(formData)
+  
+  }
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form className={cn("flex flex-col gap-6", className)} {...props} action={handelSybmit}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Create your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -21,13 +26,13 @@ export function RegisterForm({
       <div className="grid gap-4">
 
         {/* Username */}
-        <div className="grid gap-3  ">
+        <div className="grid gap-3">
           <Label htmlFor="username">Username</Label>
           <Input id="username" name="username" type="text" placeholder="johndoe123" required />
         </div>
 
         {/* Email */}
-        <div className="grid gap-3 ">
+        <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
           <Input id="email" name="email" type="email" placeholder="m@example.com" required />
         </div>

@@ -9,7 +9,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
-import { category } from '../data/categories';
+import { category, categoryPositions } from '../data/categories';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,20 +19,7 @@ const iconMap: Record<string, JSX.Element> = {
 };
 
 // Predefined positions for category items (12 positions)
-const categoryPositions = [
-  { side: 'left', left: '20px', top: '80px' },
-  { side: 'right', right: '100px', top: '100px' },
-  { side: 'left', left: '120px', top: '140px' },
-  { side: 'right', right: '30px', top: '260px' },
-  { side: 'left', left: '40px', top: '320px' },
-  { side: 'right', right: '170px', top: '230px' },
-  { side: 'left', left: '140px', top: '280px' },
-  { side: 'right', right: '40px', top: '420px' },
-  { side: 'left', left: '80px', top: '410px' },
-  { side: 'right', right: '130px', top: '350px' },
-  { side: 'left', left: '110px', top: '520px' },
-  { side: 'right', right: '60px', top: '520px' },
-];
+
 
 const HeroSection = () => {
   const t = useTranslations('HeroSection');

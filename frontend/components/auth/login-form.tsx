@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { 
+import {
   Facebook
 } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +11,8 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+
+  
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
@@ -45,7 +47,7 @@ export function LoginForm({
           </span>
         </div>
         <Button variant="outline" className="w-full">
-     <Facebook />
+          <Facebook />
           Login with GitHub
         </Button>
       </div>
