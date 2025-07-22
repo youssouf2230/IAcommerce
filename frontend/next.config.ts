@@ -5,6 +5,9 @@ import createNextIntlPlugin from 'next-intl/plugin';
 export const API_BASE_URL = "http://localhost:8080";
 
 const nextConfig: NextConfig = {
+   experimental: {
+    authInterrupts: true,
+  },
   /* config options here */
 
   images: {
@@ -29,7 +32,9 @@ const nextConfig: NextConfig = {
         hostname: "*",
       }
     ],
+    
   }
+  
 };
 
 const withNextIntl = createNextIntlPlugin();

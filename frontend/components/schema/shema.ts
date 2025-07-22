@@ -2,7 +2,7 @@ import z from "zod"
 
 export const LoginAuthSchema = z.object({
   email: z.email(),
-  password: z.string().min(6)
+  password: z.string()
 })
 
 export const SignUpAuthSchema = z.object({
@@ -13,11 +13,11 @@ export const SignUpAuthSchema = z.object({
   email: z.email("Invalid email format"),
 
   password: z.string()
-    .min(6, "password is required")
+    .min(6, "Password is required")
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, 'Please enter a stronger password.'),
 
   confirmPassword: z.string()
-    .min(1, " required"),
+    .min(1, " Confirm Password is required"),
 
 })
   .refine(data => data.password === data.confirmPassword, {

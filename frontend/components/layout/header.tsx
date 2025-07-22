@@ -1,6 +1,4 @@
 'use client'
-
-import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,17 +7,18 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import Link from "next/link"
-import ToggleTheme from "../shared/toggle-theme"
-import { ShoppingCart } from "lucide-react"
 import { useTranslations } from "next-intl"
-import LanguageSwitcher from "../shared/switch-language"
 import { usePathname } from "next/navigation"
 import { useNavigationLinks } from "../hooks/useNavigation"
 import MobileMenu from "../shared/mobile-menu"
+import RightActions from "../shared/right-actions"
 
 
 export default function Header() {
-    const t = useTranslations('Header');
+   
+  
+    
+    
     const navigationLinks = useNavigationLinks();
   const pathname = usePathname();
   return (
@@ -60,30 +59,7 @@ export default function Header() {
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-5">
-          {/* Cart Button */}
-          <Button
-            size="icon"
-            variant="ghost"
-            className="relative cursor-pointer"
-            aria-label="Cart"
-          >
-            <p className="absolute -right-2 -top-2 size-4 flex items-center justify-center rounded-full bg-rose-600 text-[10px] text-white">
-              2
-            </p>
-            <ShoppingCart size={20} />
-          </Button>
-
-          {/* Auth Buttons */}
-          <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link href="/login">{t('auth.signIn')}</Link>
-          </Button>
-          <ToggleTheme />
-          <LanguageSwitcher />
-
-
-
-        </div>
+      <RightActions />
       </div>
     </header>
   )

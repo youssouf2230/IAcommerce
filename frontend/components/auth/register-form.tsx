@@ -38,6 +38,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
             name="username"
             type="text"
             placeholder="johndoe123"
+            defaultValue={state?.data?.username}
           />
           {/* Display validation errors from the server action state */}
           {state?.errors?.username && (
@@ -55,6 +56,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
             name="email"
             type="email"
             placeholder="m@example.com"
+            defaultValue={state?.data?.email}
           />
           {state?.errors?.email && (
             <p className="text-red-500 text-sm">
@@ -71,6 +73,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
             name="password"
             type="password"
             placeholder="********"
+            defaultValue={state?.data?.password}
           />
           {state?.errors?.password && (
             <p className="text-red-500 text-sm">
@@ -87,6 +90,7 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
             name="confirmPassword"
             type="password"
             placeholder="********"
+            defaultValue={state?.data?.confirmPassword}
           />
           {state?.errors?.confirmPassword && (
             <p className="text-red-500 text-sm">

@@ -1,20 +1,22 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Facebook
-} from "lucide-react";
+"use client";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Facebook } from "lucide-react";
 import Link from "next/link";
+import { useActionState } from "react";
+import { handleLogin } from "../actions/auth-action";
+import { SubmitButton } from "../shared/submit-button";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"form">) {
 
-  
+export function LoginForm({ className, ...props}: React.ComponentProps<"form">) {
+
+   
+
+const [state, formAction, pending] = useActionState(handleLogin, null);
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form  action={formAction} className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -24,7 +26,12 @@ export function LoginForm({
       <div className="grid gap-6">
         <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input id="email" name="email" type="email" placeholder="m@example.com" required   defaultValue={state?.data?.email} />
+           {state?.errors?.email && (
+            <p className="text-red-500 text-sm">
+              {state.errors.email[0]}
+            </p>
+          )}
         </div>
         <div className="grid gap-3">
           <div className="flex items-center">
@@ -36,19 +43,30 @@ export function LoginForm({
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
+          <Input
+           id="password" 
+           name="password" 
+           type="password" 
+           placeholder="*********" 
+           required
+           defaultValue={state?.data?.password}
+           
+           />
         </div>
-        <Button type="submit" className="w-full">
+        {state?.message && (
+          <p className="text-red-500 text-sm">{state.message}</p>
+        )}
+        <SubmitButton pending={pending} type="submit" className="w-full">
           Login
-        </Button>
+        </SubmitButton>
         <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
           <span className="bg-background text-muted-foreground relative z-10 px-2">
             Or continue with
           </span>
         </div>
         <Button variant="outline" className="w-full">
-          <Facebook />
-          Login with GitHub
+          <Facebook className="mr-2 h-4 w-4" />
+          Login with Facebook
         </Button>
       </div>
       <div className="text-center text-sm">
@@ -58,5 +76,5 @@ export function LoginForm({
         </Link>
       </div>
     </form>
-  )
+  );
 }
