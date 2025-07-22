@@ -16,6 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginRestController {
 
     @Autowired
@@ -31,12 +32,14 @@ public class LoginRestController {
     public ResponseEntity<?> login(@RequestBody LoginRequest req) {
         AppUser user = userRepo.findByEmail(req.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("Email non trouvé"));
-
+        // tester si mot paasse saisi correspond avec celle stock
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Mot de passe invalide");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "Mot de passe invalide"));
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = JwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(Map.of("token", token));
     }
+
 }

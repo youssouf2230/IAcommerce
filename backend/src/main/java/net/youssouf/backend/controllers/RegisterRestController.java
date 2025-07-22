@@ -5,12 +5,9 @@ import net.youssouf.backend.entities.AppUser;
 import net.youssouf.backend.entities.Role;
 import net.youssouf.backend.repositories.AppUserRepository;
 import net.youssouf.backend.repositories.RoleRepository;
-import net.youssouf.backend.securities.JwtUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +27,6 @@ public class RegisterRestController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private JwtUtil jwtUtil;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
