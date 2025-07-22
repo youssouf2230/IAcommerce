@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/navigation-menu"
 
 import Link from "next/link"
-import { useTranslations } from "next-intl"
 import { usePathname } from "next/navigation"
 import { useNavigationLinks } from "../hooks/useNavigation"
 import MobileMenu from "../shared/mobile-menu"

@@ -76,7 +76,7 @@ const HeroSection = () => {
         markers: false,
       },
     });
-    gsap.utils.toArray('.category-item').forEach((item: any) => {
+    gsap.utils.toArray('.category-item').forEach(() => {
       gsap.to(".category-item", {
         y: 50,
         filter: 'blur(4px)',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from '../ui/button';
 import {  ShoppingCart } from 'lucide-react';
 import ToggleTheme from './toggle-theme';
