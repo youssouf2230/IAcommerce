@@ -1,6 +1,8 @@
 package net.youssouf.backend.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,8 +20,12 @@ public class AppUser {
     private Long id;
     private String username;
     private String email;
+    @JsonIgnore
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
 }
+
+

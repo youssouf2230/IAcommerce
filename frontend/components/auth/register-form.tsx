@@ -1,21 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
+
+import { useActionState } from "react";
+import Link from "next/link";
+import { Facebook } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Facebook } from "lucide-react";
-import Link from "next/link";
+import { SubmitButton } from "../shared/submit-button";
 import { handelRegister } from "../actions/auth-action";
 
-
 export function RegisterForm({ className, ...props }: React.ComponentProps<"form">) {
-  const handelSybmit =  async (formData: FormData) => {
-    const res = await handelRegister(formData)
-  
-  }
+
+  const [state, formAction, pending] = useActionState(handelRegister, null);
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props} action={handelSybmit}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+      action={formAction}
+    >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Create your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -24,23 +30,53 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
       </div>
 
       <div className="grid gap-4">
-
         {/* Username */}
         <div className="grid gap-3">
           <Label htmlFor="username">Username</Label>
-          <Input id="username" name="username" type="text" placeholder="johndoe123" required />
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="johndoe123"
+          />
+          {/* Display validation errors from the server action state */}
+          {state?.errors?.username && (
+            <p className="text-red-500 text-sm">
+              {state.errors.username[0]}
+            </p>
+          )}
         </div>
 
         {/* Email */}
         <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="m@example.com" required />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="m@example.com"
+          />
+          {state?.errors?.email && (
+            <p className="text-red-500 text-sm">
+              {state.errors.email[0]}
+            </p>
+          )}
         </div>
 
         {/* Password */}
         <div className="grid gap-3">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" name="password" type="password" placeholder="********" required />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="********"
+          />
+          {state?.errors?.password && (
+            <p className="text-red-500 text-sm">
+              {state.errors.password[0]}
+            </p>
+          )}
         </div>
 
         {/* Confirm Password */}
@@ -51,13 +87,23 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
             name="confirmPassword"
             type="password"
             placeholder="********"
-            required
           />
+          {state?.errors?.confirmPassword && (
+            <p className="text-red-500 text-sm">
+              {state.errors.confirmPassword[0]}
+            </p>
+          )}
         </div>
 
-        <Button type="submit" className="w-full">
+        {/* Display general form error (e.g., from API failure) */}
+        {state?.message && (
+          <p className="text-red-500 text-sm text-center">{state.message}</p>
+        )}
+
+        {/* Pass the pending state to the submit button to handle loading UI */}
+        <SubmitButton pending={pending} type="submit" className="w-full">
           Register
-        </Button>
+        </SubmitButton>
 
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="bg-background text-muted-foreground relative z-10 px-2">

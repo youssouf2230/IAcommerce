@@ -1,54 +1,76 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 'use server';
 
 import axios from 'axios';
-import { cookies } from 'next/headers';
-import { LoginAuthSchema, SignUpAuthSchema } from '../schema/shema';
 import { redirect } from 'next/navigation';
+import { LoginAuthSchema, SignUpAuthSchema } from '../schema/shema';
+import { cookies } from 'next/headers';
 
-export async function handelRegister(formData: FormData) {
-    console.log( "cij",formData);
 
-    if (!(formData instanceof FormData)) {
-        return { message: "invalide form data" }
-    }
+type RegisterState = {
+  errors?: {
+    username?: string[];
+    email?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  };
+  message?: string;
+} | null;
 
+type LoginState = {
+  errors?: {
+    email?: string[];
+    password?: string[];
+   
+  };
+  message?: string;
+} | null;
+
+
+
+
+
+export async function handelRegister(prevState: RegisterState,formData: FormData): Promise<RegisterState> {
     const authData = Object.fromEntries(formData.entries());
 
-    const validateDataAuth = SignUpAuthSchema.safeParse(authData)
+    // 1. Validate the form data
+    const validateDataAuth = SignUpAuthSchema.safeParse(authData);
 
     if (!validateDataAuth.success) {
-        return { message: "invalide form" }
+        // Return structured validation errors
+        return {
+            errors: validateDataAuth.error.flatten().fieldErrors,
+        };
     }
 
+    // 2. If validation is successful, try to register the user
     try {
-
-        // check user exists 
-        const response = await axios.post(
-            'http://localhost:8080/auth/register',
-            formData,
+        await axios.post('http://localhost:8080/auth/register', validateDataAuth.data,
             {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             }
         );
-
-        const data = response.data;
-
-        console.log("data", data);
-
-        redirect('/login');
     } catch (err: any) {
-        console.log(err);
+        // 3. Handle API errors gracefully
+        if (axios.isAxiosError(err) && err.response) {
+            // Return a general error message from the API response (e.g., "User already exists")
+            return {
+                message: err.response.data.message || "Registration failed. Please try again.",
+            };
+        }
+        // Return a generic message for unexpected errors (e.g., network failure)
+        return {
+            message: "An unexpected error occurred. Please try again later.",
+        };
     }
+
+    // 4. On successful registration, redirect the user
+    redirect('/login');
 }
 
 
-
-export async function handleLogin(formData: FormData) {
+export async function handleLogin( prevState:LoginState, formData: FormData) {
     if (!(formData instanceof FormData)) {
         return { message: "invalide form data" }
     }
