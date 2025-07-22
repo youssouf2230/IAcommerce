@@ -1,6 +1,8 @@
 package net.youssouf.backend.repositories;
 
 import net.youssouf.backend.entities.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findTrendingProducts();
     List<Product> findTop3ByOrderByDateDesc();
     List<Product> findByCategoryId(Long categoryId);
+    Page<Product> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
 }

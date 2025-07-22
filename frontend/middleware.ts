@@ -19,7 +19,7 @@ async function verifyToken(token: string) {
 }
 
 // Allow exact paths and prefix-matched paths (e.g., /about/team)
-const publicRoutes = ['/', '/login', '/register', '/about', '/contact'];
+const publicRoutes = ['/', '/login', '/register', '/about', '/contact','/shop'];
 const adminRoutePrefixes = ['/dashboard'];
 
 export async function middleware(request: NextRequest) {
