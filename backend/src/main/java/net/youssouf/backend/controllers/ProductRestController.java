@@ -20,14 +20,14 @@ public class ProductRestController {
     // automatic injection
     @Autowired
     private ProductRepository productRepository;
+
     // all product controller
     @GetMapping("/all-products")
     public Page<Product> getAllProducts(
             @RequestParam(defaultValue = "") String search,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "12") int size,
-            @RequestParam(defaultValue = "") String sort
-    ) {
+            @RequestParam(defaultValue = "") String sort) {
         Pageable pageable;
 
         switch (sort) {
@@ -50,7 +50,6 @@ public class ProductRestController {
 
         return productRepository.findAll(pageable);
     }
-
 
     // controller turn all products
     @GetMapping("/trending")
@@ -77,6 +76,7 @@ public class ProductRestController {
         productRepository.save(product);
         return ResponseEntity.ok(product);
     }
+
     // 3 latest product
     @GetMapping("/latest")
     public List<Product> findLatestProducts() {
