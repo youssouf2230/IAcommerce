@@ -16,19 +16,13 @@ import {
 import { Funnel, Search } from 'lucide-react';
 
 // Types
-export type Color = {
-    id: number;
-    color: string;
-    urlImage: string;
-};
-
 export type Product = {
     id: number;
     name: string;
     sellPrice: number;
     oldPrice: number;
     rating: number;
-    colors: Color[];
+    imageUrls: string[];   // <-- remplace colors par imageUrls
     hasLiked: boolean;
 };
 
@@ -120,33 +114,7 @@ const ShopPage = () => {
                     </Select>
                 </div>
 
-                <div>
-                    <Select value={sort} onValueChange={(val) => setSort(val)}>
-                        <SelectTrigger className="w-50 py-6 rounded-xl">
-                            <SelectValue placeholder="Sort by" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="none">None</SelectItem>
-                            <SelectItem value="priceLowHigh">Price: Low to High</SelectItem>
-                            <SelectItem value="priceHighLow">Price: High to Low</SelectItem>
-                            <SelectItem value="rating">Top Rated</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
-
-                <div>
-                    <Select value={sort} onValueChange={(val) => setSort(val)}>
-                        <SelectTrigger className="w-50 py-6 rounded-xl">
-                            <SelectValue placeholder="Sort by" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="none">None</SelectItem>
-                            <SelectItem value="priceLowHigh">Price: Low to High</SelectItem>
-                            <SelectItem value="priceHighLow">Price: High to Low</SelectItem>
-                            <SelectItem value="rating">Top Rated</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+                {/* Si tu as plusieurs filtres similaires, conserve-les sinon tu peux les nettoyer */}
             </div>
 
             {/* Products Grid */}
@@ -157,7 +125,7 @@ const ShopPage = () => {
                     <p className="text-center col-span-full">No products found.</p>
                 ) : (
                     products.map((product: Product) => {
-                        const imageUrl = product.colors?.[0]?.urlImage || '/default.png';
+                        const imageUrl = product.imageUrls?.[0] || '/default.png'; // <-- ici
                         return (
                             <ProductCard
                                 key={product.id}
@@ -180,8 +148,8 @@ const ShopPage = () => {
                     Previous
                 </Button>
                 <span className="self-center">
-          Page {page + 1} / {totalPages}
-        </span>
+                    Page {page + 1} / {totalPages}
+                </span>
                 <Button
                     disabled={page + 1 >= totalPages}
                     onClick={() => setPage((p) => Math.min(p + 1, totalPages - 1))}

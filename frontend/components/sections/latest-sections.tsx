@@ -8,17 +8,11 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface ProductColor {
-  id: number;
-  color: string;
-  urlImage: string;
-}
-
 interface Product {
   id: number;
   name: string;
   date: string;
-  colors: ProductColor[];
+  imageUrls: string[];  // <-- remplace colors par imageUrls
 }
 
 const LatestSections = () => {
@@ -57,21 +51,21 @@ const LatestSections = () => {
   }, [products]);
 
   return (
-    <SectionLayout title='Latest' description='Check out our latest products'>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10'>
-        {products.map((product) => (
-          <div key={product.id} className='rounded-xl overflow-hidden border h-[80vh] w-full'>
-            <Image
-              src={product.colors[0]?.urlImage || '/placeholder.jpg'}
-              width={300}
-              height={300}
-              alt={product.name}
-              className='image h-full w-full object-cover'
-            />
-          </div>
-        ))}
-      </div>
-    </SectionLayout>
+      <SectionLayout title='Latest' description='Check out our latest products'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10'>
+          {products.map((product) => (
+              <div key={product.id} className='rounded-xl overflow-hidden border h-[80vh] w-full'>
+                <Image
+                    src={product.imageUrls?.[0] || '/placeholder.jpg'}
+                    width={300}
+                    height={300}
+                    alt={product.name}
+                    className='image h-full w-full object-cover'
+                />
+              </div>
+          ))}
+        </div>
+      </SectionLayout>
   );
 };
 

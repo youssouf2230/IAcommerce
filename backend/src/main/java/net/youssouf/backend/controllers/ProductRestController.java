@@ -20,7 +20,7 @@ public class ProductRestController {
     // automatic injection
     @Autowired
     private ProductRepository productRepository;
-    // all product controller
+    // all product controller with filter
     @GetMapping("/all-products")
     public Page<Product> getAllProducts(
             @RequestParam(defaultValue = "") String search,
