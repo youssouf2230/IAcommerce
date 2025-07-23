@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
+
 
 type ProductCardProps = {
   id: number;
@@ -61,13 +63,15 @@ const ProductCard = ({
         />
       </div>
 
-      <Image
-        src={imageUrl}
-        alt={name}
-        width={300}
-        height={300}
-        className="aspect-square object-cover m-auto"
-      />
+      <Link href={`/products/${id}`}>
+        <Image
+            src={imageUrl}
+            alt={name}
+            width={300}
+            height={300}
+            className="aspect-square object-cover m-auto cursor-pointer transition-transform duration-300 group-hover:scale-105"
+        />
+      </Link>
       <h3 className="mt-3 font-semibold text-xl">{name}</h3>
       <Rating rating={rating} />
       <div className="flex items-center text-lg gap-2 mt-3">

@@ -1,0 +1,24 @@
+package net.youssouf.backend.services;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import net.youssouf.backend.entities.Product;
+import net.youssouf.backend.repositories.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+@Data
+@AllArgsConstructor
+@Builder
+public class ProductService {
+
+    @Autowired
+    private final ProductRepository productRepository;
+
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+}

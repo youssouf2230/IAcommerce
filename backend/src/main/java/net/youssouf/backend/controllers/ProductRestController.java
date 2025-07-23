@@ -1,7 +1,10 @@
 package net.youssouf.backend.controllers;
 
+import net.youssouf.backend.dtos.ProductDTO;
 import net.youssouf.backend.entities.Product;
+import net.youssouf.backend.mappers.ProductMapper;
 import net.youssouf.backend.repositories.ProductRepository;
+import net.youssouf.backend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -17,9 +22,19 @@ import java.util.List;
 // eviter cross token
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProductRestController {
+    @Autowired
+    private final ProductService productService;
+    @Autowired
+    private final ProductMapper productMapper;
     // automatic injection
     @Autowired
     private ProductRepository productRepository;
+
+    public ProductRestController(ProductService productService, ProductMapper productMapper) {
+        this.productService = productService;
+        this.productMapper = productMapper;
+    }
+
     // all product controller with filter
     @GetMapping("/all-products")
     public Page<Product> getAllProducts(
@@ -82,5 +97,16 @@ public class ProductRestController {
     public List<Product> findLatestProducts() {
         return productRepository.findTop3ByOrderByDateDesc();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        Product product = productService.findById(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        ProductDTO dto = productMapper.toDto(product);
+        return ResponseEntity.ok(dto);
+    }
+
 
 }
