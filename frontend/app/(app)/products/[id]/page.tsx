@@ -1,7 +1,7 @@
 // app/products/[id]/page.tsx
 
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Star } from "lucide-react";
+import { Heart, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 
 type Product = {
@@ -26,6 +26,35 @@ type Product = {
   imageUrls: string[];
 };
 
+const Rating = ({ rating }: { rating: number }) => {
+  const fullStars = Math.floor(rating);
+  const fractional = rating - fullStars;
+  const hasHalfStar = fractional >= 0.25 && fractional <= 0.75;
+
+  return (
+      <div className="flex items-center gap-1 text-yellow-500">
+        {Array.from({ length: 5 }).map((_, i) => {
+          if (i < fullStars) {
+            return <Star key={i} size={20} fill="currentColor" stroke="currentColor" />;
+          } else if (hasHalfStar && i === fullStars) {
+            return (
+                <Star
+                    key={i}
+                    size={20}
+                    fill="currentColor"
+                    stroke="currentColor"
+                    style={{ clipPath: "inset(0 50% 0 0)" }} // moitié gauche remplie
+                />
+            );
+          } else {
+            return <Star key={i} size={20} fill="none" stroke="currentColor" />;
+          }
+        })}
+        <span className="text-sm text-muted-foreground ml-2">({rating.toFixed(2)}/5)</span>
+      </div>
+  );
+};
+
 export default async function Page({
                                      params,
                                    }: {
@@ -40,14 +69,14 @@ export default async function Page({
   if (!res.ok) {
     return (
         <div className="text-red-500 mt-10 text-center">
-          Product no found
+          Produit introuvable (status: {res.status})
         </div>
     );
   }
 
   const product: Product = await res.json();
 
-  // Les données statics que les attributs ne sont pas créer
+  // Données statiques pour les champs manquants
   const staticData = {
     brand: "Logitech",
     discount: "25%",
@@ -86,19 +115,7 @@ export default async function Page({
             </p>
 
             {/* Rating */}
-            <div className="flex items-center gap-1 text-yellow-500">
-              {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                      key={i}
-                      fill={i < Math.round(product.rating) ? "currentColor" : "none"}
-                      stroke="currentColor"
-                      className="size-5"
-                  />
-              ))}
-              <span className="text-sm text-muted-foreground ml-2">
-              ({product.rating}/5)
-            </span>
-            </div>
+            <Rating rating={product.rating} />
 
             {/* Price */}
             <div className="flex items-center gap-4">
@@ -135,13 +152,10 @@ export default async function Page({
                     : "Out of stock"}
               </p>
               <p>
-                <strong className="text-foreground">Colors:</strong>{" "}
-                {/* Si tu as les couleurs côté backend, sinon statique */}
-                Black, Blue, Orange
+                <strong className="text-foreground">Colors:</strong> Black, Blue, Orange
               </p>
               <p>
-                <strong className="text-foreground">Tags:</strong>{" "}
-                {staticData.tags.join(", ")}
+                <strong className="text-foreground">Tags:</strong> {staticData.tags.join(", ")}
               </p>
               <p>
                 <strong className="text-foreground">Material:</strong> {staticData.material}
