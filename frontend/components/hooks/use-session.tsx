@@ -9,6 +9,8 @@ import { User } from '@/components/types';
 interface Session {
   isLoggedIn: boolean;
   user: User | null;
+  token:string | null
+
 }
 
 export function useSession() {

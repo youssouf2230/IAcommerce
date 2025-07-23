@@ -1,50 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Product } from '../types';
+import { useSession } from '../hooks/use-session';
 
-type ProductCardProps = {
-  id: number;
-  name: string;
-  price: string;
-  oldPrice: string;
-  rating: number;
-  imageUrl: string;
-  initialHasLiked: boolean;
-};
 
-const ProductCard = ({
-  id,
-  name,
-  price,
-  oldPrice,
-  rating,
-  imageUrl,
-  initialHasLiked,
-}: ProductCardProps) => {
-  const [liked, setLiked] = useState(initialHasLiked);
+
+const ProductCard = (props: Product) => {
+  const [liked, setLiked] = useState(props.hasLiked);
   const [loading, setLoading] = useState(false);
+  const { session } = useSession();
 
   const toggleLike = async () => {
-    if (loading) return; // éviter plusieurs clics rapides
-    setLoading(true);
-    try {
-      const res = await fetch(`http://localhost:8080/api/products/${id}/toggle-like`, {
-        method: 'POST',
-      });
-      if (res.ok) {
-        const updatedProduct = await res.json();
-        setLiked(updatedProduct.hasLiked);
-      } else {
-        console.error('Erreur lors de la mise à jour du like');
-      }
-    } catch (error) {
-      console.error('Erreur réseau:', error);
-    } finally {
-      setLoading(false);
+  if (loading) return; // prevent multiple fast clicks
+  setLoading(true);
+
+  try {
+    const res = await fetch(`http://localhost:8080/api/products/${props.id}/toggle-like`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session?.token}`,
+      },
+    
+    });
+    console.log(res);
+    console.log("Session Token:", session?.token);
+
+
+    if (res.ok) {
+      const updatedProduct = await res.json();
+      setLiked(updatedProduct.hasLiked);
+    } else {
+      console.error('Erreur lors de la mise à jour du like', await res.text());
     }
-  };
+  } catch (error) {
+    console.error('Erreur réseau:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="p-6 relative bg-card group rounded-lg">
@@ -62,17 +61,17 @@ const ProductCard = ({
       </div>
 
       <Image
-        src={imageUrl}
-        alt={name}
+        src={props.colors[0].urlImage}
+        alt={props.name}
         width={300}
         height={300}
         className="aspect-square object-cover m-auto"
       />
-      <h3 className="mt-3 font-semibold text-xl">{name}</h3>
-      <Rating rating={rating} />
+      <h3 className="mt-3 font-semibold text-xl">{props.name}</h3>
+      <Rating rating={props.rating} />
       <div className="flex items-center text-lg gap-2 mt-3">
-        <span className="text-primary font-semibold">{price}</span>
-        <span className="text-gray-500 line-through">{oldPrice}</span>
+        <span className="text-primary font-semibold">{props.sellPrice}</span>
+        <span className="text-gray-500 line-through">{props.oldPrice}</span>
       </div>
       <Button variant="default" size="lg" className="mt-4 w-full">
         <ShoppingCart size={20} /> Ajouter au panier

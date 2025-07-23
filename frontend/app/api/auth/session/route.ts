@@ -9,10 +9,10 @@ export async function GET() {
     const session = await getUserSession();
 
     if (!session.isLoggedIn) {
-      return NextResponse.json({ isLoggedIn: false, user: null }, { status: 200 });
+      return NextResponse.json({ isLoggedIn: false, user: null, token: null }, { status: 200 });
     }
-
-    return NextResponse.json(session, { status: 200 });
+     
+    return NextResponse.json({ isLoggedIn: true, user: session.user, token: session.token }, { status: 200 });
 
   } catch (error) {
   
