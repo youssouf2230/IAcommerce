@@ -1,9 +1,10 @@
-import React from 'react';
+import { SectionCards } from "@/components/dashboard/section-cards";
 
 const Page = () => {
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="@container/dashboard" >
+          
+                <SectionCards />
         </div>
     );
 }

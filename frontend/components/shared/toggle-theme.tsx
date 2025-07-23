@@ -7,21 +7,13 @@ import { useTheme } from "next-themes";
 
 const ToggleTheme = () => {
     const { theme, setTheme } = useTheme();
-   
-
-  
-   
-
     const toggleTheme = () => {
         setTheme(theme === "dark" ? "light" : "dark");
     };
 
-   
-
-
     return (
         <Button
-            asChild
+                
             onClick={toggleTheme}
             variant="ghost"
             size="icon"

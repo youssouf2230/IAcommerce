@@ -9,6 +9,7 @@ const fallbackImage = '/default.png';
 
 const CategorySection = async () => {
   const categories = await axios.get('http://localhost:8080/api/categories/images').then(res => res.data);
+  if(!categories) return null
 
   return (
     <SectionLayout

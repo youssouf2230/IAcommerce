@@ -42,6 +42,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --font-inter: Inter, sans-serif;
+
+
+
 }
 
 :root {
@@ -122,7 +125,6 @@
     @apply bg-background text-foreground;
   }
 }
-
 
 body {
   font-family: var(--font-inter);
