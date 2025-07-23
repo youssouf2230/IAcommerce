@@ -17,11 +17,14 @@ interface ShopPageProps {
 }
 
 const ShopPage = async ({ searchParams }: ShopPageProps) => {
-  const page = Number(searchParams?.page) || 0;
-  const size = Number(searchParams?.size) || 4; 
-  const search = searchParams?.search || '';
-  const sort = searchParams?.sort || '';
+  const search_params=await searchParams
+  const page = Number(search_params?.page) || 0;
+  const size = Number(search_params?.size) || 4; 
+  const search = search_params?.search || '';
+  const sort = search_params?.sort || '';
+
   const productData = await getProducts(page, size, search, sort);
+
   const products = productData.content;
   const totalPages = productData.totalPages;
   const currentPage = productData.number;
@@ -38,6 +41,7 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
       <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products && products.length > 0 ? (
           products.map((product) => (
+           
             <ProductCard key={product.id} {...product} />
           ))
         ) : (

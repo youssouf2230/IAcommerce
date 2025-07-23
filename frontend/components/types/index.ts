@@ -12,24 +12,25 @@ export type User = {
     roles: string[];
 }
 
-export type Product = {
+export interface Product {
   id: number;
   name: string;
-  purchasePrice: number;
+  purchasePrice: number;       
   sellPrice: number;
+  oldPrice: number;
   stockQuantity: number;
   description: string;
-  oldPrice: number;
   numberOfView: number;
   rating: number;
   numberOfComments: number;
   numberOfLiked: number;
-  hasLiked: boolean;
   numberOfDisliked: number;
-  date: string; // ISO date string (e.g., "2025-07-23")
+  date: string;
+  hasliked: boolean;  
   category: Category;
-  colors: Color[];
-};
+  imageUrls: string[];
+}
+
 
  export type category = {
   id: number;

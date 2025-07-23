@@ -17,15 +17,15 @@ export async function getProducts(
   search = '',
   sort = ''
 ): Promise<PaginatedProductsResponse> { // 2. Update the return type
-  
+
   const apiBaseUrl = process.env.API_URL || "http://localhost:8080";
-  
+
   const url = new URL(`${apiBaseUrl}/api/products/all-products`);
   url.searchParams.append('page', String(page));
   url.searchParams.append('size', String(size));
   if (search) url.searchParams.append('search', search);
   if (sort) url.searchParams.append('sort', sort);
-
+  
   try {
     const res = await fetch(url.toString(), {
       cache: 'no-store', // Keep this for dynamic search/sort
@@ -36,7 +36,7 @@ export async function getProducts(
     }
 
     const data = await res.json();
-    return data; 
+    return data;
 
   } catch (error) {
     console.error("getProducts fetch error:", error);

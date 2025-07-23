@@ -5,7 +5,6 @@ import { getTranslations } from 'next-intl/server';
 import { Product } from '../types';
 
 
-
 const FeaturesProducts = async () => {
 
   const t = await getTranslations('FeaturesProducts');
@@ -15,7 +14,7 @@ const FeaturesProducts = async () => {
     <SectionLayout title={t('title')} description={t('description')}>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {products.map((product: Product, index: number) => {
-          const imageUrl = product.colors?.[0]?.urlImage || '/default.png';
+          const imageUrl = product.imageUrls[0] || '/default.png';
           console.log("URL image utilisée :", imageUrl);
 
           return (
