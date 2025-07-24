@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { LogOut, User as UserIcon } from 'lucide-react';
-import { User as UserType } from '../types';
+import { User as UserType } from '../../types';
 import { handleLogout } from '../../app/actions/auth-action';
 import { SubmitButton } from './submit-button';
 
@@ -30,7 +30,7 @@ export default function UserProfile({ user }: UserProfileProps) {
                         <UserIcon size={20} />
                     </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="sm:w-56 w-46 border">
                     <DropdownMenuLabel>
                         <div className="flex flex-col">
                             {/* FIX 3: Removed unnecessary optional chaining */}

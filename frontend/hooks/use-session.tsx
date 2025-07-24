@@ -3,7 +3,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { User } from '@/components/types';
+import { User } from '@/types';
 
 
 interface Session {

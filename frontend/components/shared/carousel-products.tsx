@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { Product } from "../types";
+import { Product } from "../../types";
 import ProductCard from "../product/product-card";
 
 const CarouselProducts = ({ products,className }: { products: Product[],className?:string }) => {

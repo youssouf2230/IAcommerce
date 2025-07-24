@@ -1,12 +1,10 @@
 // app/products/[id]/page.tsx
-
 import { Rating } from "@/components/product/product-card";
-import CarouselProducts from "@/components/shared/carousel-products";
 import CommentsUser from "@/components/shared/comments-user";
 import SimilarProducts from "@/components/shared/similar-products";
-import { Product } from "@/components/types";
+import { Product } from "@/types";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
 
@@ -137,9 +135,9 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         </div>
       </div>
 
-      <SimilarProducts id={product.id}/>
+      <SimilarProducts id={product.id} />
 
-      <CommentsUser/>
+      <CommentsUser />
     </div>
   );
 }

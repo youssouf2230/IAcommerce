@@ -1,7 +1,7 @@
 'use client';
 
 import React, {  useState } from 'react';
-import { useNavigationLinks } from '../hooks/useNavigation';
+import { useNavigationLinks } from '../../hooks/useNavigation';
 import Link from 'next/link';
 import HumButton from '../ui/hum-button';
 import { gsap } from 'gsap';
@@ -68,7 +68,7 @@ const MobileMenu = () => {
             {isOpen && (
                 <div
 
-                    className='absolute h-full bg-muted z-50 w-full top-0 left-0 py-5 px-7 parent '
+                    className='absolute h-full bg-muted z-99 w-full top-0 left-0 py-5 px-7 parent '
                 >
                     <Button variant={"ghost"} className='mt-8 mb-20' onClick={() => setIsOpen(!isOpen)} >
                         <X size={100} className='size-18' />

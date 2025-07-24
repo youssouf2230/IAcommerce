@@ -2,7 +2,7 @@ import SectionLayout from '../layout/section-layout';
 import ProductCard from '../product/product-card';
 import axios from 'axios';
 import { getTranslations } from 'next-intl/server';
-import { Product } from '../types';
+import { Product } from '../../types';
 
 
 const FeaturesProducts = async () => {

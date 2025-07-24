@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import 'server-only'; // Ensures this module is never used on the client
-import { User } from '../types';
+import { User } from '../../types';
 
 
 

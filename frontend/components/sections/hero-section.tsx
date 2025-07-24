@@ -9,7 +9,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
-import { category, categoryPositions } from '../data/categories';
+import { category, categoryPositions } from '../../data/categories';
 
 gsap.registerPlugin(ScrollTrigger);
 

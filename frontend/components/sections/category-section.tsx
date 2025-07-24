@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import SectionLayout from '../layout/section-layout';
 import axios from 'axios';
-import { Category } from '../types';
+import { Category } from '../../types';
 
 
 const fallbackImage = '/default.png';

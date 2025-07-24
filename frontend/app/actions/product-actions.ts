@@ -1,6 +1,6 @@
 'use server';
 
-import { Product } from "@/components/types";
+import { Product } from "@/types";
 
 // 1. Define the new response type from your API
 export interface PaginatedProductsResponse {

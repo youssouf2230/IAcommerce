@@ -8,26 +8,22 @@ import {
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useNavigationLinks } from "../hooks/useNavigation"
+import { useNavigationLinks } from "../../hooks/useNavigation"
 import MobileMenu from "../shared/mobile-menu"
 import RightActions from "../shared/right-actions"
 
 
 export default function Header() {
-   
-  
-    
-    
-    const navigationLinks = useNavigationLinks();
+  const navigationLinks = useNavigationLinks();
   const pathname = usePathname();
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left: Logo & Navigation */}
         <div className="flex items-center gap-2">
-       
-         <MobileMenu/>
-          
+
+          <MobileMenu />
+
 
           {/* Logo & Desktop Nav */}
           <div className="flex items-center gap-6">
@@ -58,7 +54,7 @@ export default function Header() {
         </div>
 
         {/* Right: Actions */}
-      <RightActions />
+        <RightActions />
       </div>
     </header>
   )

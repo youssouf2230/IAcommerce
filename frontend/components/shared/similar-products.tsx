@@ -1,6 +1,6 @@
 import React from 'react';
 import CarouselProducts from './carousel-products';
-import { Product } from '../types';
+import { Product } from '../../types';
 
 const SimilarProducts = async ({id}:{id:number}) => {
   const res = await fetch('http://localhost:8080/api/products/similar/'+id, {

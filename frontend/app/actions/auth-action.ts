@@ -2,7 +2,7 @@
 'use server';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
-import { LoginAuthSchema, SignUpAuthSchema } from '../../components/schema/shema';
+import { LoginAuthSchema, SignUpAuthSchema } from '../../schema/shema';
 import { cookies } from 'next/headers';
 
 // Pa$$w0rd!
