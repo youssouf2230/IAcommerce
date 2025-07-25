@@ -1,13 +1,7 @@
 package net.youssouf.backend;
 
-import net.youssouf.backend.entities.AppUser;
-import net.youssouf.backend.entities.Category;
-import net.youssouf.backend.entities.Product;
-import net.youssouf.backend.entities.Role;
-import net.youssouf.backend.repositories.AppUserRepository;
-import net.youssouf.backend.repositories.CategoryRepository;
-import net.youssouf.backend.repositories.ProductRepository;
-import net.youssouf.backend.repositories.RoleRepository;
+import net.youssouf.backend.entities.*;
+import net.youssouf.backend.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -37,9 +32,11 @@ public class BackendApplication {
                 CategoryRepository categoryRepo,
                 AppUserRepository userRepo,
                 RoleRepository roleRepo,
+                CommentRepository commentRepository,
                 PasswordEncoder passwordEncoder
         ) {
                 return args -> {
+
 
                         Role clientRole = roleRepo.save(new Role(null, "ROLE_CLIENT"));
                         Role adminRole = roleRepo.save(new Role(null, "ADMIN"));
@@ -88,6 +85,7 @@ public class BackendApplication {
                                         .numberOfComments(100)
                                         .numberOfLiked(150)
                                         .numberOfDisliked(5)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(smartphones)
                                         .imageUrls(List.of(
@@ -107,6 +105,7 @@ public class BackendApplication {
                                         .numberOfComments(40)
                                         .numberOfLiked(130)
                                         .numberOfDisliked(3)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(smartphones)
                                         .imageUrls(List.of(
@@ -126,6 +125,7 @@ public class BackendApplication {
                                         .numberOfComments(100)
                                         .numberOfLiked(120)
                                         .numberOfDisliked(2)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(laptops)
                                         .imageUrls(List.of("https://uno.ma/pub/media/catalog/product/cache/af8d7fd2c4634f9c922fba76a4a30c04/l/d/ld0005959647_1.jpeg"))
@@ -143,6 +143,7 @@ public class BackendApplication {
                                         .numberOfComments(100)
                                         .numberOfLiked(100)
                                         .numberOfDisliked(1)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(laptops)
                                         .imageUrls(List.of("https://m.media-amazon.com/images/I/81Vep45DQ4L._AC_SL1500_.jpg"))
@@ -160,6 +161,7 @@ public class BackendApplication {
                                         .numberOfComments(50)
                                         .numberOfLiked(160)
                                         .numberOfDisliked(4)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(audio)
                                         .imageUrls(List.of("https://www.sony.com/image/6145c1d32e6ac8e63a46c912dc33c5bb?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF"))
@@ -177,6 +179,7 @@ public class BackendApplication {
                                         .numberOfComments(28)
                                         .numberOfLiked(110)
                                         .numberOfDisliked(3)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(audio)
                                         .imageUrls(List.of("https://www.mediazone.ma/product/images/11912-huOL0Ml8/enceinte-portable-sans-fil-bluetooth-jbl-charge-5-rouge.jpg"))
@@ -194,6 +197,7 @@ public class BackendApplication {
                                         .numberOfComments(22)
                                         .numberOfLiked(90)
                                         .numberOfDisliked(1)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(accessories)
                                         .imageUrls(List.of("https://www.ultrapc.ma/19003-large_default/logitech-mx-master-3-graphite.jpg"))
@@ -211,6 +215,7 @@ public class BackendApplication {
                                         .numberOfComments(15)
                                         .numberOfLiked(75)
                                         .numberOfDisliked(2)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(accessories)
                                         .imageUrls(List.of("https://www.pcgamer.ma/259714-large_default/samsung-27-led-f27t350fhm-moniteur.jpg"))
@@ -228,6 +233,7 @@ public class BackendApplication {
                                         .numberOfComments(20)
                                         .numberOfLiked(10)
                                         .numberOfDisliked(30)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(smartphones)
                                         .imageUrls(List.of("https://mytechnology.lk/wp-content/uploads/2024/03/google-pixel-8.jpg"))
@@ -245,6 +251,7 @@ public class BackendApplication {
                                         .numberOfComments(48)
                                         .numberOfLiked(140)
                                         .numberOfDisliked(5)
+                                        .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(audio)
                                         .imageUrls(List.of(
@@ -252,6 +259,59 @@ public class BackendApplication {
                                         ))
                                         .build()
                         ));
+
+
+                        List<Comment> comments = List.of(
+                                // Avec utilisateur connecté
+                                Comment.builder()
+                                        .content("Produit exceptionnel, je l’utilise tous les jours !")
+                                        .rating(5)
+                                        .createdAt(LocalDateTime.now())
+                                        .authorName(clientUser.getUsername())
+                                        .user(clientUser)
+                                        .product(productRepo.findById(1L))
+                                        .build(),
+
+                                Comment.builder()
+                                        .content("Bon rapport qualité/prix, rien à dire.")
+                                        .rating(4)
+                                        .createdAt(LocalDateTime.now())
+                                        .authorName(clientUser.getUsername())
+                                        .user(clientUser)
+                                        .product(productRepo.findById(2L))
+                                        .build(),
+
+                                Comment.builder()
+                                        .content("Correct sans plus, quelques défauts à l’usage.")
+                                        .rating(3)
+                                        .createdAt(LocalDateTime.now())
+                                        .authorName(clientUser.getUsername())
+                                        .user(clientUser)
+                                        .product(productRepo.findById(3L))
+                                        .build(),
+
+                                // Anonyme
+                                Comment.builder()
+                                        .content("Très déçu, je m’attendais à mieux.")
+                                        .rating(2)
+                                        .createdAt(LocalDateTime.now())
+                                        .authorName("Client anonyme")
+                                        .user(null)
+                                        .product(productRepo.findById(4L))
+                                        .build(),
+
+                                Comment.builder()
+                                        .content("Catastrophique, je regrette mon achat.")
+                                        .rating(1)
+                                        .createdAt(LocalDateTime.now())
+                                        .authorName("Utilisateur inconnu")
+                                        .user(null)
+                                        .product(productRepo.findById(5L))
+                                        .build()
+                        );
+
+                        commentRepository.saveAll(comments);
                 };
+
         }
 }

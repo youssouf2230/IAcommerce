@@ -9,7 +9,7 @@ import { Product } from '../types';
 
 
 const ProductCard = (props: Product) => {
-  const [liked, setLiked] = useState(props.hasliked);
+  const [liked, setLiked] = useState(props.hasLiked);
   const [loading, setLoading] = useState(false);
 
   const toggleLike = async () => {

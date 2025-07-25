@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,6 +32,10 @@ public class Product {
     private int numberOfLiked = 0;
     private boolean hasLiked = false;
     private int numberOfDisliked = 0;
+    @ElementCollection
+    @CollectionTable(name = "product_colors", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "color")
+    private List<String> colors = new ArrayList<>();
 
     private LocalDate date = LocalDate.now();
 
