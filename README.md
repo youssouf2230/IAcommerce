@@ -1,8 +1,8 @@
 # -IAcommerce
 IAcommerce(commerce intelligent 90% automatisé).
 
-FONCTIONNALITÉS INTELLIGENTES :
-    🧠 1. Moteur de Recommandation Intelligent
+# FONCTIONNALITÉS INTELLIGENTES :
+🧠 1. Moteur de Recommandation Intelligent
     👉 "Vous aimerez aussi...", "Produits similaires"
     
     Basé sur :
@@ -124,11 +124,22 @@ FONCTIONNALITÉS INTELLIGENTES :
     Push notifications IA
     
     Interface adaptée
-📱 Multilinguistique:
+📱 11. Multilinguistique:
 
     Français
     Anglais
     Arabe
+
+🧠 12. Analyse de sentiment dans des commentaire:
+    
+    Basé sur :
+    
+    commentaire fait par user connecter ou anonyme
+    
+     Associer les notes de commentaires dans produits
+
+    🔧 Tech :LLM
+
 
 # Conception :
     .....
