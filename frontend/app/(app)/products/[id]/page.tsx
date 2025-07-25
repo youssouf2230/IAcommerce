@@ -103,8 +103,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
                 : "Out of stock"}
             </p>
             <p>
-              <strong className="text-foreground">Colors:</strong> Black, Blue, Orange
+              <strong className="text-foreground">Colors:</strong>{' '}
+              {product.colors && product.colors.length > 0 ? product.colors.join(', ') : 'No colors'}
             </p>
+
             <p>
               <strong className="text-foreground">Tags:</strong> {staticData.tags.join(", ")}
             </p>
@@ -137,7 +139,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
       <SimilarProducts id={product.id} />
 
-      <CommentsUser />
+      <CommentsUser productId={product.id}/>
     </div>
   );
 }

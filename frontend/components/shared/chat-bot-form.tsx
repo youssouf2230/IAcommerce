@@ -23,6 +23,7 @@ const copyToClipboard = (text: string) => {
 };
 
 const ChatBotForm = ({className}:{className?:string}) => {
+   
     return (
         <Card className= {cn("w-full relative  h-[65vh]  overflow-y-auto flex flex-col px-4 ",className)}>
             <div className="flex-1 flex flex-col gap-4">

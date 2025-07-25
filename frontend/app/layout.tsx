@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"], // Ensure you load the required weights
@@ -41,7 +42,7 @@ export default async function RootLayout({
         >
           {children}
 
-          
+            <Toaster position="bottom-right" />
         </ThemeProvider>
 
          </NextIntlClientProvider>
