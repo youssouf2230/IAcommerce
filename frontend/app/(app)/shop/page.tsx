@@ -6,8 +6,9 @@ import SearchProduct from './search-product';
 import Sorting from './sorting';
 import Filter from './filter';
 import PaginationShop from './pagination-shop';
+import { Suspense } from 'react';
 
-interface ShopPageProps {
+type ShopPageProps = {
   searchParams?: {
     page?: string;
     size?: string;
@@ -17,9 +18,9 @@ interface ShopPageProps {
 }
 
 const ShopPage = async ({ searchParams }: ShopPageProps) => {
-  const search_params=await searchParams
+  const search_params = await searchParams
   const page = Number(search_params?.page) || 0;
-  const size = Number(search_params?.size) || 4; 
+  const size = Number(search_params?.size) || 4;
   const search = search_params?.search || '';
   const sort = search_params?.sort || '';
 
@@ -39,16 +40,19 @@ const ShopPage = async ({ searchParams }: ShopPageProps) => {
       </div>
 
       <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products && products.length > 0 ? (
-          products.map((product) => (
-           
-            <ProductCard key={product.id} {...product} />
-          ))
-        ) : (
-          <p className="col-span-full text-center text-muted-foreground">
-            No products found matching your criteria.
-          </p>
-        )}
+        <Suspense fallback={<p>Loading...</p>}>
+
+          {products && products.length > 0 ? (
+            products.map((product) => (
+
+              <ProductCard key={product.id} {...product} />
+            ))
+          ) : (
+            <p className="col-span-full text-center text-muted-foreground">
+              No products found matching your criteria.
+            </p>
+          )}
+        </Suspense>
       </div>
 
 

@@ -89,7 +89,8 @@ public class BackendApplication {
                                         .date(LocalDate.now())
                                         .category(smartphones)
                                         .imageUrls(List.of(
-                                                "https://electrosalam.ma/cdn/shop/files/10_11_87bd80b1-d4e9-473f-86e1-eb5cbbfaab50.png?v=1751299222&width=1000"
+                                                "https://electrosalam.ma/cdn/shop/files/10_11_87bd80b1-d4e9-473f-86e1-eb5cbbfaab50.png?v=1751299222&width=1000",
+                                                 "https://uno.ma/pub/media/catalog/product/cache/af8d7fd2c4634f9c922fba76a4a30c04/l/d/ld0006166469.jpg"
                                         ))
                                         .build(),
 

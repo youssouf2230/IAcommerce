@@ -1,12 +1,13 @@
 // app/products/[id]/page.tsx
-import { Rating } from "@/components/product/product-card";
+;
 import CommentsUser from "@/components/shared/comments-user";
 import SimilarProducts from "@/components/shared/similar-products";
 import { Product } from "@/types";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
-
+import { Rating } from "@/components/shared/rating";
+import { ImageProduct } from "./image-product";
 
 
 
@@ -50,14 +51,8 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     <div className="mx-auto my-20 ">
       <div className="flex flex-wrap gap-10">
         {/* Product Image */}
-        <Image
-          src={product.imageUrls[0]}
-          width={600}
-          height={600}
-          alt={product.name}
-          className="rounded-lg object-contain m-auto "
-        />
 
+        <ImageProduct imageUrls={product.imageUrls} name={product.name} />
         {/* Product Info */}
         <div className="flex-1 min-w-sm space-y-4">
           <h1 className="sm:text-5xl text-4xl font-semibold">{product.name}</h1>
@@ -139,7 +134,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
       <SimilarProducts id={product.id} />
 
-      <CommentsUser productId={product.id}/>
+      <CommentsUser productId={product.id} />
     </div>
   );
 }

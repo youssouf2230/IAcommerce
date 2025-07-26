@@ -1,6 +1,5 @@
 import { CommentType } from '@/types';
-import React from 'react';
-import { Rating } from '../product/product-card';
+import { Rating } from '../shared/rating';
 
 
 const Comment = ({ comment }: { comment: CommentType }) => {
