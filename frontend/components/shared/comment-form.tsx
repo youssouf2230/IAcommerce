@@ -1,7 +1,5 @@
-// Your original component file
-'use client';
 
-import React, { useEffect, useRef } from 'react';
+'use client';
 import { useActionState } from 'react'; // In React 18, use: import { useFormState } from 'react-dom';
 import { usePathname } from 'next/navigation';
 
@@ -16,7 +14,7 @@ const initialState: FormState = {
   error: null,
 };
 
-const CommentForm = ({ user, productId }: { user: User; productId: number }) => {
+  const CommentForm = ({  productId }: { user: User; productId: number }) => {
   const [state, formAction,pending] = useActionState(addComment, initialState);
   const pathname = usePathname(); 
   return (
@@ -31,7 +29,7 @@ const CommentForm = ({ user, productId }: { user: User; productId: number }) => 
           />
 
           <input type="hidden" name="productId" value={productId} />
-          <input type="hidden" name="authorName" value={user.username} />
+       
           <input type="hidden" name="path" value={pathname} />
 
         

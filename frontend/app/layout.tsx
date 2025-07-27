@@ -42,7 +42,7 @@ export default async function RootLayout({
         >
           {children}
 
-            <Toaster position="bottom-right" />
+            <Toaster position="top-right"  richColors />
         </ThemeProvider>
 
          </NextIntlClientProvider>

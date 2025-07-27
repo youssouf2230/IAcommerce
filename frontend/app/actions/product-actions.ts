@@ -1,6 +1,6 @@
 'use server';
-
 import { Product } from "@/types";
+import { cookies } from "next/headers";
 
 // 1. Define the new response type from your API
 export interface PaginatedProductsResponse {
@@ -25,7 +25,7 @@ export async function getProducts(
   url.searchParams.append('size', String(size));
   if (search) url.searchParams.append('search', search);
   if (sort) url.searchParams.append('sort', sort);
-  
+
   try {
     const res = await fetch(url.toString(), {
       cache: 'no-store', // Keep this for dynamic search/sort
@@ -43,4 +43,35 @@ export async function getProducts(
     // Return a default empty state on error
     return { content: [], totalPages: 0, totalElements: 0, number: 0, size: size };
   }
+}
+
+
+export async function getSingleProduct(id: number): Promise<Product | { message: string }> {
+  const res = await fetch(`http://localhost:8080/api/products/${id}`); // Replace with your API endpoint
+  if (!res.ok) {
+
+    return {
+      message: "Product not found" + res.status,
+      
+    }
+  }
+  const product = res.json();
+
+  return product;
+}
+
+
+export async function recentlyViewedProducts(ProductCards: Product) {
+  
+  const cookie = await cookies();
+  const cookie_products = await cookie.get('recentlyViewedProducts')
+
+  if (true) {
+    // const products = JSON.parse(cookie_products.value);
+    // products.push(ProductCards);
+   await cookie.set('recentlyViewedProducts', JSON.stringify(  [ ProductCards ]))
+  }
+  
+  return null;
+
 }

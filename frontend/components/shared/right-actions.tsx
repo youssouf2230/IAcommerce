@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+'use client';
 import { Button } from '../ui/button';
 
 import ToggleTheme from './toggle-theme';
@@ -14,7 +15,7 @@ const RightActions = () => {
     const { session, isLoading } = useSession();
     return (
         <div>
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-4">
 
                 <ShopCart/>
 
@@ -30,7 +31,7 @@ const RightActions = () => {
                     </Button>
                 )}
 
-                <ToggleTheme />
+                <ToggleTheme  />
                 <LanguageSwitcher />
 
 

@@ -1,22 +1,20 @@
 'use client';
-import React, { useState } from 'react';
+import {  useState, useTransition } from 'react';
 import Image from 'next/image';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Heart } from 'lucide-react';
 import Link from 'next/link';
-
 import { Product } from '../../types';
 import { Rating } from '../shared/rating';
-
-import { getOrCreateSessionId } from "@/lib/utils";
-
+import AddToCartButton from '../shared/add-to-cart';
 
 
 const ProductCard = (props: Product) => {
   const [liked, setLiked] = useState(props.hasLiked);
   const [loading, setLoading] = useState(false);
+  const [ispendingLike, startTransition] = useTransition();
 
-  const toggleLike = async () => {
+
+  const toggleLike = () => startTransition(async () => {
     if (loading) return; // éviter plusieurs clics rapides
     setLoading(true);
     try {
@@ -34,74 +32,48 @@ const ProductCard = (props: Product) => {
     } finally {
       setLoading(false);
     }
-  };
+  });
 
 
 
-    const addToCart = async () => {
-        try {
-            const sessionId = getOrCreateSessionId();
 
-            const res = await fetch("http://localhost:8080/api/cart/add", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include", // indispensable pour envoyer les cookies (JWT)
-                body: JSON.stringify({
-                    productId: props.id,
-                    quantity: 1,
-                    sessionId: sessionId, // pour user anonyme
-                }),
-            });
-
-            if (!res.ok) {
-                throw new Error("Erreur lors de l’ajout au panier");
-            }
-
-            const data = await res.json();
-            //console.log("Ajout au panier avec succès:", data);
-            alert("The product has been added successfully");
-        } catch (err) {
-            console.error("Erreur d’ajout au panier:", err);
-        }
-    };
-
-
-    return (
-    <div className="p-6 relative bg-white  rounded-lg">
-      <div
+  return (
+    <div className="p-6 relative bg-white rounded-lg border flex flex-col">
+      <button
         onClick={toggleLike}
-        className={`p-1.5 absolute top-3 right-5 rounded-full cursor-pointer ${liked ? 'bg-red-100' : 'bg-transparent'}`}
-        title={liked ? 'remove from favorites' : 'add to favorites'}
+        disabled={ispendingLike}
+        aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
+        className="p-1.5 absolute top-3 right-5 rounded-full cursor-pointer transition-colors bg-gray-100 hover:bg-gray-200"
       >
         <Heart
           size={20}
           className={liked ? 'text-red-600' : 'text-foreground'}
           fill={liked ? 'currentColor' : 'none'}
-          strokeWidth={2}
         />
-      </div>
+      </button>
 
-      <Link href={`/products/${props.id}`}>
+      <Link href={`/products/${props.id}`} className="flex-grow">
         <Image
-            src={props.imageUrls[0]}
-            alt={props.name}
-            width={300}
-            height={300}
-            className="aspect-square object-contain m-auto cursor-pointer  "
+          src={props.imageUrls[0]}
+          alt={props.name}
+          width={300}
+          height={300}
+          loading="lazy"
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          className="aspect-square object-contain m-auto"
         />
       </Link>
-      <h3 className="mt-3 font-semibold text-zinc-900 text-xl">{props.name}</h3>
-      <Rating rating={props.rating} />
-      <div className="flex items-center text-lg gap-2 mt-3">
-        <span className="text-primary font-semibold">{props.sellPrice} Dh</span>
-        <span className="text-gray-500 line-through">{props.oldPrice ? props.oldPrice: 200 }Dh</span>
-      </div>
-        <Button onClick={addToCart} variant="default" size="lg" className="mt-4 w-full">
-            <ShoppingCart size={20} /> Add cart
-        </Button>
 
+      <div className="mt-auto pt-4"> {/* Pushes content to the bottom */}
+        <h3 className="font-semibold text-zinc-900 text-xl">{props.name}</h3>
+        <Rating rating={props.rating} />
+        <div className="flex items-center text-lg gap-2 mt-3">
+          <span className="text-primary font-semibold">{props.sellPrice} Dh</span>
+          {/* ACCESSIBILITY FIX: Increased contrast */}
+          <span className="text-gray-600 line-through">{props.oldPrice ?? 200}Dh</span>
+        </div>
+       <AddToCartButton productId={props.id} />
+      </div>
     </div>
   );
 };

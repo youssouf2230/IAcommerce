@@ -1,6 +1,3 @@
-import { id } from "zod/v4/locales";
-
-
 export const products = [
     {
         id: 10,

@@ -1,33 +1,28 @@
-// app/products/[id]/page.tsx
-;
 import CommentsUser from "@/components/shared/comments-user";
 import SimilarProducts from "@/components/shared/similar-products";
 import { Product } from "@/types";
-import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
-import Image from "next/image";
 import { Rating } from "@/components/shared/rating";
 import { ImageProduct } from "./image-product";
+import { getSingleProduct } from "@/app/actions/product-actions";
+import RecentlyViewed from "./recently-viewed";
+import AddToCartButton from "@/components/shared/add-to-cart";
 
 
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-
-  const res = await fetch(`http://localhost:8080/api/products/${id}`, {
-    cache: "no-store",
-  });
-
-  console.log(res);
-  if (!res.ok) {
+  const res = await getSingleProduct(Number(id));
+  
+  if (typeof res === "string") {
     return (
       <div className="text-red-500 mt-10 text-center">
-        Produit introuvable (status: {res.status})
+         {res}
       </div>
     );
   }
+  
+  const product: Product = res as Product;
 
-  const product: Product = await res.json();
 
   const staticData = {
     brand: "Logitech",
@@ -45,7 +40,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     material: "Nylon and silicone",
     weight: "200g",
     dimensions: "15 x 10 x 3 cm",
-  };
+    };
 
   return (
     <div className="mx-auto my-20 ">
@@ -126,13 +121,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </div>
 
           {/* Button */}
-          <Button className="mt-4" size="lg">
-            <ShoppingCart className="mr-2" /> Ajouter au panier
-          </Button>
+         <AddToCartButton className="w-fit" productId={product.id} />
         </div>
       </div>
 
       <SimilarProducts id={product.id} />
+
+      <RecentlyViewed  product={product}/>
 
       <CommentsUser productId={product.id} />
     </div>

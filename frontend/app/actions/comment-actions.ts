@@ -17,7 +17,7 @@ export type FormState = {
 const CommentSchema = z.object({
     content: z.string().min(1, { message: "Comment cannot be empty." }),
     productId: z.coerce.number(),
-    authorName: z.string(),
+  
 
     path: z.string(),
 });
@@ -26,6 +26,7 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
     // 1. Validate form data against our schema
     const session = await getUserSession();
     const userId = session?.user?.id ?? null;
+    const authorName = session?.user?.username ?? null;
 
     const validatedFields = CommentSchema.safeParse(Object.fromEntries(formData.entries()));
 
@@ -38,7 +39,7 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
     }
 
     
-    const { content, productId, authorName, path } = validatedFields.data;
+    const { content, productId, path } = validatedFields.data;
     const data = { content,authorName, userId , productId,  };
 
     try {
