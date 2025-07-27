@@ -4,8 +4,11 @@ import Image from 'next/image';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+
 import { Product } from '../../types';
 import { Rating } from '../shared/rating';
+
+import { getOrCreateSessionId } from "@/lib/utils";
 
 
 
@@ -33,7 +36,39 @@ const ProductCard = (props: Product) => {
     }
   };
 
-  return (
+
+
+    const addToCart = async () => {
+        try {
+            const sessionId = getOrCreateSessionId();
+
+            const res = await fetch("http://localhost:8080/api/cart/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include", // indispensable pour envoyer les cookies (JWT)
+                body: JSON.stringify({
+                    productId: props.id,
+                    quantity: 1,
+                    sessionId: sessionId, // pour user anonyme
+                }),
+            });
+
+            if (!res.ok) {
+                throw new Error("Erreur lors de l’ajout au panier");
+            }
+
+            const data = await res.json();
+            //console.log("Ajout au panier avec succès:", data);
+            alert("The product has been added successfully");
+        } catch (err) {
+            console.error("Erreur d’ajout au panier:", err);
+        }
+    };
+
+
+    return (
     <div className="p-6 relative bg-white  rounded-lg">
       <div
         onClick={toggleLike}
@@ -63,9 +98,10 @@ const ProductCard = (props: Product) => {
         <span className="text-primary font-semibold">{props.sellPrice} Dh</span>
         <span className="text-gray-500 line-through">{props.oldPrice ? props.oldPrice: 200 }Dh</span>
       </div>
-      <Button variant="default" size="lg" className="mt-4 w-full">
-        <ShoppingCart size={20} /> Ajouter au panier
-      </Button>
+        <Button onClick={addToCart} variant="default" size="lg" className="mt-4 w-full">
+            <ShoppingCart size={20} /> Add cart
+        </Button>
+
     </div>
   );
 };

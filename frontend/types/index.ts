@@ -59,3 +59,16 @@ export type CommentType= {
   productId: number; // reference to Product ID (since product is @JsonIgnore in backend)
   userId?: number | null; // optional user ID (nullable)
 }
+
+export type CartItem = {
+     id: number;
+     quantity: number;
+     product: Product;
+};
+
+export type Cart = {
+    id: number;
+    sessionId?: string;
+    user?: object;
+    items: CartItem[];
+};

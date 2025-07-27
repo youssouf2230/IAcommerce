@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -33,6 +34,8 @@ public class BackendApplication {
                 AppUserRepository userRepo,
                 RoleRepository roleRepo,
                 CommentRepository commentRepository,
+                CartRepository cartRepository,
+                CartItemRepository cartItemRepository,
                 PasswordEncoder passwordEncoder
         ) {
                 return args -> {
@@ -312,6 +315,36 @@ public class BackendApplication {
                         );
 
                         commentRepository.saveAll(comments);
+
+                        AppUser user1 = userRepo.findById(1L);
+                        AppUser user2 = userRepo.findById(2L);
+
+                        Product p1 = productRepo.findById(1L);
+                        Product p2 = productRepo.findById(2L);
+                        Product p3 = productRepo.findById(3L);
+                        Product p4 = productRepo.findById(4L);
+                        Product p5 = productRepo.findById(5L);
+
+                        // Paniers utilisateurs
+                        Cart cart1 = new Cart(null, user2, null, false, LocalDateTime.now(), new ArrayList<>());
+                        Cart cart2 = new Cart(null, user2, null, false, LocalDateTime.now(), new ArrayList<>());
+                        Cart cart3 = new Cart(null, user1, null, false, LocalDateTime.now(), new ArrayList<>());
+
+                        // Paniers anonymes avec sessionId
+                        Cart cart4 = new Cart(null, null, "session-abc123", false, LocalDateTime.now(), new ArrayList<>());
+                        Cart cart5 = new Cart(null, null, "session-xyz789", false, LocalDateTime.now(), new ArrayList<>());
+
+                        // Sauvegarde
+                        cartRepository.saveAll(List.of(cart1, cart2, cart3, cart4, cart5));
+
+                        // Ajout des items
+                        cartItemRepository.save(new CartItem(null, cart1, p1, 2));
+                        cartItemRepository.save(new CartItem(null, cart2, p2, 1));
+                        cartItemRepository.save(new CartItem(null, cart3, p3, 4));
+                        cartItemRepository.save(new CartItem(null, cart4, p4, 3));
+                        cartItemRepository.save(new CartItem(null, cart5, p5, 1));
+
+
                 };
 
         }

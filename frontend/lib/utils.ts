@@ -20,3 +20,16 @@ export function debounce<T extends (...args: any[]) => void>(callback: T, delay:
     }, delay);
   };
 }
+
+const getOrCreateSessionId = (): string => {
+  let sessionId = localStorage.getItem("sessionId");
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem("sessionId", sessionId);
+  }
+  return sessionId;
+};
+
+export { getOrCreateSessionId };
+
+
