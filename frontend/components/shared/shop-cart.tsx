@@ -20,7 +20,7 @@ const ShopCart = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [totalItems, setTotalItems] = useState(0);
 
-    //  Met à jour le panier à chaque action
+    // Met à jour le panier à chaque action
     const fetchCart = useCallback(async () => {
         try {
             const sessionId = getOrCreateSessionId();
@@ -81,9 +81,11 @@ const ShopCart = () => {
                     className="relative cursor-pointer"
                     aria-label="Cart"
                 >
-                    <p className="absolute -right-2 -top-2 size-4 flex items-center justify-center rounded-full bg-rose-600 text-[10px] text-white">
-                        {totalItems}
-                    </p>
+                    {totalItems > 0 && (
+                        <p className="absolute -right-2 -top-2 size-4 flex items-center justify-center rounded-full bg-rose-600 text-[10px] text-white">
+                            {totalItems}
+                        </p>
+                    )}
                     <ShoppingCart size={20} />
                 </Button>
             </SheetTrigger>
@@ -95,101 +97,57 @@ const ShopCart = () => {
                 </SheetHeader>
 
                 <div className="grid grid-cols-1 gap-3 px-2 mt-4">
-                    {cartItems.map(item => {
-                        const { product } = item;
-                        const imageUrl = product.imageUrls?.[0] || '/default.png';
+                    {cartItems.length === 0 ? (
+                        <p>Your cart is empty.</p>
+                    ) : (
+                        cartItems.map(item => {
+                            const { product } = item;
+                            const imageUrl = product.imageUrls?.[0] || '/default.png';
 
-<<<<<<< HEAD
-                        <p className="absolute -right-2 -top-2 size-4 flex items-center justify-center rounded-full bg-rose-600 text-[10px] text-white">
-                            2
-                        </p>
-                        <ShoppingCart size={20} />
-                    </Button>
-                </SheetTrigger>
-                <SheetContent className='w-[500px]'>
-                    <SheetHeader>
-                        <SheetTitle className='text-3xl'>
-                            Your Cart
-                        </SheetTitle>
+                            return (
+                                <div
+                                    key={item.id}
+                                    className="grid p-4 grid-cols-1 bg-muted/60 rounded-xl"
+                                >
+                                    <div className="flex justify-between items-center">
+                                        <Image
+                                            src={imageUrl}
+                                            alt={product.name}
+                                            width={48}
+                                            height={48}
+                                            className="size-15 rounded-full mr-4 aspect-square object-contain"
+                                        />
 
-                        <h2 className=' text-lg font-medium'>Items {products.length}</h2>
+                                        <div className="flex-1">
+                                            <h3 className="text-lg font-semibold">{product.name}</h3>
+                                            <p className="text-zinc-500 font-medium">
+                                                {product.sellPrice} MAD x {item.quantity}
+                                            </p>
+                                        </div>
 
-
-                    </SheetHeader>
-                    <div className=' grid grid-cols-1 gap-3 px-2'>
-                        {products.map((product) => (
-                            <div key={product.id} className="grid p-4 grid-cols-1 bg-muted/60 rounded-xl ">
-                                <div className="flex justify-between items-center ">
-
-                                    <Image
-                                        src={product.imageUrl}
-=======
-                        return (
-                            <div
-                                key={item.id}
-                                className="grid p-4 grid-cols-1 bg-muted/60 rounded-xl"
-                            >
-                                <div className="flex justify-between items-center">
-                                    <Image
-                                        src={imageUrl}
->>>>>>> 6fb64ac (cart active)
-                                        alt={product.name}
-                                        width={48}
-                                        height={48}
-                                        className="size-15 rounded-full mr-4 aspect-square object-contain"
-                                    />
-<<<<<<< HEAD
-                                    <div className='flex-1'>
-                                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                                        <p className="text-zinc-500 font-medium">{product.price}</p>
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            onClick={() => removeItem(item.id)}
+                                        >
+                                            <Trash size={20} className="text-destructive" />
+                                        </Button>
                                     </div>
-                                    <Button variant="ghost" size="icon">
 
-                                        <Trash size={20} className='text-destructive' />
-                                    </Button>
-
-                                </div>
-                                <div className='w-max m-auto'>
-                                    <NumberField />
-                                </div>
-                            </div>
-                        ))}
-
-                    </div>
-
-
-                </SheetContent>
-            </Sheet>
-        </div>
-=======
-                                    <div className="flex-1">
-                                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                                        <p className="text-zinc-500 font-medium">
-                                            {product.sellPrice} MAD x {item.quantity}
-                                        </p>
+                                    <div className="w-max m-auto mt-2">
+                                        <NumberField
+                                            value={item.quantity}
+                                            onChange={val => updateQuantity(item.id, val)}
+                                            min={1}
+                                        />
                                     </div>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => removeItem(item.id)}
-                                    >
-                                        <Trash size={20} className="text-destructive" />
-                                    </Button>
                                 </div>
-                                <div className="w-max m-auto mt-2">
-                                    <NumberField
-                                        value={item.quantity}
-                                        onChange={val => updateQuantity(item.id, val)}
-                                        min={1}
-                                    />
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })
+                    )}
                 </div>
             </SheetContent>
         </Sheet>
->>>>>>> 6fb64ac (cart active)
     );
 };
 

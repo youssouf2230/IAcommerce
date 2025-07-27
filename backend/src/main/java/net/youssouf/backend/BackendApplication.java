@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
+@EnableScheduling
 public class BackendApplication {
 
         public static void main(String[] args) {
@@ -57,6 +59,7 @@ public class BackendApplication {
                         // Client user
                         AppUser clientUser = new AppUser();
                         clientUser.setUsername("client1");
+                        // vrai email pour des test
                         clientUser.setEmail("client1@example.com");
                         clientUser.setPassword(passwordEncoder.encode("client1"));
                         clientUser.setRoles(Set.of(clientRole));
