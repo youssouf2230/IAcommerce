@@ -33,7 +33,7 @@ const ChatBot = () => {
   return (
     <div
       ref={containerRef}
-      className="fixed z-50 sm:max-w-md max-w-sm w-full bottom-5 right-4 flex flex-col items-end"
+      className="fixed   z-50 sm:max-w-md max-w-sm w-max bottom-5 right-4 flex flex-col items-end"
     >
       {isOpen && (
         <div className="shadow-2xl rounded-lg w-full mb-3">
@@ -41,8 +41,8 @@ const ChatBot = () => {
         </div>
       )}
 
-      <div className="relative flex items-center">
-        {!isOpen && <ChatAnimatedText />}
+      <div className="relative flex items-center  ">
+        {!isOpen && <ChatAnimatedText  />}
 
         <button
           onClick={toggleChat}

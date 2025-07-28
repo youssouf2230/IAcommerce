@@ -40,9 +40,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+            {children}
 
-            <Toaster position="top-right"  richColors />
+            <Toaster position="bottom-right"  richColors closeButton />
         </ThemeProvider>
 
          </NextIntlClientProvider>

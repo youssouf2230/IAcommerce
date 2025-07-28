@@ -3,23 +3,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {
     Sheet,
+    SheetClose,
     SheetContent,
+    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '../ui/button';
-import { ShoppingCart, Trash } from 'lucide-react';
-import Image from 'next/image';
-import NumberField from '../ui/number-field';
+import { ShoppingCart } from 'lucide-react';
+
 import axios from 'axios';
 import { getOrCreateSessionId } from '@/lib/utils';
 import { CartItem, Cart } from '@/types';
+import CartCard from '../ui/cart-card';
+import Link from 'next/link';
 
 const ShopCart = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [totalItems, setTotalItems] = useState(0);
-
+    const [open, setOpen] = useState(false);
     //  Met à jour le panier à chaque action
     const fetchCart = useCallback(async () => {
         try {
@@ -34,7 +37,7 @@ const ShopCart = () => {
 
             const carts = Array.isArray(response.data) ? response.data : response.data.content;
             const allItems = carts.flatMap(cart => cart.items || []);
-
+            // console.log(response?.data?.content[0].id)
             setCartItems(allItems);
             setTotalItems(allItems.reduce((sum, item) => sum + item.quantity, 0));
         } catch (err) {
@@ -47,33 +50,10 @@ const ShopCart = () => {
     }, [fetchCart]);
 
     // Supprimer un produit du panier
-    const removeItem = async (itemId: number) => {
-        try {
-            await axios.delete(`http://localhost:8080/api/cart/item/${itemId}`, {
-                withCredentials: true,
-            });
-            fetchCart();
-        } catch (err) {
-            console.error('Erreur suppression article :', err);
-        }
-    };
 
-    // Changer la quantité
-    const updateQuantity = async (itemId: number, newQuantity: number) => {
-        try {
-            await axios.put(
-                `http://localhost:8080/api/cart/item/${itemId}`,
-                { quantity: newQuantity },
-                { withCredentials: true }
-            );
-            fetchCart();
-        } catch (err) {
-            console.error('Erreur mise à jour quantité :', err);
-        }
-    };
 
     return (
-        <Sheet>
+        <Sheet onOpenChange={setOpen}>
             <SheetTrigger asChild>
                 <Button
                     size="icon"
@@ -96,47 +76,21 @@ const ShopCart = () => {
 
                 <div className="grid grid-cols-1 gap-3 px-2 mt-4">
                     {cartItems.map(item => {
-                        const { product } = item;
-                        const imageUrl = product.imageUrls?.[0] || '/default.png';
-
                         return (
-                            <div
-                                key={item.id}
-                                className="grid p-4 grid-cols-1 bg-muted/60 rounded-xl"
-                            >
-                                <div className="flex justify-between items-center">
-                                    <Image
-                                        src={imageUrl}
-                                        alt={product.name}
-                                        width={48}
-                                        height={48}
-                                        className="size-15 rounded-full mr-4 aspect-square object-contain"
-                                    />
-                                    <div className="flex-1">
-                                        <h3 className="text-lg font-semibold">{product.name}</h3>
-                                        <p className="text-zinc-500 font-medium">
-                                            {product.sellPrice} MAD x {item.quantity}
-                                        </p>
-                                    </div>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => removeItem(item.id)}
-                                    >
-                                        <Trash size={20} className="text-destructive" />
-                                    </Button>
-                                </div>
-                                <div className="w-max m-auto mt-2">
-                                    <NumberField
-                                        value={item.quantity}
-                                        onChange={val => updateQuantity(item.id, val)}
-                                        min={1}
-                                    />
-                                </div>
-                            </div>
+                            <CartCard key={item.id} cartItem={item} fetchCart={fetchCart} />
                         );
                     })}
                 </div>
+
+                <SheetFooter >
+                    <SheetClose asChild>
+                        <Button asChild >
+                            <Link href={`/checkout/${cartItems[0]?.id} `} >Checkout</Link>
+                        </Button>
+
+                    </SheetClose>
+                </SheetFooter>
+
             </SheetContent>
         </Sheet>
     );

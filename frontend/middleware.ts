@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -11,10 +11,13 @@ async function verifyToken(token: string) {
     return null;
   }
   try {
-    const secret = new TextEncoder().encode(JWT_SECRET);
-    const { payload } = await jwtVerify(token, secret);
+    // const secret = new TextEncoder().encode(JWT_SECRET);
+    const decodedSecret = Buffer.from(JWT_SECRET, 'base64');
+    const { payload } = await jwtVerify(token, decodedSecret);
+
     return payload;
   } catch (error) {
+ 
     return null; // Token is invalid or expired
   }
 }
@@ -22,7 +25,7 @@ async function verifyToken(token: string) {
 // Allow exact paths and prefix-matched paths (e.g., /about/team)
 const publicRoutes = ['/', '/login', '/register', '/about', '/contact','/shop','/products'];
 const adminRoutePrefixes = ['/dashboard'];
-
+const authenticatedRoutes = ['/checkout'];
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get('token')?.value;
@@ -32,6 +35,7 @@ export async function middleware(request: NextRequest) {
   if (isPublic) {
     return NextResponse.next();
   }
+
 
   // No token -> redirect to login
   if (!token) {
@@ -43,6 +47,7 @@ export async function middleware(request: NextRequest) {
   // Verify token
   const payload = await verifyToken(token);
   if (!payload) {
+    console.log(payload)
     const loginUrl = new URL('/login', request.url);
     const response = NextResponse.redirect(loginUrl);
     response.cookies.delete('token');
@@ -50,6 +55,11 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
+
+  if(payload && authenticatedRoutes){
+     return  NextResponse.next();
+
+  }
   // Role-based access control for admin routes
   const userRoles = (payload.roles as string[]) || [];
 
@@ -61,6 +71,8 @@ export async function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+
+
 
 // Matcher to apply middleware to all non-static paths
 export const config = {

@@ -137,6 +137,11 @@
             <artifactId>meilisearch-java</artifactId>
             <version>0.15.0</version>
         </dependency>
+        <!-- email -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 
 
         <dependency>

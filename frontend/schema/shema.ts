@@ -13,8 +13,9 @@ export const SignUpAuthSchema = z.object({
   email: z.email("Invalid email format"),
 
   password: z.string()
-    .min(6, "Password is required")
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, 'Please enter a stronger password.'),
+    .min(1, "Password is required")
+   .regex(/^.{6,}$/, 'Password must be at least 6 characters long.'),
+
 
   confirmPassword: z.string()
     .min(1, " Confirm Password is required"),

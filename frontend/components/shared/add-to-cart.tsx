@@ -14,6 +14,7 @@ const AddToCartButton = ({ productId, className }: { productId: number, classNam
       const sessionId = getOrCreateSessionId();
       const result = await addToCart({ productId, sessionId });
 
+
       if (result.success) {
         toast.success(result.success);
       }
@@ -26,6 +27,7 @@ const AddToCartButton = ({ productId, className }: { productId: number, classNam
     <SubmitButton
 
       onClick={handleAddToCart}
+    
       pending={isPendingcart}
       variant="default"
       size="lg"
