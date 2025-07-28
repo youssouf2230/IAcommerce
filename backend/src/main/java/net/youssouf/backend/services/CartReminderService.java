@@ -24,8 +24,9 @@ public class CartReminderService {
         this.chatClient = chatClientBuilder.build();
     }
 
-    // Toutes les jous à 10h
+    // Tous les jous à 10h
     @Scheduled(cron = "0 0 10 * * ?")
+    //@Scheduled(cron = "0 */2 * * * ?") // Toutes les 2
     public void sendCartReminders() {
         LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
         List<Cart> abandonedCarts = cartRepository.findByLastUpdatedBeforeAndAbandonedFalse(twentyFourHoursAgo);

@@ -60,7 +60,7 @@ public class BackendApplication {
                         AppUser clientUser = new AppUser();
                         clientUser.setUsername("client1");
                         // vrai email pour des test
-                        clientUser.setEmail("client1@example.com");
+                        clientUser.setEmail("dy5155414@gmail.com");
                         clientUser.setPassword(passwordEncoder.encode("client1"));
                         clientUser.setRoles(Set.of(clientRole));
                         userRepo.save(clientUser);
