@@ -28,5 +28,8 @@ public class ProductService {
         return productRepository.findByCategoryIdAndIdNot(categoryId, excludedProductId);
     }
 
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
+    }
 
 }

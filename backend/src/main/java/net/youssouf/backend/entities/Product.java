@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Data
 @Builder
@@ -35,7 +34,7 @@ public class Product {
     @ElementCollection
     @CollectionTable(name = "product_colors", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "color")
-    private List<String> colors = new ArrayList<>();
+    private List<String> colors = new ArrayList<>(List.of("black", "white"));
 
     private LocalDate date = LocalDate.now();
 

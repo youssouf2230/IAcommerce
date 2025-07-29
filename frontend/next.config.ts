@@ -65,13 +65,14 @@ const securityHeaders = [
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
   { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
   { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
+
 ];
 
 const nextConfig: NextConfig = {
   experimental: {
-    // This is not a standard Next.js experimental flag. You might want to remove it
-    // if it's not from a specific library you are using.
-    // authInterrupts: true, 
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
   },
 
   // Optional: Enable source maps in production for easier debugging.
@@ -86,7 +87,7 @@ const nextConfig: NextConfig = {
       // The wildcard hostname is very permissive. Consider restricting it if possible.
       { protocol: 'https', hostname: '*.google.com' }, // Example of a more specific wildcard
       { protocol: 'https', hostname: 'res.cloudinary.com' }, // Example
-        {protocol: 'https',hostname: '*',},
+      { protocol: 'https', hostname: '*', },
     ],
   },
 

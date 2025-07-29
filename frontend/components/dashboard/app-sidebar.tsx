@@ -15,6 +15,7 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
+import { handleLogout } from "@/app/actions/auth-action";
 
 // Menu items.
 const items = [
@@ -30,7 +31,7 @@ const items = [
   },
   {
     title: "Porducts",
-    url: "#",
+    url: "/dashboard/products",
     icon: ShoppingBag,
   },
   {
@@ -84,10 +85,12 @@ export function AppSidebar() {
                 Achraf Tichirra
               </span>
             </div>
+           <form action={handleLogout}>
 
             <Button size="sm" variant="outline" className="rounded-full aspect-square bg-muted/50"> 
                 <LogOut size={20}/>
             </Button>
+           </form>
            </div>
       </SidebarFooter>
     </Sidebar>

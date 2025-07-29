@@ -27,6 +27,7 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   return (
+    
      <html lang={locale} suppressHydrationWarning >
       <body
         className={` ${inter.variable} font-inter  bg-background text-foreground   antialiased`}
