@@ -24,6 +24,9 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     WHERE c.lastUpdated < :dateTime AND c.abandoned = false
     """)
     List<Cart> findByLastUpdatedBeforeAndAbandonedFalse(@Param("dateTime") LocalDateTime dateTime);
+    Cart findById(long id);
+    Cart findBySessionId(String sessionId);
+
 
 
 }
