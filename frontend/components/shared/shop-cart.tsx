@@ -23,7 +23,10 @@ const ShopCart = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [totalItems, setTotalItems] = useState(0);
     const [open, setOpen] = useState(false);
-    //  Met à jour le panier à chaque action
+    // id to cart
+    const [cartId, setCartId] = useState<number | null>(null);
+
+    // Met à jour le panier à chaque action
     const fetchCart = useCallback(async () => {
         try {
             const sessionId = getOrCreateSessionId();
@@ -36,10 +39,17 @@ const ShopCart = () => {
             );
 
             const carts = Array.isArray(response.data) ? response.data : response.data.content;
-            const allItems = carts.flatMap(cart => cart.items || []);
-            // console.log(response?.data?.content[0].id)
-            setCartItems(allItems);
-            setTotalItems(allItems.reduce((sum, item) => sum + item.quantity, 0));
+
+            if (carts.length > 0) {
+                setCartId(carts[0].id);
+                const allItems = carts[0].items || [];
+                setCartItems(allItems);
+                setTotalItems(allItems.reduce((sum, item) => sum + item.quantity, 0));
+            } else {
+                setCartItems([]);
+                setTotalItems(0);
+                setCartId(null);
+            }
         } catch (err) {
             console.error('Erreur chargement panier :', err);
         }
@@ -48,9 +58,6 @@ const ShopCart = () => {
     useEffect(() => {
         fetchCart();
     }, [fetchCart]);
-
-    // Supprimer un produit du panier
-
 
     return (
         <Sheet onOpenChange={setOpen}>
@@ -75,22 +82,19 @@ const ShopCart = () => {
                 </SheetHeader>
 
                 <div className="grid grid-cols-1 gap-3 px-2 mt-4">
-                    {cartItems.map(item => {
-                        return (
-                            <CartCard key={item.id} cartItem={item} fetchCart={fetchCart} />
-                        );
-                    })}
+                    {cartItems.map(item => (
+                        <CartCard key={item.id} cartItem={item} fetchCart={fetchCart} />
+                    ))}
                 </div>
 
-                <SheetFooter >
+                <SheetFooter>
                     <SheetClose asChild>
-                        <Button asChild >
-                            <Link href={`/checkout/${cartItems[0]?.id} `} >Checkout</Link>
+                        <Button asChild disabled={!cartId}>
+                            {/* redirect vs checkout/[cartId]/page.tsx */}
+                            <Link href={`/checkout/${cartId}`}>Checkout</Link>
                         </Button>
-
                     </SheetClose>
                 </SheetFooter>
-
             </SheetContent>
         </Sheet>
     );

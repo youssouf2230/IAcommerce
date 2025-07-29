@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/cart")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -58,6 +60,15 @@ public class RestCartController {
         return ResponseEntity.ok().build();
     }
 
+    // return cart by id
+    @GetMapping("/{id}")
+    public ResponseEntity<Cart> getCartById(@PathVariable Long id) {
+        Optional<Cart> cart = cartRepository.findById(id);
+        return cart.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
 
     private AppUser getAuthenticatedUserOrNull() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -68,4 +79,5 @@ public class RestCartController {
         }
         return null;
     }
+
 }
