@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { columns, Order } from "./columns"
 import { DataTable } from "./data-table"
+import TableSkeleton from "@/components/shared/table-skeleton"
 
 export async function getData(): Promise<Order[]> {
   return [
@@ -56,11 +57,11 @@ export default async function DemoPage() {
 
   return (
     <div className="container mx-auto mt-12 ">
-        <h1 className="text-3xl font-semibold my-6">Orders</h1>
-        <Suspense fallback={<div>Loading...</div>}>
+      <h1 className="text-3xl font-semibold my-6">Orders</h1>
+      <Suspense fallback={<TableSkeleton />}>
 
-      <DataTable columns={columns} data={data} />
-        </Suspense>
+        <DataTable columns={columns} data={data} />
+      </Suspense>
     </div>
   )
 }

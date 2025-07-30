@@ -6,7 +6,7 @@ import CommentForm from './comment-form';
 
 
 const CommentsUser =  async ({ productId }: { productId: number }) => {
-
+  
   const {user}=  await getUserSession();
   
   const comments = (await axios.get(`http://localhost:8080/api/comments/product/${productId}`)).data as CommentType[];

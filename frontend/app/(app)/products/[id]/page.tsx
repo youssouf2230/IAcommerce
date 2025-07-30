@@ -6,21 +6,21 @@ import { ImageProduct } from "./image-product";
 import { getSingleProduct } from "@/app/actions/product-actions";
 import RecentlyViewed from "./recently-viewed";
 import AddToCartButton from "@/components/shared/add-to-cart";
+import { notFound } from "next/navigation";
+
 
 
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+
   const res = await getSingleProduct(Number(id));
-  
-  if (typeof res === "string") {
-    return (
-      <div className="text-red-500 mt-10 text-center">
-         {res}
-      </div>
-    );
+
+  if ("message" in res) {
+    return  notFound(); 
   }
-  
+
+
   const product: Product = res as Product;
 
 
@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     material: "Nylon and silicone",
     weight: "200g",
     dimensions: "15 x 10 x 3 cm",
-    };
+  };
 
   return (
     <div className="mx-auto my-20 ">
@@ -121,13 +121,13 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </div>
 
           {/* Button */}
-         <AddToCartButton className="w-fit" productId={product.id} />
+          <AddToCartButton className="w-fit" productId={product.id} />
         </div>
       </div>
 
       <SimilarProducts id={product.id} />
 
-      <RecentlyViewed  product={product}/>
+      <RecentlyViewed product={product} />
 
       <CommentsUser productId={product.id} />
     </div>

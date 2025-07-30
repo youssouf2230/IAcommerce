@@ -60,7 +60,7 @@ export default function UploadImages({ onFilesChange,}: {onFilesChange?: (files:
                     <div className="flex w-full flex-col gap-3">
                         <div className="flex items-center justify-between gap-2">
                             <h3 className="truncate text-sm font-medium">
-                                Uploaded Files ({files.length})
+                                Uploaded Images Product ({files.length})
                             </h3>
                             <Button
                                 variant="outline"
@@ -77,15 +77,15 @@ export default function UploadImages({ onFilesChange,}: {onFilesChange?: (files:
                             </Button>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5  md:grid-cols-4">
                             {files.map((file) => (
                                 <div
                                     key={file.id}
-                                    className="bg-accent relative aspect-square rounded-md"
+                                    className="bg-accent w-46 relative aspect-square rounded-md"
                                 >
                                     <Image
-                                        width={500}
-                                        height={500}
+                                        width={40}
+                                        height={40}
                                         src={file.preview as string}
                                         alt={file.file.name}
                                         className="size-full rounded-[inherit] object-cover"

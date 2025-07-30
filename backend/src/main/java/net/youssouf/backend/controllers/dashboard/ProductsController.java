@@ -53,7 +53,7 @@ public class ProductsController {
                 pageable = PageRequest.of(page, size, Sort.by("rating").descending());
                 break;
             default:
-                pageable = PageRequest.of(page, size);
+                pageable = PageRequest.of(page, size, Sort.by("date"));
         }
 
         if (!search.isEmpty()) {

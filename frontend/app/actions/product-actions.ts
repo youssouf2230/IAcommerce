@@ -86,12 +86,12 @@ export async function recentlyViewedProducts(ProductCards: Product) {
 
 
 
- const productSchema = z.object({
+const ProductFormSchema = z.object({
   name: z.string().min(1, "Product name is required"),
-  purchasePrice: z.coerce.number().min(0, "Purchase price must be positive"),
-  sellPrice: z.coerce.number().min(0, "Sell price must be positive"),
+  purchasePrice: z.coerce.number().min(1, "Purchase price must be grater than 0"),
+  sellPrice: z.coerce.number().min(1, "Purchase price must be grater than 0"),
   oldPrice: z.coerce.number().optional(),
-  stockQuantity: z.coerce.number().int().min(0, "Stock must be a whole number"),
+  stockQuantity: z.coerce.number().int().min(1, "Purchase price must be grater than 0"),
   description: z.string().min(1, "Description is required"),
   colors: z.array(z.string()).optional(),
   imageUrls: z.array(z.string()).min(1, "At least one image is required."),
@@ -99,10 +99,16 @@ export async function recentlyViewedProducts(ProductCards: Product) {
     id: z.coerce.number().int().positive("Category is required")
   }),
 });
+
+
+// You can put this in a types.ts file or at the top of your action file
+
+
+
 // Assuming you use Next.js
-export async function createProduct(prevState: any, formData: FormData) {
+export async function createProduct(prevState: any, formData: FormData)  {
   const utapi = new UTApi();
-  
+
 
   try {
     // 1. Extract file and text data
@@ -110,18 +116,19 @@ export async function createProduct(prevState: any, formData: FormData) {
     const rawData = Object.fromEntries(formData.entries());
 
     const transformedData = {
-         ...rawData,
-         category: { id: rawData.categoryId },
-       };
+      ...rawData,
+      category: { id: rawData.categoryId },
+    };
     // 2. Validate text fields using the schema (omitting imageUrls for now)
-    const validatedFields = productSchema.omit({ imageUrls: true }).safeParse(transformedData);
-
+    const validatedFields = ProductFormSchema.omit({ imageUrls: true }).safeParse(transformedData);
+    
 
     if (!validatedFields.success) {
-      console.log('Validation Errors:', validatedFields.error.flatten().fieldErrors);
+    
+
       return {
         success: false,
-        error: validatedFields.error.flatten().fieldErrors,
+        errors: z.treeifyError(validatedFields.error),
       };
 
     }
@@ -129,7 +136,7 @@ export async function createProduct(prevState: any, formData: FormData) {
     if (files.length === 0 || files.some(f => f.size === 0)) {
       return {
         success: false,
-        error: { imageUrls: ["At least one product image is required."] },
+        errors: { imageUrls: ["At least one product image is required."] },
       };
     }
 
@@ -148,17 +155,11 @@ export async function createProduct(prevState: any, formData: FormData) {
     }
 
     // 5. Prepare the complete data object for the database
-    
-    const productDataForDbUnsafe = {
 
+    const productDataForDbUnsafe = {
       ...validatedFields.data,
       imageUrls: uploadedImageUrls,
-      // colors: [],
-      // numberOfView: 0,
-      // rating: 0,
-      // numberOfComments: 0,
-      // numberOfLiked: 0,
-      // numberOfDisliked: 0,
+
     };
 
     // console.log("Product created successfully!", productDataForDbUnsafe);
@@ -170,8 +171,7 @@ export async function createProduct(prevState: any, formData: FormData) {
       credentials: 'include',
       body: JSON.stringify(productDataForDbUnsafe),
     })
-    console.log(res)
-
+ 
 
 
 

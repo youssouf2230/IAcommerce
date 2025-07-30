@@ -27,7 +27,7 @@ const AddToCartButton = ({ productId, className }: { productId: number, classNam
     <SubmitButton
 
       onClick={handleAddToCart}
-    
+
       pending={isPendingcart}
       variant="default"
       size="lg"

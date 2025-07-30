@@ -27,26 +27,26 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   return (
-    
-     <html lang={locale} suppressHydrationWarning >
+
+    <html lang={locale} suppressHydrationWarning >
       <body
         className={` ${inter.variable} font-inter  bg-background text-foreground   antialiased`}
       >
         <NextIntlClientProvider>
 
-       
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
 
-            <Toaster position="bottom-right"  richColors closeButton />
-        </ThemeProvider>
+            <Toaster position="bottom-right" richColors closeButton />
+          </ThemeProvider>
 
-         </NextIntlClientProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

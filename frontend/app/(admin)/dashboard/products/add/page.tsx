@@ -1,9 +1,11 @@
 import React from 'react';
 import ProductForm from './form-add';
 import axios from 'axios';
+import { Category } from '@/types';
 
-const Page =  () => {
-  
+const Page =  async () => {
+  const categories:Category[] = await axios.get('http://localhost:8080/api/dashboard/categories').then((res) => res.data);
+  console.log(categories)
     return (
         
         <div className='px-'>
@@ -11,7 +13,7 @@ const Page =  () => {
                 Add Product
             </h1>
 
-            <ProductForm/>
+            <ProductForm categories={categories }/>
         </div>
     );
 }

@@ -12,12 +12,13 @@ const SearchProduct = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-
   // Using a hook like useDebouncedCallback is more efficient in React.
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
-   
+
+
     if (term) {
+      params.set('page', '0');
       params.set('search', term);
     } else {
       params.delete('search');

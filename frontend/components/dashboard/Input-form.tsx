@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 
 type InputFormProps = {
     label?: string;
-    error?: string;
+    error?: string  ;
 } & React.InputHTMLAttributes<HTMLInputElement>; // Inherit all native <input> props
 
 const InputForm = ({ label, error, id, ...props }: InputFormProps) => {
@@ -15,7 +15,7 @@ const InputForm = ({ label, error, id, ...props }: InputFormProps) => {
             {label && <Label htmlFor={id}>{label}</Label>}
             <Input id={id} {...props} />
             {error && (
-                <p className="text-destructive/70 text-sm absolute bottom-0">{error}</p>
+                <p className="text-destructive/70 text-sm absolute -bottom-1.5">{error}</p>
             )}
         </div>
     );
