@@ -69,8 +69,8 @@ public class OrderService {
         cart.getItems().clear();
         cartRepository.save(cart);
 
-        System.out.println("===================================================");
-        System.out.println("Commande enregistrée : ID = " + order.getId());
-        System.out.println("===================================================");
+//        System.out.println("===================================================");
+//        System.out.println("Commande enregistrée : ID = " + order.getId());
+//        System.out.println("===================================================");
     }
 }
