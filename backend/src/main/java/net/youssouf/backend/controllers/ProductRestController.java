@@ -100,6 +100,8 @@ public class ProductRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        // increment number of views( à ameliorer)
+        productService.incrementViewCount(id);
         Product product = productService.findById(id);
         if (product == null) {
             return ResponseEntity.notFound().build();

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     // filter product trending
-    @Query("SELECT p FROM Product p WHERE p.rating >= 4 AND p.numberOfView >= 100 AND p.numberOfLiked > p.numberOfDisliked ORDER BY p.rating DESC, p.numberOfView DESC")
+    @Query("SELECT p FROM Product p WHERE p.rating >= 4 AND p.numberOfView >= 100  ORDER BY p.rating DESC, p.numberOfView DESC")
     List<Product> findTrendingProducts();
     List<Product> findTop3ByOrderByDateDesc();
     List<Product> findByCategoryId(Long categoryId);

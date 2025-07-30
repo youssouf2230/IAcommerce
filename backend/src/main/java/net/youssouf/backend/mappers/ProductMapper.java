@@ -23,7 +23,7 @@ public class ProductMapper {
         dto.setNumberOfComments(product.getNumberOfComments());
         dto.setNumberOfLiked(product.getNumberOfLiked());
         dto.setHasLiked(product.isHasLiked());
-        dto.setNumberOfDisliked(product.getNumberOfDisliked());
+        //dto.setNumberOfDisliked(product.getNumberOfDisliked());
         dto.setImageUrls(product.getImageUrls());
 
         if (product.getCategory() != null) {

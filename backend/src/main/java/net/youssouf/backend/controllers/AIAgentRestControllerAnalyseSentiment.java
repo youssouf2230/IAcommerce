@@ -45,7 +45,7 @@ public class AIAgentRestControllerAnalyseSentiment {
         comment.setContent(dto.getContent());
         comment.setAuthorName(dto.getAuthorName());
 
-        // 🔍 Analyse du contenu via LLM
+        // Analyse du contenu via LLM
         int rating;
         try {
             rating = analyzeComment(dto.getContent());
@@ -69,8 +69,14 @@ public class AIAgentRestControllerAnalyseSentiment {
         }
 
         comment.setCreatedAt(LocalDateTime.now());
+        // rendre rating product dynamique
+        comment = commentRepository.save(comment);
 
-        return commentRepository.save(comment);
+        // Mettre à jour dynamiquement le rating moyen du produit
+        updateProductRating(product);
+
+
+        return comment;
     }
 
     public int analyzeComment(String content) {
@@ -102,4 +108,18 @@ public class AIAgentRestControllerAnalyseSentiment {
         }
         throw new IllegalArgumentException("Réponse LLM invalide : " + response);
     }
+
+    // mettre à jour rating du produit
+    private void updateProductRating(Product product) {
+        List<Comment> comments = commentRepository.findByProduct(product);
+        double averageRating = comments.stream()
+                .mapToInt(Comment::getRating)
+                .average()
+                .orElse(0.0);
+
+        product.setRating(averageRating);
+        product.setNumberOfComments(comments.size());
+        productRepository.save(product);
+    }
+
 }

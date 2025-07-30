@@ -32,4 +32,14 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    // number of like
+    public void incrementViewCount(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("No found"));
+
+        product.setNumberOfView(product.getNumberOfView() + 1);
+        productRepository.save(product);
+    }
+
+
 }

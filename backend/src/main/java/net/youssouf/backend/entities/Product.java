@@ -30,7 +30,7 @@ public class Product {
     private int numberOfComments = 0;
     private int numberOfLiked = 0;
     private boolean hasLiked = false;
-    private int numberOfDisliked = 0;
+    //private int numberOfDisliked = 0;
     @ElementCollection
     @CollectionTable(name = "product_colors", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "color")
