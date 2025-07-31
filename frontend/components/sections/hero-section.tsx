@@ -100,7 +100,7 @@ const HeroSection = () => {
     <section ref={animationRef} className="w-full px-4 pt-20 bg-background text-center relative">
       <div className="max-w-3xl mx-auto">
 
-        <div className=' space-y-6 relative z-50   max-lg:bg-background/50  max-lg:backdrop-blur-md rounded-2xl p-6  ' >
+        <div className=' space-y-6 relative z-20   max-lg:bg-background/50  max-lg:backdrop-blur-md rounded-2xl p-6  ' >
 
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight md:leading-18 animate">
             {t('title')}

@@ -13,7 +13,7 @@ const CategorySection = async () => {
 
   return (
     <SectionLayout
-      title="Shop by product category"
+      title="Shop by  category"
       description="Find the perfect device for your needs from our curated collections"
     >
       <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4 gap-y-10">
@@ -28,9 +28,9 @@ const CategorySection = async () => {
               width={150}
               height={150}
 
-              className="object-contain group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 ease-in-out"
+              className="object-contain flex-1 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 ease-in-out"
             />
-            <p className="mt-2 text-center text-sm">{category.name}</p>
+            <p className=" text-center text-sm  font-medium  ">{category.name}</p>
           </div>
         ))}
       </div>

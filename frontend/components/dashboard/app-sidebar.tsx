@@ -1,5 +1,5 @@
 'use client'
-import { Calendar, Home, Inbox, LogOut, Search, Settings, ShoppingBag, ShoppingBasket, ShoppingCart, User } from "lucide-react"
+import { Home, LayoutGrid, LogOut, Settings, ShoppingBag, ShoppingCart, User } from "lucide-react"
 
 import {
   Sidebar,
@@ -35,6 +35,11 @@ const items = [
     icon: ShoppingBag,
   },
   {
+    title: "Categories",
+    url: "/dashboard/categories",
+    icon: LayoutGrid,
+  },
+  {
     title: "Users",
     url: "#",
     icon: User,
@@ -48,7 +53,7 @@ const items = [
 
 export function AppSidebar() {
 
-    const pathname=usePathname();
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarContent>
@@ -58,7 +63,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton isActive={pathname===item.url}  className="py-4.5  " asChild>
+                  <SidebarMenuButton isActive={pathname === item.url} className="py-4.5  " asChild>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -68,7 +73,7 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
             <SidebarFooter>
-                
+
             </SidebarFooter>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -76,22 +81,22 @@ export function AppSidebar() {
 
       <SidebarFooter>
 
-           <div className="flex items-center justify-between px-8 py-2 border rounded-2xl bg-muted/20">
-            <div className="flex items-center  gap-2">
-              <span  className="font-medium bg-muted p-1.5 rounded-2xl">
-                AT
-              </span>
-              <span className="text-xs font-medium">
-                Achraf Tichirra
-              </span>
-            </div>
-           <form action={handleLogout}>
+        <div className="flex items-center justify-between px-8 py-2 border rounded-2xl bg-muted/20">
+          <div className="flex items-center  gap-2">
+            <span className="font-medium bg-muted p-1.5 rounded-2xl">
+              AT
+            </span>
+            <span className="text-xs font-medium">
+              Achraf Tichirra
+            </span>
+          </div>
+          <form action={handleLogout}>
 
-            <Button size="sm" variant="outline" className="rounded-full aspect-square bg-muted/50"> 
-                <LogOut size={20}/>
+            <Button size="sm" variant="outline" className="rounded-full aspect-square bg-muted/50">
+              <LogOut size={20} />
             </Button>
-           </form>
-           </div>
+          </form>
+        </div>
       </SidebarFooter>
     </Sidebar>
   )

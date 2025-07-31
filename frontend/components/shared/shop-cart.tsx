@@ -60,7 +60,7 @@ const ShopCart = () => {
     }, [fetchCart]);
 
     return (
-        <Sheet onOpenChange={setOpen}>
+        <Sheet onOpenChange={setOpen} >
             <SheetTrigger asChild>
                 <Button
                     size="icon"
@@ -75,7 +75,7 @@ const ShopCart = () => {
                 </Button>
             </SheetTrigger>
 
-            <SheetContent className="w-[500px]">
+            <SheetContent className="w-[500px] h-screen  overflow-y-auto" >
                 <SheetHeader>
                     <SheetTitle className="text-3xl">Your Cart</SheetTitle>
                     <h2 className="text-lg font-medium">Items {cartItems.length}</h2>

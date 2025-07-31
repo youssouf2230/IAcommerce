@@ -72,7 +72,7 @@ const ProductCard = (props: Product) => {
     <div className="p-8 relative bg-white  rounded-lg">
       <div
         onClick={toggleLike}
-        className={`p-1.5 absolute top-3 z-50 right-5 rounded-full cursor-pointer ${liked ? 'bg-red-100' : 'bg-transparent'}`}
+        className={`p-1.5 absolute top-3 z-20 right-5 rounded-full cursor-pointer ${liked ? 'bg-red-100' : 'bg-transparent'}`}
         title={liked ? 'remove from favorites' : 'add to favorites'}
       >
         <Heart
