@@ -51,14 +51,14 @@ const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
                         <div className="p-8 text-red-500">Aucun produit dans le panier</div>
                     ) : (
                         cart.items.map(item => (
-                            <CartCard key={item.id} cartItem={item} fetchCart={() => {}} />
+                            <CartCard key={item.id} cartItem={item}  />
                         ))
                     )}
                 </div>
 
                 {cart.items.length > 0 && (
                     <div className='flex-1'>
-                        <div className='sticky top-10 m-auto'>
+                        <div className='sticky top-24 m-auto'>
                             <AdditionalInfoForm cartId={cartId} />
                             <h1 className='text-3xl font-bold px-10 w-full flex justify-end'>
                                 Total : {

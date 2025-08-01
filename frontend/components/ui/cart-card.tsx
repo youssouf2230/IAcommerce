@@ -10,38 +10,12 @@ import axios from 'axios';
 import { CartItem } from '@/types';
 import { toast } from 'sonner'; // Assuming you're using sonner for toasts
 import { API_BASE_URL } from '@/lib/utils';
+import { useCart } from '@/hooks/use-cart';
 
 
-const CartCard = ({ cartItem, fetchCart }: { cartItem: CartItem, fetchCart: () => void }) => {
+const CartCard = ({ cartItem }: { cartItem: CartItem }) => {
+  const {removeItem,updateQuantity}=useCart()
 
-    const removeItem = async (itemId: number) => {
-        try {
-            await axios.delete(`${API_BASE_URL}/api/cart/item/${itemId}`, {
-                withCredentials: true,
-            });
-            fetchCart();
-            toast.success("Item removed from cart!"); // Success toast
-        } catch (err) {
-            console.error('Erreur suppression article :', err);
-            toast.error("Failed to remove item."); // Error toast
-        }
-    };
-
-    const updateQuantity = async (itemId: number, newQuantity: number) => {
-        try {
-            await axios.put(
-                `${API_BASE_URL}/api/cart/item/${itemId}`,
-                { quantity: newQuantity },
-                { withCredentials: true }
-            );
-            fetchCart();
-            toast.success("Quantity updated!"); // Success toast
-        } catch (err) {
-            console.error('Erreur mise à jour quantité :', err);
-            toast.error("Failed to update quantity."); // Error toast
-        }
-    };
-console.log()
     return (
         <div className="grid p-4 grid-cols-1 bg-muted/60 rounded-xl">
             <div className="flex justify-between items-center">
