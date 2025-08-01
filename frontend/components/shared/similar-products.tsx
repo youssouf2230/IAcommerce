@@ -1,9 +1,11 @@
 import React from 'react';
 import CarouselProducts from './carousel-products';
 import { Product } from '../../types';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 const SimilarProducts = async ({id}:{id:number}) => {
-  const res = await fetch('http://localhost:8080/api/products/similar/'+id, {
+  const res = await fetch(`${API_BASE_URL}/api/products/similar/`+id, {
     next: { revalidate: 60 }, 
   });
 

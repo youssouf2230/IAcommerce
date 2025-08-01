@@ -1,10 +1,13 @@
 'use server'
 
+import { API_BASE_URL } from '@/lib/utils';
+
+
 export const addToCart = async ({ productId, sessionId }: { productId: number, sessionId: string }) =>  {
     try {
       
 
-        const res = await fetch("http://localhost:8080/api/cart/add", {
+        const res = await fetch(`${API_BASE_URL}/api/cart/add}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

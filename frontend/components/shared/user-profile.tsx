@@ -10,7 +10,7 @@ import {
 } from '../ui/dropdown-menu';
 import { LogOut, User as UserIcon } from 'lucide-react';
 import { User as UserType } from '../../types';
-import { handleLogout } from '../../app/actions/auth-action';
+import { handleLogout } from '../../actions/auth-action';
 import { SubmitButton } from './submit-button';
 
 

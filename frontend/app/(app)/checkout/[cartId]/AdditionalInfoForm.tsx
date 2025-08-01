@@ -15,7 +15,8 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitButton } from "@/components/shared/submit-button"
-import { getOrCreateSessionId } from '@/lib/utils'
+import { API_BASE_URL, getOrCreateSessionId } from '@/lib/utils'
+
 
 const formSchema = z.object({
     contactPhone: z
@@ -50,7 +51,7 @@ export function AdditionalInfoForm({ cartId }: { cartId: string }) {
         setSuccessMessage("")
 
         try {
-            const response = await fetch("http://localhost:8080/api/orders", {
+            const response = await fetch(`${API_BASE_URL}/api/orders`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

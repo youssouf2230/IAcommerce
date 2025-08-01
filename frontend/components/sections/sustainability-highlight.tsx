@@ -6,7 +6,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Button } from '../ui/button';
-import { ShoppingCart } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 const SustainabilityHighlight = () => {
@@ -35,12 +34,12 @@ const SustainabilityHighlight = () => {
 
 
     return (
-        <SectionLayout  explore={false} className=' bg-gradient-to-r from-zinc-800 to-zinc-950  text-zinc-50  p-10 rounded-xl'  >
+        <SectionLayout explore={false} className=' bg-gradient-to-r from-zinc-800 to-zinc-950  text-zinc-50  p-10 rounded-xl'  >
             <div className='flex flex-col gap-5 justify-center items-center max-w-4xl m-auto mb-10 text-center'>
                 <h3 className='text-xl '>Design for sustainability</h3>
                 <h2 className='md:text-6xl text-4xl font-medium '>Everything Matters</h2>
                 <p className='md:text-lg font-extralight text-neutral-400'>When it comes to doing better for our planet, it’s on us. Every component. Every process. Every product.</p>
-                <Button  size={'lg'} className='rounded-full md:p-6 text-black bg-zinc-50 hover:bg-zinc-100'> See all products </Button>
+                <Button size={'lg'} className='rounded-full md:p-6 text-black bg-zinc-50 hover:bg-zinc-100'> See all products </Button>
             </div>
 
 

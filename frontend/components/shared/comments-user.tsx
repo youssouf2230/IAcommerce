@@ -3,13 +3,15 @@ import axios from 'axios';
 import {  getUserSession } from '../auth/auth-data';
 import { CommentType, User } from '@/types';
 import CommentForm from './comment-form';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 
 const CommentsUser =  async ({ productId }: { productId: number }) => {
   
   const {user}=  await getUserSession();
   
-  const comments = (await axios.get(`http://localhost:8080/api/comments/product/${productId}`)).data as CommentType[];
+  const comments = (await axios.get(`${API_BASE_URL}/api/comments/product/${productId}`)).data as CommentType[];
  
 
 

@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
 import { Cart } from '@/types';
 import CartCard from '@/components/ui/cart-card';
 import { AdditionalInfoForm } from './AdditionalInfoForm';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
     const { cartId } = use(params);
@@ -15,7 +18,7 @@ const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/api/cart/${cartId}`, {
+                const res = await fetch(`${API_BASE_URL}/api/cart/${cartId}`, {
                     credentials: 'include',
                     cache: 'no-store',
                 });

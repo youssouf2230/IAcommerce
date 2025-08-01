@@ -3,11 +3,13 @@
 
 
 import { getUserSession } from '@/components/auth/auth-data';
+import { API_BASE_URL } from '@/lib/utils';
+
 import axios from 'axios';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 
-// Define the shape of the state our action will return
+
 export type FormState = {
     message: string;
     error?: string | null;
@@ -43,7 +45,7 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
     const data = { content,authorName, userId , productId,  };
 
     try {
-        await axios.post('http://localhost:8080/api/comments', data, {
+        await axios.post(`${API_BASE_URL}/api/comments'`, data, {
             withCredentials: true,
         });
 

@@ -9,7 +9,7 @@ import { User } from '@/types';
 interface Session {
   isLoggedIn: boolean;
   user: User | null;
-  token:string | null
+  token: string | null
 
 }
 
@@ -24,7 +24,7 @@ export function useSession() {
       try {
         setIsLoading(true);
         const response = await fetch('/api/auth/session');
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch session');
         }

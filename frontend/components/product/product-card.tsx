@@ -10,6 +10,8 @@ import { Rating } from '../shared/rating';
 
 import { getOrCreateSessionId } from "@/lib/utils";
 import { toast } from 'sonner';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 
 
@@ -21,7 +23,7 @@ const ProductCard = (props: Product) => {
     if (loading) return; // éviter plusieurs clics rapides
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/products/${props.id}/toggle-like`, {
+      const res = await fetch(`${API_BASE_URL}/api/products/${props.id}/toggle-like`, {
         method: 'POST',
       });
       if (res.ok) {
@@ -43,7 +45,7 @@ const ProductCard = (props: Product) => {
     try {
       const sessionId = getOrCreateSessionId();
 
-      const res = await fetch("http://localhost:8080/api/cart/add", {
+      const res = await fetch(`${API_BASE_URL}/api/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

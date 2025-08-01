@@ -18,6 +18,8 @@ import { getOrCreateSessionId } from '@/lib/utils';
 import { CartItem, Cart } from '@/types';
 import CartCard from '../ui/cart-card';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 const ShopCart = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -31,7 +33,7 @@ const ShopCart = () => {
         try {
             const sessionId = getOrCreateSessionId();
             const response = await axios.get<{ content: Cart[] } | Cart[]>(
-                `http://localhost:8080/api/cart`,
+                `${API_BASE_URL}/api/cart`,
                 {
                     params: sessionId ? { sessionId, page: 0, size: 10 } : { page: 0, size: 10 },
                     withCredentials: true,

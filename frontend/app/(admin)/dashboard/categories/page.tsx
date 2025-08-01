@@ -1,13 +1,15 @@
-import CategoryCard from '@/components/shared/category-card';
+import CategoryCard from '@/components/dashboard/category-card';
+import { CategoryForm } from '@/components/dashboard/category-form';
+import { API_BASE_URL } from '@/lib/utils';
+
 import { Category } from '@/types';
 import axios from 'axios';
 import { Plus } from 'lucide-react';
 import React from 'react';
-import { CategoryForm } from './category-form';
+
 
 const Page = async () => {
-    const categories = await axios.get('http://localhost:8080/api/categories/images').then(res => res.data);
-    
+    const categories = await axios.get(`${API_BASE_URL}/api/categories/images`).then(res => res.data);
     if (!categories) return null
     return (
         <div className="container mx-auto mt-12 ">

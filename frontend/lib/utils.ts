@@ -7,6 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
+export const  API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+
+
 
 export function debounce<T extends (...args: any[]) => void>(callback: T, delay: number): (...args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout> | null = null;

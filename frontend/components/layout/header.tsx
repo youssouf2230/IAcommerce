@@ -2,10 +2,12 @@ import MobileMenu from "./mobile-menu"
 import RightActions from "../shared/right-actions"
 import LaptopMenu from "./laptop-menu"
 import axios from "axios"
+import { API_BASE_URL } from '@/lib/utils';
 
+console.log("API_BASE_URL", API_BASE_URL)
 
 export default  async function Header () {
-   const categories = await axios.get('http://localhost:8080/api/categories/images').then(res => res.data);
+   const categories = await axios.get(`${API_BASE_URL}/api/categories/images`).then(res => res.data);
   if(!categories) return null
 
   return (

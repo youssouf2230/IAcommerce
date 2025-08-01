@@ -3,12 +3,13 @@ import Image from 'next/image';
 import SectionLayout from '../layout/section-layout';
 import axios from 'axios';
 import { Category } from '../../types';
+import { API_BASE_URL } from '@/lib/utils';
 
 
 const fallbackImage = '/default.png';
 
 const CategorySection = async () => {
-  const categories = await axios.get('http://localhost:8080/api/categories/images').then(res => res.data);
+  const categories = await axios.get(`${API_BASE_URL}/api/categories/images`).then(res => res.data);
   if(!categories) return null
 
   return (

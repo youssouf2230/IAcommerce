@@ -9,12 +9,14 @@ import NumberField from './number-field';
 import axios from 'axios';
 import { CartItem } from '@/types';
 import { toast } from 'sonner'; // Assuming you're using sonner for toasts
+import { API_BASE_URL } from '@/lib/utils';
+
 
 const CartCard = ({ cartItem, fetchCart }: { cartItem: CartItem, fetchCart: () => void }) => {
 
     const removeItem = async (itemId: number) => {
         try {
-            await axios.delete(`http://localhost:8080/api/cart/item/${itemId}`, {
+            await axios.delete(`${API_BASE_URL}/api/cart/item/${itemId}`, {
                 withCredentials: true,
             });
             fetchCart();
@@ -28,7 +30,7 @@ const CartCard = ({ cartItem, fetchCart }: { cartItem: CartItem, fetchCart: () =
     const updateQuantity = async (itemId: number, newQuantity: number) => {
         try {
             await axios.put(
-                `http://localhost:8080/api/cart/item/${itemId}`,
+                `${API_BASE_URL}/api/cart/item/${itemId}`,
                 { quantity: newQuantity },
                 { withCredentials: true }
             );

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +44,6 @@ public class CategoryController {
         return categoryService.save(category);
     }
 
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteCategory(@PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
@@ -62,6 +61,13 @@ public class CategoryController {
             response.put("message", "An unexpected error occurred.");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+
+
+    @PutMapping("/{id}")
+    public Category updateCategory(@PathVariable Long id, @RequestBody Category category) {
+        return categoryService.update(id, category);
     }
 
 }

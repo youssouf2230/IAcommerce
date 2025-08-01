@@ -10,7 +10,6 @@ export default function layout({ children }: { children: React.ReactElement }) {
             <div className=' '>
                 {children}
             </div>
-
             <ChatBot/>
             <Footer />
         </div>
