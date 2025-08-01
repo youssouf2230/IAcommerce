@@ -1,15 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
+import { Heart, ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
 import { Product } from '../../types';
 import { Rating } from '../shared/rating';
 
-import { getOrCreateSessionId } from "@/lib/utils";
-import { toast } from 'sonner';
+import { API_BASE_URL } from '@/lib/utils';
+import { useCart } from '@/hooks/use-cart';
+
 
 
 
@@ -21,7 +22,7 @@ const ProductCard = (props: Product) => {
     if (loading) return; // éviter plusieurs clics rapides
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:8080/api/products/${props.id}/toggle-like`, {
+      const res = await fetch(`${API_BASE_URL}/api/products/${props.id}/toggle-like`, {
         method: 'POST',
       });
       if (res.ok) {
@@ -38,46 +39,19 @@ const ProductCard = (props: Product) => {
   };
 
 
-
-  const addToCart = async () => {
-    try {
-      const sessionId = getOrCreateSessionId();
-
-      const res = await fetch("http://localhost:8080/api/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // indispensable pour envoyer les cookies (JWT)
-        body: JSON.stringify({
-          productId: props.id,
-          quantity: 1,
-          sessionId: sessionId, // pour user anonyme
-        }),
-      });
-
-
-      if (!res.ok) {
-        throw new Error("Erreur lors de l’ajout au panier");
-      }
-
-      toast.success("added to cart with success");
-    } catch (err) {
-      console.error("Erreur d’ajout au panier:", err);
-    }
-  };
+  const { addToCart } = useCart()
 
 
   return (
     <div className="p-8 relative bg-white  rounded-lg">
       <div
         onClick={toggleLike}
-        className={`p-1.5 absolute top-3 z-50 right-5 rounded-full cursor-pointer ${liked ? 'bg-red-100' : 'bg-transparent'}`}
+        className={`p-1.5 absolute top-3 z-20 right-5 rounded-full cursor-pointer ${liked ? 'bg-red-100' : 'bg-transparent'}`}
         title={liked ? 'remove from favorites' : 'add to favorites'}
       >
         <Heart
           size={20}
-          className=  {`   block ${liked ? 'text-red-600' : 'text-foreground'}`}
+          className={`   block ${liked ? 'text-red-600' : 'text-foreground'}`}
           fill={liked ? 'currentColor' : 'none'}
           strokeWidth={2}
         />
@@ -100,7 +74,7 @@ const ProductCard = (props: Product) => {
         <span className="text-primary font-semibold">{props.sellPrice} Dh</span>
         <span className="text-gray-500 line-through">{props.oldPrice ? props.oldPrice : 200}Dh</span>
       </div>
-      <Button onClick={addToCart} variant="default" size="lg" className="mt-4 w-full cursor-pointer">
+      <Button onClick={() => addToCart(props)} variant="default" size="lg" className="mt-4 w-full cursor-pointer">
         <ShoppingCart size={20} /> Add cart
       </Button>
 

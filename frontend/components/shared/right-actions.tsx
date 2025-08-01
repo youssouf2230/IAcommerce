@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import { Button } from '../ui/button';
 
@@ -12,7 +11,8 @@ import ShopCart from './shop-cart';
 
 const RightActions = () => {
     const t = useTranslations('Header');
-    const { session, isLoading } = useSession();
+    const { session } = useSession();
+    
     return (
         <div>
             <div className="flex items-center gap-4">

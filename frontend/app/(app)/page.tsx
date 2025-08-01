@@ -1,5 +1,5 @@
 
-import BannerSection from "@/components/sections/banner-section";
+// import BannerSection from "@/components/sections/banner-section";
 import CategorySection from "@/components/sections/category-section";
 import FeaturesProducts from "@/components/sections/features-products";
 

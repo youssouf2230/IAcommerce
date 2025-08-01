@@ -1,8 +1,8 @@
 // app/shop/page.tsx
 
-import SearchProduct from './search-product';
-import Sorting from './sorting';
-import Filter from './filter';
+import SearchProduct from '../../../components/shop/search-product';
+import Sorting from '../../../components/shop/sorting';
+import Filter from '../../../components/shop/filter';
 import { Suspense } from 'react';
 import { ProductCardSkeleton } from '@/components/product/product-card-skeleton';
 import { ProductList } from '@/components/product/product-list';

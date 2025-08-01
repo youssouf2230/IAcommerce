@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
 import { Cart } from '@/types';
 import CartCard from '@/components/ui/cart-card';
 import { AdditionalInfoForm } from './AdditionalInfoForm';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
     const { cartId } = use(params);
@@ -15,7 +18,7 @@ const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/api/cart/${cartId}`, {
+                const res = await fetch(`${API_BASE_URL}/api/cart/${cartId}`, {
                     credentials: 'include',
                     cache: 'no-store',
                 });
@@ -48,14 +51,14 @@ const Page = ({ params }: { params: Promise<{ cartId: string }> }) => {
                         <div className="p-8 text-red-500">Aucun produit dans le panier</div>
                     ) : (
                         cart.items.map(item => (
-                            <CartCard key={item.id} cartItem={item} fetchCart={() => {}} />
+                            <CartCard key={item.id} cartItem={item}  />
                         ))
                     )}
                 </div>
 
                 {cart.items.length > 0 && (
                     <div className='flex-1'>
-                        <div className='sticky top-10 m-auto'>
+                        <div className='sticky top-24 m-auto'>
                             <AdditionalInfoForm cartId={cartId} />
                             <h1 className='text-3xl font-bold px-10 w-full flex justify-end'>
                                 Total : {

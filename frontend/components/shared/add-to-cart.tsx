@@ -3,7 +3,7 @@ import React, { useTransition } from 'react';
 import { SubmitButton } from './submit-button';
 import { ShoppingCart } from 'lucide-react';
 import { cn, getOrCreateSessionId } from '@/lib/utils';
-import { addToCart } from '@/app/actions/cart-action';
+import { addToCart } from '@/actions/cart-action';
 import { toast } from 'sonner';
 
 const AddToCartButton = ({ productId, className }: { productId: number, className?: string }) => {

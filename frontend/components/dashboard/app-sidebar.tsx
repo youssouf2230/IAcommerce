@@ -1,5 +1,5 @@
 'use client'
-import { Calendar, Home, Inbox, LogOut, Search, Settings, ShoppingBag, ShoppingBasket, ShoppingCart, User } from "lucide-react"
+import { Home, LayoutGrid, LogOut, Settings, ShoppingBag, ShoppingCart, User } from "lucide-react"
 
 import {
   Sidebar,
@@ -15,7 +15,9 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
-import { handleLogout } from "@/app/actions/auth-action";
+import { handleLogout } from "@/actions/auth-action";
+import { useSession } from "@/hooks/use-session";
+import { User as UserType } from "@/types";
 
 // Menu items.
 const items = [
@@ -35,6 +37,11 @@ const items = [
     icon: ShoppingBag,
   },
   {
+    title: "Categories",
+    url: "/dashboard/categories",
+    icon: LayoutGrid,
+  },
+  {
     title: "Users",
     url: "#",
     icon: User,
@@ -48,7 +55,9 @@ const items = [
 
 export function AppSidebar() {
 
-    const pathname=usePathname();
+  const { session, isLoading } = useSession()
+  const user = session?.user
+  const pathname = usePathname();
   return (
     <Sidebar>
       <SidebarContent>
@@ -58,7 +67,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton isActive={pathname===item.url}  className="py-4.5  " asChild>
+                  <SidebarMenuButton isActive={pathname === item.url} className="py-4.5  " asChild>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -68,31 +77,56 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
             <SidebarFooter>
-                
+
             </SidebarFooter>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
-
-           <div className="flex items-center justify-between px-8 py-2 border rounded-2xl bg-muted/20">
-            <div className="flex items-center  gap-2">
-              <span  className="font-medium bg-muted p-1.5 rounded-2xl">
-                AT
-              </span>
-              <span className="text-xs font-medium">
-                Achraf Tichirra
-              </span>
-            </div>
-           <form action={handleLogout}>
-
-            <Button size="sm" variant="outline" className="rounded-full aspect-square bg-muted/50"> 
-                <LogOut size={20}/>
-            </Button>
-           </form>
-           </div>
+        {isLoading ? <UserINfoSkeleton /> : <UserInfo user={user as UserType} />}
       </SidebarFooter>
     </Sidebar>
+  )
+}
+
+
+const UserInfo = ({ user }: { user: UserType }) => {
+  return (
+    <div className="flex items-center justify-between px-8 py-2 border rounded-2xl bg-muted/20">
+      <div className="flex items-center  gap-2">
+        <span className="font-medium bg-muted p-1.5 rounded-2xl">
+          {user?.username?.charAt(0).toUpperCase()}
+          {user?.username?.charAt(1).toUpperCase()}
+        </span>
+        <span className="text-sm font-medium capitalize">
+          {user?.username || "Guest"}
+        </span>
+      </div>
+      <form action={handleLogout}>
+
+        <Button size="sm" variant="outline" className="rounded-full aspect-square bg-muted/50">
+          <LogOut size={20} />
+        </Button>
+      </form>
+    </div>
+  )
+}
+
+const UserINfoSkeleton = () => {
+  return (
+    <div className="flex items-center justify-between px-8 py-2 border rounded-2xl bg-muted/20">
+      <div className="flex items-center  gap-2">
+        <span className="font-medium bg-muted p-1.5 size-8 rounded-2xl">
+
+        </span>
+        <span className="text-sm font-medium  w-24 h-4 rounde-md bg-muted capitalize">
+
+        </span>
+      </div>
+      <span className="font-medium bg-muted p-1.5 size-8 rounded-2xl">
+
+      </span>
+    </div>
   )
 }

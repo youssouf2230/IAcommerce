@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "../shared/submit-button";
-import { handelRegister } from "../../app/actions/auth-action";
+import { handelRegister } from "../../actions/auth-action";
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<"form">) {
 

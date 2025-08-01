@@ -67,9 +67,9 @@ public class BackendApplication {
 
                         // Create Categories
                         Category smartphones = categoryRepo.save(new Category(null, "Smartphones",
-                                "https://img.freepik.com/premium-photo/smartphone-frameless-display-edgetoedge-screen-blank-screen-mockup_1243992-22427.jpg?w=2000"));
+                                "https://www.plug.tech/cdn/shop/files/iPhone_13_Series.png"));
                         Category laptops = categoryRepo.save(new Category(null, "Laptops",
-                                "https://www.hp.com/content/dam/sites/worldwide/homepage/images/pcs-main.png"));
+                                "https://www.pngall.com/wp-content/uploads/15/Macbook-Pro-PNG.png"));
                         Category audio = categoryRepo.save(new Category(null, "Audio",
                                 "https://resource.logitech.com/w_300,h_300,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/homepage/delorean-hp/products-with-background/new-images/speakers.png"));
                         Category accessories = categoryRepo.save(new Category(null, "Accessories",

@@ -3,7 +3,7 @@ import SimilarProducts from "@/components/shared/similar-products";
 import { Product } from "@/types";
 import { Rating } from "@/components/shared/rating";
 import { ImageProduct } from "./image-product";
-import { getSingleProduct } from "@/app/actions/product-actions";
+import { getSingleProduct } from "@/actions/product-actions";
 import RecentlyViewed from "./recently-viewed";
 import AddToCartButton from "@/components/shared/add-to-cart";
 import { notFound } from "next/navigation";

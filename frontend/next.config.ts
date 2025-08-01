@@ -1,38 +1,35 @@
-// next.config.js
+
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
 
-// Spring Boot API URL
-export const API_BASE_URL = "http://localhost:8080";
 
-// --- START: DYNAMIC CSP LOGIC ---
 
 // Base CSP directives
 const ContentSecurityPolicy = {
   "default-src": "'self'",
   "script-src": [
     "'self'",
-    "'unsafe-inline'", // Required for Next.js style hydration
+    "'unsafe-inline'", 
   ],
   "object-src": "'none'",
-  "style-src": "'self' 'unsafe-inline'", // 'unsafe-inline' is often needed for CSS-in-JS or component libraries
-  "img-src": "'self' data: https:", // Allows self, data URIs, and any HTTPS source
+  "style-src": "'self' 'unsafe-inline'", 
+  "img-src": "'self' data: https:", 
   "font-src": "'self' https:",
-  "connect-src": "'self' http://localhost:8080", // Allow connection to your API
+  "connect-src": "'self' http://localhost:8080",
   "frame-ancestors": "'none'",
 };
 
-// Add 'unsafe-eval' to script-src ONLY in development
+
 if (process.env.NODE_ENV === 'development') {
   ContentSecurityPolicy['script-src'].push("'unsafe-eval'");
 }
 
-// Convert the policy object to a string
+
 const cspValue = Object.entries(ContentSecurityPolicy)
   .map(([key, value]) => `${key} ${Array.isArray(value) ? value.join(' ') : value}`)
   .join('; ');
 
-// --- END: DYNAMIC CSP LOGIC ---
+
 
 const securityHeaders = [
   {
@@ -75,8 +72,7 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Optional: Enable source maps in production for easier debugging.
-  // Be cautious with this if your app's source code is sensitive.
+  
   productionBrowserSourceMaps: true,
 
   images: {

@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Facebook } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
-import { handleLogin } from "../../app/actions/auth-action";
+import { handleLogin } from "../../actions/auth-action";
 import { SubmitButton } from "../shared/submit-button";
 
 

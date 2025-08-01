@@ -3,12 +3,14 @@ import ProductCard from '../product/product-card';
 import axios from 'axios';
 import { getTranslations } from 'next-intl/server';
 import { Product } from '../../types';
+import { API_BASE_URL } from '@/lib/utils';
+
 
 
 const FeaturesProducts = async () => {
 
   const t = await getTranslations('FeaturesProducts');
-  const products = await axios.get("http://localhost:8080/api/products/trending").then(res => res.data)
+  const products = await axios.get(`${API_BASE_URL}/api/products/trending`).then(res => res.data)
   if (!products) return null
   return (
     <SectionLayout title={t('title')} description={t('description')}>

@@ -1,6 +1,6 @@
 // app/shop/product-list.tsx
-import PaginationShop from '@/app/(app)/shop/pagination-shop';
-import { getProducts } from '@/app/actions/product-actions';
+import PaginationShop from '@/components/shop/pagination-shop';
+import { getProducts } from '@/actions/product-actions';
 import ProductCard from '@/components/product/product-card';
 
 type ProductListProps = {

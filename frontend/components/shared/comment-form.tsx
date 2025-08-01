@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Textarea } from '../ui/textarea';
 import { SubmitButton } from './submit-button'; // The new, smart submit button
 import { User } from '@/types';
-import { addComment, FormState } from '@/app/actions/comment-actions';
+import { addComment, FormState } from '@/actions/comment-actions';
 import { SendHorizonal } from 'lucide-react';
 
 const initialState: FormState = {
