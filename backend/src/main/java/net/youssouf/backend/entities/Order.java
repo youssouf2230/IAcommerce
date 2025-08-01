@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = {"orderItems"})
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +40,6 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
-    @JsonIgnore
     private AppUser user;
     // for user anomyous
     private String sessionId;
