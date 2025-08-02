@@ -16,6 +16,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitButton } from "@/components/shared/submit-button"
 import { API_BASE_URL, getOrCreateSessionId } from '@/lib/utils'
+import { useRouter } from "next/navigation"
+
 
 
 const formSchema = z.object({
@@ -36,6 +38,7 @@ type AdditionalInfoFormValues = z.infer<typeof formSchema>
 export function AdditionalInfoForm({ cartId }: { cartId: string }) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
+    const router = useRouter()
 
     const form = useForm<AdditionalInfoFormValues>({
         resolver: zodResolver(formSchema),
@@ -57,9 +60,9 @@ export function AdditionalInfoForm({ cartId }: { cartId: string }) {
                 credentials: "include",
                 body: JSON.stringify({
                     cartId,
-                    contactPhone : values.contactPhone,
-                    deliveryAddress : values.deliveryAddress,
-                    deliveryInstructions : values.deliveryInstructions ,
+                    contactPhone: values.contactPhone,
+                    deliveryAddress: values.deliveryAddress,
+                    deliveryInstructions: values.deliveryInstructions,
                     sessionId: getOrCreateSessionId(),
                 }),
             })
@@ -72,8 +75,10 @@ export function AdditionalInfoForm({ cartId }: { cartId: string }) {
             }
 
 
-            setSuccessMessage("Commande passée avec succès ")
-            form.reset()
+           
+            router.push(`/success?status=passed&orderId=${cartId}`)
+
+
         } catch (error) {
             console.error("Erreur:", error)
         } finally {

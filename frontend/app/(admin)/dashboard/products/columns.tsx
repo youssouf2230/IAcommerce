@@ -76,7 +76,7 @@ export const columns: ColumnDef<Product>[] = [
         header: "Rating",
         cell: ({ row }) => {
             const rating = row.getValue("rating") as number;
-            return <span className="bg-amber-400/80 px-1.5 py-0.5   rounded-full text-xs text-white flex w-max items-center gap-0.5 font-semibold">{rating} <Star size={11}/> </span>;
+            return <span className="bg-amber-200/20 px-1.5 py-0.5   rounded-full text-xs text-amber-500 flex w-max items-center gap-0.5 font-semibold">{rating} <Star size={11}/> </span>;
         },
     },
     {

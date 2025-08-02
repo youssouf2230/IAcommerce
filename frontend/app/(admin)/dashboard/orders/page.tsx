@@ -1,15 +1,19 @@
 import { cookies } from "next/headers";
 import { Suspense } from "react";
-import { Order } from "./columns";
+
 import TableSkeleton from "@/components/shared/table-skeleton";
-import { OrdersTableClient } from "./OrdersTableClient";
+
+import { API_BASE_URL } from "@/lib/utils";
+import { Order } from "@/types";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
 
 export async function getOrders(): Promise<Order[]> {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
-    const res = await fetch(`${baseUrl}/api/dashboard/orders`, {
+    const res = await fetch(`${API_BASE_URL}/api/dashboard/orders`, {
         headers: {
             Cookie: `token=${token}`,
         },
@@ -30,7 +34,7 @@ export default async function OrdersPage() {
         <div className="container mx-auto mt-12">
             <h1 className="text-3xl font-semibold my-6">Orders</h1>
             <Suspense fallback={<TableSkeleton />}>
-                <OrdersTableClient data={data} />
+                <DataTable columns={columns} data={data} />
             </Suspense>
         </div>
     );

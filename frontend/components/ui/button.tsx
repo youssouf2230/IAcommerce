@@ -18,6 +18,8 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
 
+        success:"success hover:bg-emerald-200/50 dark:hover:bg-emerald-800/50",
+
         outlineDestructive:
           "border border-destructive/20 bg-destructive/10 text-destructive/90 hover:bg-destructive/25 ",
         ghost:

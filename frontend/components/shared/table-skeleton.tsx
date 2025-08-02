@@ -1,7 +1,7 @@
 import React from "react";
 
-const rows = 5; 
-const cols = 4; 
+const rows = 8; 
+const cols = 6; 
 
 export default function TableSkeleton() {
   return (

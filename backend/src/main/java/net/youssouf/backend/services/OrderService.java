@@ -3,6 +3,7 @@ package net.youssouf.backend.services;
 import lombok.RequiredArgsConstructor;
 import net.youssouf.backend.dtos.OrderRequestDTO;
 import net.youssouf.backend.entities.*;
+import net.youssouf.backend.enums.OrderStatus;
 import net.youssouf.backend.repositories.*;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void placeOrder(OrderRequestDTO request) {
-        //  Trouver le panier
+        // Trouver le panier
         Cart cart = cartRepository.findById(request.getCartId())
                 .orElseThrow(() -> new RuntimeException("Cart not found"));
 
@@ -31,7 +32,7 @@ public class OrderService {
         order.setContactPhone(request.getContactPhone());
         order.setDeliveryAddress(request.getDeliveryAddress());
         order.setDeliveryInstructions(request.getDeliveryInstructions());
-        order.setStatus(false);
+        order.setStatus(OrderStatus.PENDING);
         order.setDate(LocalDate.now());
 
         // Calculer le total
@@ -69,8 +70,25 @@ public class OrderService {
         cart.getItems().clear();
         cartRepository.save(cart);
 
-//        System.out.println("===================================================");
-//        System.out.println("Commande enregistrée : ID = " + order.getId());
-//        System.out.println("===================================================");
+        // System.out.println("===================================================");
+        // System.out.println("Commande enregistrée : ID = " + order.getId());
+        // System.out.println("===================================================");
     }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public Order findById(Long id) {
+        return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
+    public Order updateStatus(long orderId, OrderStatus status) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        order.setStatus(status);
+        return orderRepository.save(order);
+    }
+
 }
