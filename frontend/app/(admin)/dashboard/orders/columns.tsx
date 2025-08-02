@@ -64,7 +64,7 @@ export const columns: ColumnDef<Order>[] = [
         cell: ({ row }) => {
             const status = row.getValue("status") as OrderStatus
             return (
-                <Badge className={`capitalize ${getStatusStyles(status)}`}>
+                <Badge className={`lowercase ${getStatusStyles(status)}`}>
                     {status || "PENDING"}
                 </Badge>
             )
@@ -94,20 +94,20 @@ export const columns: ColumnDef<Order>[] = [
             const status = row.getValue("status") as OrderStatus
 
             return (
-                <DropdownMenu>
+                <DropdownMenu >
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center" className="gap-4">
+                    <DropdownMenuContent align="center" className="gap-6">
                         <DropdownMenuLabel >Actions</DropdownMenuLabel>
                         <DropdownMenuItem asChild variant="info">
                             <Link className="" href={`/dashboard/orders/${order.id}`}> <Eye className="text-inherit" />Details Order</Link>
                         </DropdownMenuItem>
                         {status === "PENDING" && (
-                            <DropdownMenuItem asChild >
+                            <DropdownMenuItem  className="w-max"  variant="success" asChild>
                                 <UpdateStatusBtn OrderId={order.id}  status={"CONFIRMED"} />
                             </DropdownMenuItem>
                         )}

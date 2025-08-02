@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitButton } from "@/components/shared/submit-button"
 import { API_BASE_URL, getOrCreateSessionId } from '@/lib/utils'
 import { useRouter } from "next/navigation"
+import { useCart } from "@/hooks/use-cart"
 
 
 
@@ -38,6 +39,7 @@ type AdditionalInfoFormValues = z.infer<typeof formSchema>
 export function AdditionalInfoForm({ cartId }: { cartId: string }) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [successMessage, setSuccessMessage] = useState("")
+    const { clearCart } = useCart()
     const router = useRouter()
 
     const form = useForm<AdditionalInfoFormValues>({
@@ -67,7 +69,8 @@ export function AdditionalInfoForm({ cartId }: { cartId: string }) {
                 }),
             })
 
-            //if (!response.ok) throw new Error("Erreur lors de la commande.")
+
+
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error("Backend error response:", response.status, errorText);
@@ -75,9 +78,10 @@ export function AdditionalInfoForm({ cartId }: { cartId: string }) {
             }
 
 
-           
-            router.push(`/success?status=passed&orderId=${cartId}`)
 
+            
+            router.replace(`/success?status=passed&orderId=${cartId}`)
+            clearCart()
 
         } catch (error) {
             console.error("Erreur:", error)

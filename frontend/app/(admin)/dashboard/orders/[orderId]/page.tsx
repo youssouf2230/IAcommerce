@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
+import UpdateStatusBtn from "@/components/dashboard/update-status-btn"
 
 export default async function Page({ params }: { params: { orderId: string | number } }) {
   const { orderId } = params
@@ -19,17 +20,13 @@ export default async function Page({ params }: { params: { orderId: string | num
     .then((res) => res.data)
 
   const Items = order.items
+  console.log(order.status)
 
   return (
     <div className="px-4 md:px-8  mt-12 @container ">
-      {order.status === "PENDING" || order.status === "PROCESSING" &&
-        <Button
-          className="mb-4 font-medium"
-          variant="success"
-        >
-          <CheckCircle className="size-5 " />
-          Confirm Order
-        </Button>
+      
+      {order.status == "PENDING"  &&
+        <UpdateStatusBtn  status="CONFIRMED" OrderId={order.id} className="w-max mb-5" />
 
       }
       <div className="flex flex-col  @md:flex-row @md:items-center @md:justify-between mb-8 gap-4">
