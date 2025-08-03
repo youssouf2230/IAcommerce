@@ -3,13 +3,13 @@ import { Suspense } from "react";
 import { Order } from "./columns";
 import TableSkeleton from "@/components/shared/table-skeleton";
 import { OrdersTableClient } from "./OrdersTableClient";
+import  { API_BASE_URL } from "@/lib/utils";
 
 export async function getOrders(): Promise<Order[]> {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 
-    const res = await fetch(`${baseUrl}/api/dashboard/orders`, {
+    const res = await fetch(`${API_BASE_URL}/api/dashboard/orders`, {
         headers: {
             Cookie: `token=${token}`,
         },
