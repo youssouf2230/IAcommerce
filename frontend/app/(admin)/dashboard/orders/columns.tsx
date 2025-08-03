@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CheckCircle, Eye, MoreHorizontal, Trash } from "lucide-react"
+import { Eye, MoreHorizontal, Trash } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { formattedPrice, getStatusStyles } from "@/lib/utils"
 import Link from "next/link"
@@ -90,7 +90,7 @@ export const columns: ColumnDef<Order>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            const order = row.original
+            const order = row?.original
             const status = row.getValue("status") as OrderStatus
 
             return (
@@ -104,18 +104,20 @@ export const columns: ColumnDef<Order>[] = [
                     <DropdownMenuContent align="center" className="gap-6">
                         <DropdownMenuLabel >Actions</DropdownMenuLabel>
                         <DropdownMenuItem asChild variant="info">
-                            <Link className="" href={`/dashboard/orders/${order.id}`}> <Eye className="text-inherit" />Details Order</Link>
+                            <Link className="" href={`/dashboard/orders/${order?.id}`}> <Eye className="text-inherit" />Details Order</Link>
                         </DropdownMenuItem>
+
                         {status === "PENDING" && (
-                            <DropdownMenuItem  className="w-max"  variant="success" asChild>
-                                <UpdateStatusBtn OrderId={order.id}  status={"CONFIRMED"} />
+                            <DropdownMenuItem className="w-max" variant="success" asChild  tabIndex={-1}>
+                                <UpdateStatusBtn OrderId={order?.id} status={"CONFIRMED"} className="flex w-full" />
                             </DropdownMenuItem>
+
                         )}
                         <DropdownMenuItem variant="destructive">
                             <Trash className="h-4 w-4" />
                             Delete
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order.id.toString())}>
+                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(order?.id.toString())}>
                             Copy Order ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />

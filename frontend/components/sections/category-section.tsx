@@ -17,7 +17,7 @@ const CategorySection = async () => {
       title="Shop by  category"
       description="Find the perfect device for your needs from our curated collections"
     >
-      <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-4 gap-y-10">
+      <div className="grid lg:grid-cols-6  sm:grid-cols-5 grid-cols-3 gap-4 gap-y-10">
         {categories.map((category: Category) => (
           <div
             key={category.id}

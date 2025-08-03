@@ -1,5 +1,4 @@
 "use client"
-
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,8 +9,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, RatIcon, Star, Trash } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { MoreHorizontal, Star, Trash } from "lucide-react"
 import { Product, Category } from "@/types"
 
 
@@ -76,7 +74,8 @@ export const columns: ColumnDef<Product>[] = [
         header: "Rating",
         cell: ({ row }) => {
             const rating = row.getValue("rating") as number;
-            return <span className="bg-amber-200/20 px-1.5 py-0.5   rounded-full text-xs text-amber-500 flex w-max items-center gap-0.5 font-semibold">{rating} <Star size={11}/> </span>;
+           
+            return <span className="bg-amber-300/20 px-1.5 py-0.5   rounded-full text-xs text-amber-500 flex w-max items-center gap-0.5 font-semibold">{ rating.toFixed(1)} <Star size={11}/> </span>;
         },
     },
     {
@@ -111,7 +110,7 @@ export const columns: ColumnDef<Product>[] = [
         header: "Category",
         cell: ({ row }) => {
             const category = row.getValue("category") as Category;
-            return <span>{category.name}</span>; // Assuming Category has a 'name' property. Adjust accordingly.
+            return <span className="font-semibold">{category.name}</span>; // Assuming Category has a 'name' property. Adjust accordingly.
         },
     },
 

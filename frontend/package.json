@@ -35,6 +35,7 @@
     "radix-ui": "^1.4.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.61.1",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",

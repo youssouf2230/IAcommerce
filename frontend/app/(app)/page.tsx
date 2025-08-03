@@ -6,6 +6,7 @@ import FeaturesProducts from "@/components/sections/features-products";
 import HeroSection from "@/components/sections/hero-section";
 import LatestSections from "@/components/sections/latest-sections";
 import SustainabilityHighlight from "@/components/sections/sustainability-highlight";
+import CompanyMarquee from "@/components/shared/company-marquee";
 
 
 export default function Page() {
@@ -16,6 +17,7 @@ export default function Page() {
      <LatestSections/>
      <CategorySection/>
      <SustainabilityHighlight/>
+     <CompanyMarquee/>
      {/* <BannerSection/> */}
     </main>
   );
