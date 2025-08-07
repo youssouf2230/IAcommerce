@@ -1,5 +1,7 @@
 # IAcommerce
 IAcommerce(commerce intelligent 90% automatisé).
+<img width="1920" height="905" alt="image" src="https://github.com/user-attachments/assets/67ae37cd-b622-443a-99ae-daf57b121a6c" />
+
 
 ## FONCTIONNALITÉS INTELLIGENTES :
 🧠 1. Moteur de Recommandation Intelligent
