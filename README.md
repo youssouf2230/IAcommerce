@@ -144,6 +144,8 @@ IAcommerce(commerce intelligent 90% automatisé).
      Associer les notes de commentaires dans produits
 
     🔧 Tech :LLM
+<img width="1886" height="899" alt="image" src="https://github.com/user-attachments/assets/a5a30ac2-aa48-48c5-a8a4-cf97bda34aba" />
+
 
 
 # Conception :
