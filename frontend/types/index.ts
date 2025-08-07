@@ -12,8 +12,9 @@ export type User = {
   roles: string[];
 }
 
+export type Client=Omit<User,'roles'>
+
 export interface Product {
-<<<<<<< HEAD
     id: number;
     name: string;
     description: string;
@@ -34,25 +35,6 @@ export interface Product {
     material?: string;
     weight?: string;
     dimensions?: string;
-=======
-  id: number;
-  name: string;
-  purchasePrice: number;
-  sellPrice: number;
-  oldPrice: number;
-  stockQuantity: number;
-  description: string;
-  numberOfView: number;
-  rating: number;
-  numberOfComments: number;
-  numberOfLiked: number;
-  numberOfDisliked: number;
-  colors: string[],
-  date: string;
-  hasLiked: boolean;
-  category: Category;
-  imageUrls: string[];
->>>>>>> 7ed5d017b1b1294ad56300c334688b451606e6ba
 }
 
 export type Order = {
@@ -75,23 +57,6 @@ export type OrderItem = {
   
 }
 
-<<<<<<< HEAD
-
-export type category = {
-    id: number;
-    name: string;
-    urlImage: string;
-  };
-
-  export type CommentProps = {
-      id: number;
-      content: string;
-      rating: number;
-      authorName: string;
-      createdAt: string;
-
-  };
-=======
 export type OrderStatus =
   | "PENDING"
   | "CONFIRMED"
@@ -102,7 +67,6 @@ export type OrderStatus =
   | "CANCELLED"
   | "RETURNED"
   | "REFUNDED";
->>>>>>> 7ed5d017b1b1294ad56300c334688b451606e6ba
 
 
 

@@ -77,18 +77,17 @@ export default function UploadImages({ onFilesChange,}: {onFilesChange?: (files:
                             </Button>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5  md:grid-cols-4">
+                        <div className="grid grid-cols-2 gap-10 lg:grid-cols-5  md:grid-cols-4">
                             {files.map((file) => (
                                 <div
                                     key={file.id}
-                                    className="bg-accent w-46 relative aspect-square rounded-md"
+                                    className="bg-accent w-56 relative aspect-square rounded-md"
                                 >
                                     <Image
-                                        width={40}
-                                        height={40}
+                                        fill
                                         src={file.preview as string}
                                         alt={file.file.name}
-                                        className="size-full rounded-[inherit] object-cover"
+                                        className="rounded-[inherit] object-contain"
                                     />
                                     <Button
                                         onClick={() => removeFile(file.id)}

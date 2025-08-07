@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,41 +75,59 @@ public class ProductsController {
         return productService.createProduct(product);
     }*/
 
-    @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        System.out.println(" Réception produit depuis frontend : " + product);
+@PostMapping
+public ResponseEntity<?> createProduct(@RequestBody Product product) {
+    try {
+        System.out.println("Produit reçu depuis frontend : " + product);
 
-        // Appel au LLM pour générer les champs manquants
-        Map<String, Object> generatedFields = productService.generateFromName(product.getName());
-
-        System.out.println(" Champs générés par LLM : " + generatedFields);
-
-        // Compléter les champs avec ce que le LLM a généré
-        product.setDescription((String) generatedFields.get("description"));
-        product.setBrand((String) generatedFields.get("brand"));
-        product.setMaterial((String) generatedFields.get("material"));
-        product.setDimensions((String) generatedFields.get("dimensions"));
-        product.setWeight((String) generatedFields.get("weight"));
-        product.setWarranty((String) generatedFields.get("warranty"));
-        product.setSku((String) generatedFields.get("sku"));
-        product.setDeliveryInfo((String) generatedFields.get("delivery"));
-        product.setReturnPolicy((String) generatedFields.get("returns"));
-
-        // Tags : conversion vers List<String>
-        if (generatedFields.get("tags") instanceof List<?> tagList) {
-            List<String> stringTags = tagList.stream()
-                    .map(Object::toString)
-                    .toList();
-            product.setTags(stringTags);
-            System.out.println("🏷 Tags générés : " + stringTags);
-        } else {
-            System.out.println(" Aucun tags valides générés !");
+        if (product.getName() == null || product.getName().trim().isEmpty()) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(" Le champ 'name' est requis.");
         }
 
-        Product saved = productService.createProduct(product);
-        System.out.println(" Produit enregistré avec succès : " + saved);
+        // Appel au service pour générer les champs manquants via LLM
+        Map<String, Object> generatedFields = productService.generateFromName(product.getName());
+        System.out.println("Champs générés : " + generatedFields);
 
-        return saved;
+        // Appliquer les champs générés (avec vérification préalable)
+        if (generatedFields != null) {
+            product.setBrand((String) generatedFields.getOrDefault("brand", ""));
+            product.setMaterial((String) generatedFields.getOrDefault("material", ""));
+            product.setDimensions((String) generatedFields.getOrDefault("dimensions", ""));
+            product.setWeight((String) generatedFields.getOrDefault("weight", ""));
+            product.setWarranty((String) generatedFields.getOrDefault("warranty", ""));
+            product.setSku((String) generatedFields.getOrDefault("sku", ""));
+            product.setDeliveryInfo((String) generatedFields.getOrDefault("delivery", ""));
+            product.setReturnPolicy((String) generatedFields.getOrDefault("returns", ""));
+
+            Object tagsRaw = generatedFields.get("tags");
+            if (tagsRaw instanceof List<?> tagList) {
+                List<String> stringTags = tagList.stream()
+                        .map(Object::toString)
+                        .toList();
+                product.setTags(stringTags);
+                System.out.println("Tags générés : " + stringTags);
+            } else {
+                System.out.println("Aucun tags valides générés !");
+            }
+        }
+
+        // Enregistrement en base
+        Product saved = productService.createProduct(product);
+        System.out.println("Produit enregistré : " + saved);
+
+        return ResponseEntity.ok(saved);
+
+    } catch (Exception e) {
+        // 🔍 Log complet de l'erreur
+        System.err.println("❌ Erreur lors de la création du produit : " + e.getMessage());
+        e.printStackTrace();
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Erreur interne : " + e.getMessage());
     }
+}
 
 }

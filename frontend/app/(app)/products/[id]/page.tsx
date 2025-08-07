@@ -118,7 +118,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             </div>
 
             {/* Button */}
-            <AddToCartButton className="w-fit" productId={product.id} />
+            <AddToCartButton className="w-fit" product={product} />
           </div>
         </div>
 

@@ -42,8 +42,8 @@ const items = [
     icon: LayoutGrid,
   },
   {
-    title: "Users",
-    url: "#",
+    title: "Clients",
+    url: "/dashboard/clients",
     icon: User,
   },
   {

@@ -2,8 +2,7 @@
 
 import { useActionState } from "react";
 import Link from "next/link";
-import { Facebook } from "lucide-react";
-
+import { Google } from "developer-icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -115,8 +114,9 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<"form
         </div>
 
         <Button variant="outline" className="w-full" type="button">
-          <Facebook className="mr-2 h-4 w-4" />
-          Continue with Facebook
+          <Google className="mr-2 h-4 w-4" />
+         
+          Continue with Google
         </Button>
       </div>
 

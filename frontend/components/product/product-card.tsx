@@ -8,6 +8,7 @@ import { Product } from '../../types';
 import { Rating } from '../shared/rating';
 import { API_BASE_URL } from '@/lib/utils';
 import { useCart } from '@/hooks/use-cart';
+import AddToCartButton from '../shared/add-to-cart';
 
 
 
@@ -72,9 +73,9 @@ const ProductCard = (props: Product) => {
         <span className="text-primary font-semibold">{props.sellPrice} Dh</span>
         <span className="text-gray-500 line-through">{props.oldPrice ? props.oldPrice : 200}Dh</span>
       </div>
-      <Button onClick={() => addToCart(props)} variant="default" size="lg" className="mt-4 w-full cursor-pointer">
-        <ShoppingCart size={20} /> Add cart
-      </Button>
+    
+
+      <AddToCartButton product={props} />
 
     </div>
   );

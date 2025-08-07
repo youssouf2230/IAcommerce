@@ -19,7 +19,7 @@ export type FormState = {
 const CommentSchema = z.object({
     content: z.string().min(1, { message: "Comment cannot be empty." }),
     productId: z.coerce.number(),
-  
+
 
     path: z.string(),
 });
@@ -40,12 +40,13 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
         };
     }
 
-    
+
     const { content, productId, path } = validatedFields.data;
-    const data = { content,authorName, userId , productId,  };
+    const data = { content, authorName, userId, productId, };
+    console.log("data", data)
 
     try {
-        await axios.post(`${API_BASE_URL}/api/comments'`, data, {
+        await axios.post(`${API_BASE_URL}/api/comments`, data, {
             withCredentials: true,
         });
 
@@ -59,7 +60,7 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
         };
     } catch (err) {
         console.error("Error sending comment:", err);
-
+       
         return {
             message: 'Failed to add comment.',
             error: 'An unexpected error occurred. Please try again.',

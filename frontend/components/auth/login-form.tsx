@@ -8,16 +8,17 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { handleLogin } from "../../actions/auth-action";
 import { SubmitButton } from "../shared/submit-button";
+import { Google } from "developer-icons";
 
 
-export function LoginForm({ className, ...props}: React.ComponentProps<"form">) {
+export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
 
-   
 
-const [state, formAction, pending] = useActionState(handleLogin, null);
+
+  const [state, formAction, pending] = useActionState(handleLogin, null);
 
   return (
-    <form  action={formAction} className={cn("flex flex-col gap-6", className)} {...props}>
+    <form action={formAction} className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -27,8 +28,8 @@ const [state, formAction, pending] = useActionState(handleLogin, null);
       <div className="grid gap-6">
         <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="m@example.com" required   defaultValue={state?.data?.email} />
-           {state?.errors?.email && (
+          <Input id="email" name="email" type="email" placeholder="m@example.com" required defaultValue={state?.data?.email} />
+          {state?.errors?.email && (
             <p className="text-red-500 text-sm">
               {state.errors.email[0]}
             </p>
@@ -45,14 +46,14 @@ const [state, formAction, pending] = useActionState(handleLogin, null);
             </a>
           </div>
           <Input
-           id="password" 
-           name="password" 
-           type="password" 
-           placeholder="*********" 
-           required
-           defaultValue={state?.data?.password}
-           
-           />
+            id="password"
+            name="password"
+            type="password"
+            placeholder="*********"
+            required
+            defaultValue={state?.data?.password}
+
+          />
         </div>
         {state?.message && (
           <p className="text-red-500 text-sm">{state.message}</p>
@@ -65,9 +66,9 @@ const [state, formAction, pending] = useActionState(handleLogin, null);
             Or continue with
           </span>
         </div>
-        <Button variant="outline" className="w-full">
-          <Facebook className="mr-2 h-4 w-4" />
-          Login with Facebook
+        <Button variant="outline" className="w-full" type="button">
+          <Google className="mr-2 h-4 w-4" />
+          Continue with Google
         </Button>
       </div>
       <div className="text-center text-sm">

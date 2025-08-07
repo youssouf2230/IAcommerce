@@ -2,25 +2,18 @@
 import React, { useTransition } from 'react';
 import { SubmitButton } from './submit-button';
 import { ShoppingCart } from 'lucide-react';
-import { cn, getOrCreateSessionId } from '@/lib/utils';
-import { addToCart } from '@/actions/cart-action';
-import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 
-const AddToCartButton = ({ productId, className }: { productId: number, className?: string }) => {
+import { useCart } from '@/hooks/use-cart';
+import { Product } from '@/types';
+
+const AddToCartButton = ({ product, className }: { product: Product, className?: string }) => {
 
   const [isPendingcart, startCartTransition] = useTransition();
+  const {addToCart}=useCart();
   const handleAddToCart = () => {
     startCartTransition(async () => {
-      const sessionId = getOrCreateSessionId();
-      const result = await addToCart({ productId, sessionId });
-
-
-      if (result.success) {
-        toast.success(result.success);
-      }
-      if (result.error) {
-        toast.error(result.error);
-      }
+       addToCart(product);
     });
   };
   return (

@@ -21,7 +21,7 @@ const CommentsUser =  async ({ productId }: { productId: number }) => {
         Comments <span className='text-2xl text-zinc-300'> ({comments.length}) </span>
       </h1>
 
-      <div className='bg-muted/50 rounded-2xl p-6'>
+      <div className='bg-muted/50 rounded-2xl md:px-6 px-3 p-8'>
         <div className='grid grid-cols-1 gap-8'>
           {comments.map((comment, index) => (
             <Comment key={index} comment={comment }  />

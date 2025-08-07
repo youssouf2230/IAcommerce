@@ -5,7 +5,8 @@ import { Product } from "@/types";
 import { UTApi } from "uploadthing/server";
 import { redirect } from "next/navigation";
 import { ProductFormState } from "@/app/(admin)/dashboard/products/add/form-add";
-import { API_BASE_URL } from "@/lib/utils"; 
+import { API_BASE_URL } from "@/lib/utils";
+import { error } from "console";
 
 // 1. Define the new response type from your API
 export interface PaginatedProductsResponse {
@@ -56,13 +57,13 @@ export async function getSingleProduct(id: number): Promise<Product | { message:
 
 
 
+// description: z.string().min(1, "Description is required"),
 const ProductFormSchema = z.object({
   name: z.string().min(1, "Product name is required"),
   purchasePrice: z.coerce.number().min(1, "Purchase price must be greater than 0"),
   sellPrice: z.coerce.number().min(1, "Sell price must be greater than 0"),
   oldPrice: z.coerce.number().optional(),
   stockQuantity: z.coerce.number().int().min(1, "Stock quantity must be greater than 0"),
-  description: z.string().min(1, "Description is required"),
   colors: z.array(z.string()).optional(),
   imageUrls: z.array(z.string()).min(1, "At least one image is required."),
   category: z.object({
@@ -83,6 +84,7 @@ export async function createProduct(prevState: any, formData: FormData): Promise
     };
 
     const validatedFields = ProductFormSchema.omit({ imageUrls: true }).safeParse(transformedData);
+    
 
     if (!validatedFields.success) {
       return {
@@ -105,8 +107,8 @@ export async function createProduct(prevState: any, formData: FormData): Promise
     for (const fileResult of uploadResponse) {
       if (fileResult.error) {
         console.error("UploadThing Error:", fileResult.error);
-      
-        
+
+
         throw new Error(`Failed to upload image: ${fileResult.error}`);
       }
       uploadedImageUrls.push(fileResult.data.ufsUrl);
@@ -116,6 +118,8 @@ export async function createProduct(prevState: any, formData: FormData): Promise
       ...validatedFields.data,
       imageUrls: uploadedImageUrls,
     };
+     console.log(JSON.stringify(productDataForDbUnsafe))
+     
 
     const res = await fetch(`${API_BASE_URL}/api/dashboard/products`, {
       method: 'POST',
@@ -123,9 +127,18 @@ export async function createProduct(prevState: any, formData: FormData): Promise
         'Content-Type': 'application/json',
       },
       credentials: 'include',
+      
       body: JSON.stringify(productDataForDbUnsafe),
     });
-
+    if(!res.ok){
+      return {
+        success:false,
+        errors:{
+          error:["An unexpected error occurred"]
+        }
+      }
+    }
+   
   } catch (error: any) {
     console.error("❌ Error creating product:", error);
     return {

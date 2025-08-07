@@ -30,7 +30,7 @@ const ProductForm = ({ categories }: { categories: Category[] }) => {
     const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
     const [state, handleSubmit, pending] = useActionState(
-        async (_prev: any, formData: FormData) => {
+        async (_prev: ProductFormState, formData: FormData) => {
             uploadedFiles.forEach((file) => {
                 formData.append('imageUrls', file);
             });
