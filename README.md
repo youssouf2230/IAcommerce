@@ -89,6 +89,8 @@ IAcommerce(commerce intelligent 90% automatisé).
     Rappel automatique (notif ou mail)
     
     Calcul dynamique (réductions IA, offre personnalisée)
+    <img width="1352" height="731" alt="image" src="https://github.com/user-attachments/assets/a3f0c348-f788-4cb3-b7a3-aa1e7d727586" />
+
 
 📄 8. Génération automatique de contenu
     Générer :
