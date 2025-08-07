@@ -19,6 +19,9 @@ import net.youssouf.backend.mappers.ProductMapper;
 import net.youssouf.backend.repositories.ProductRepository;
 import net.youssouf.backend.services.ProductService;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/dashboard/products")
 @CrossOrigin(origins = "*")
@@ -64,10 +67,47 @@ public class ProductsController {
     }
 
 
-    @PostMapping
+    /*@PostMapping
     public Product createProduct(@RequestBody Product product) {
         //System.out.println("product : " + product);
         return productService.createProduct(product);
+    }*/
+
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        System.out.println(" Réception produit depuis frontend : " + product);
+
+        // Appel au LLM pour générer les champs manquants
+        Map<String, Object> generatedFields = productService.generateFromName(product.getName());
+
+        System.out.println(" Champs générés par LLM : " + generatedFields);
+
+        // Compléter les champs avec ce que le LLM a généré
+        product.setDescription((String) generatedFields.get("description"));
+        product.setBrand((String) generatedFields.get("brand"));
+        product.setMaterial((String) generatedFields.get("material"));
+        product.setDimensions((String) generatedFields.get("dimensions"));
+        product.setWeight((String) generatedFields.get("weight"));
+        product.setWarranty((String) generatedFields.get("warranty"));
+        product.setSku((String) generatedFields.get("sku"));
+        product.setDeliveryInfo((String) generatedFields.get("delivery"));
+        product.setReturnPolicy((String) generatedFields.get("returns"));
+
+        // Tags : conversion vers List<String>
+        if (generatedFields.get("tags") instanceof List<?> tagList) {
+            List<String> stringTags = tagList.stream()
+                    .map(Object::toString)
+                    .toList();
+            product.setTags(stringTags);
+            System.out.println("🏷 Tags générés : " + stringTags);
+        } else {
+            System.out.println(" Aucun tags valides générés !");
+        }
+
+        Product saved = productService.createProduct(product);
+        System.out.println(" Produit enregistré avec succès : " + saved);
+
+        return saved;
     }
 
 }

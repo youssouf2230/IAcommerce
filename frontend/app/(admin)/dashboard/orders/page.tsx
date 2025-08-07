@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Order } from "./columns";
 import TableSkeleton from "@/components/shared/table-skeleton";
 import { OrdersTableClient } from "./OrdersTableClient";
-import  { API_BASE_URL } from "@/lib/utils";
+import { API_BASE_URL } from "@/lib/utils";
 
 export async function getOrders(): Promise<Order[]> {
     const cookieStore = await cookies();

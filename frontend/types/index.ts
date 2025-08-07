@@ -13,28 +13,32 @@ export type Category = {
       roles: string[];
   }
 
-  export interface Product {
+export interface Product {
     id: number;
     name: string;
-    purchasePrice: number;       
-    sellPrice: number;
-    oldPrice: number;
-    stockQuantity: number;
     description: string;
-    numberOfView: number;
+    sellPrice: number;
+    oldPrice?: number;
+    stockQuantity: number;
     rating: number;
-    numberOfComments: number;
-    numberOfLiked: number;
-    numberOfDisliked: number;
-    colors : string[],
-    date: string;
-    hasLiked: boolean;
-    category: Category;
     imageUrls: string[];
-  }
+    category?: { name: string };
+    colors?: string[];
+    brand?: string;
+    discount?: string;
+    tags?: string[];
+    features?: string[];
+    deliveryInfo?: string;
+    returnPolicy?: string;
+    warranty?: string;
+    material?: string;
+    weight?: string;
+    dimensions?: string;
+}
 
 
-  export type category = {
+
+export type category = {
     id: number;
     name: string;
     urlImage: string;
