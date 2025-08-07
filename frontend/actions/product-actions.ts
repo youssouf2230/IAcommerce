@@ -101,9 +101,12 @@ export async function createProduct(prevState: any, formData: FormData): Promise
     const uploadResponse = await utapi.uploadFiles(files);
     const uploadedImageUrls: string[] = [];
 
+
     for (const fileResult of uploadResponse) {
       if (fileResult.error) {
         console.error("UploadThing Error:", fileResult.error);
+      
+        
         throw new Error(`Failed to upload image: ${fileResult.error}`);
       }
       uploadedImageUrls.push(fileResult.data.ufsUrl);

@@ -4,10 +4,8 @@ import Image from 'next/image';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-
 import { Product } from '../../types';
 import { Rating } from '../shared/rating';
-
 import { API_BASE_URL } from '@/lib/utils';
 import { useCart } from '@/hooks/use-cart';
 
@@ -65,7 +63,7 @@ const ProductCard = (props: Product) => {
           height={300}
           priority
           unoptimized={false}
-          className="aspect-square size-60 object-contain m-auto cursor-pointer  hover:rotate-3 transition-all duration-300 ease-in-out"
+          className="aspect-square min-size-60 object-contain m-auto cursor-pointer  hover:rotate-3 transition-all duration-300 ease-in-out"
         />
       </Link>
       <h3 className="mt-3 font-semibold text-zinc-900 text-xl">{props.name}</h3>

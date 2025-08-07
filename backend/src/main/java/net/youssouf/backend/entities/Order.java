@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import net.youssouf.backend.enums.OrderStatus;
 
 import java.time.LocalDate;
 import java.util.List;
+
+
 
 @Entity
 @Table(name = "orders")
@@ -28,7 +31,9 @@ public class Order {
     @Column(length = 300)
     private String deliveryInstructions;
 
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status = OrderStatus.PENDING;
 
     private double total;
 

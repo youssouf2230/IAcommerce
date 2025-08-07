@@ -3,7 +3,8 @@
 @import "tailwindcss";
 
 @import "uploadthing/tw/v4";
-@source "../node_modules/@uploadthing/react/dist"; /** <-- depends on your project structure */
+@source "../node_modules/@uploadthing/react/dist";
+/** <-- depends on your project structure */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -128,13 +129,36 @@
   body {
     @apply bg-background text-foreground;
   }
-   input[type="number"]::-webkit-inner-spin-button,
+
+  /* Remove spinners in Chrome, Safari, Edge */
+  input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    -moz-appearance: none;
     margin: 0;
   }
+
+
+  .success {
+    @apply text-emerald-500 bg-emerald-100/50 font-semibold dark:bg-emerald-900/50 dark:text-emerald-400;
+  }
+
+  .info {
+    @apply text-blue-500 bg-blue-100/50 font-semibold dark:bg-blue-900/50 dark:text-blue-400;
+  }
+
+  .warning {
+    @apply text-amber-500 bg-amber-100/50 font-semibold dark:bg-amber-900/50 dark:text-amber-400;
+  }
+
+  .error {
+    @apply text-red-500 bg-red-100/50 font-semibold dark:bg-red-900/50 dark:text-red-400;
+  }
+
+
 }
 
 body {
   font-family: var(--font-inter);
 }
+

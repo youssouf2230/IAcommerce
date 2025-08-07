@@ -1,5 +1,7 @@
 # IAcommerce
 IAcommerce(commerce intelligent 90% automatisé).
+<img width="1920" height="905" alt="image" src="https://github.com/user-attachments/assets/67ae37cd-b622-443a-99ae-daf57b121a6c" />
+
 
 ## FONCTIONNALITÉS INTELLIGENTES :
 🧠 1. Moteur de Recommandation Intelligent
@@ -87,6 +89,8 @@ IAcommerce(commerce intelligent 90% automatisé).
     Rappel automatique (notif ou mail)
     
     Calcul dynamique (réductions IA, offre personnalisée)
+<img width="1352" height="731" alt="image" src="https://github.com/user-attachments/assets/a3f0c348-f788-4cb3-b7a3-aa1e7d727586" />
+
 
 📄 8. Génération automatique de contenu
     Générer :
@@ -128,7 +132,8 @@ IAcommerce(commerce intelligent 90% automatisé).
 
     Français
     Anglais
-    Arabe
+<img width="405" height="218" alt="image" src="https://github.com/user-attachments/assets/0e1e9dc5-0d1c-4752-b1ff-71e72e5c26fd" />
+
 
 🧠 12. Analyse de sentiment dans des commentaire:
     
@@ -139,6 +144,8 @@ IAcommerce(commerce intelligent 90% automatisé).
      Associer les notes de commentaires dans produits
 
     🔧 Tech :LLM
+<img width="1886" height="899" alt="image" src="https://github.com/user-attachments/assets/a5a30ac2-aa48-48c5-a8a4-cf97bda34aba" />
+
 
 
 # Conception :

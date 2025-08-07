@@ -26,7 +26,6 @@ export default async function Page() {
 
       </div>
       <Suspense fallback={<TableSkeleton />}>
-
         <DataTable columns={columns} data={data.content} />
       </Suspense>
     </div>

@@ -31,11 +31,11 @@ export default function LanguageSwitcher() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="outline-none cursor-pointer flex items-center">
-                <Globe className="mr-1" size={18} />
-                {currentLabel?.slice(0, 2)}
+            <DropdownMenuTrigger className="outline-none underline text-muted-foreground hover:text-foreground transition-colors text-sm cursor-pointer flex items-center">
+                <Globe className="mr-1 " size={14} />
+                {currentLabel}
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-max">
+            <DropdownMenuContent align="start" className="w-max">
                
                 {languages.map(lang => (
                     <DropdownMenuItem

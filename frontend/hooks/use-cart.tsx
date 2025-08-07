@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { API_BASE_URL, getOrCreateSessionId } from '@/lib/utils';
 import { Cart, CartItem, Product } from '@/types';
 import axios, { AxiosError } from 'axios';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
+
 
 
 type CartContextType = {
@@ -17,7 +17,8 @@ type CartContextType = {
     removeItem: (itemId: number) => Promise<void>;
     updateQuantity: (itemId: number, newQuantity: number) => Promise<void>;
     refetchCart: () => Promise<void>;
-    
+    clearCart: () => void;
+
 };
 
 
@@ -111,6 +112,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         }
     }, [refetchCart]); // Dependency on refetchCart
 
+    const clearCart = useCallback(async () => {
+        setCartItems([])
+    }, []);
+
     const removeItem = useCallback(async (itemId: number) => {
         try {
             await axios.delete(`${API_BASE_URL}/api/cart/item/${itemId}`, {
@@ -153,8 +158,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         addToCart,
         removeItem,
         updateQuantity,
-        refetchCart
-    }), [cartItems, totalItems, cartId, isLoading, addToCart, removeItem, updateQuantity, refetchCart, totalPrice]);
+        refetchCart,
+        clearCart
+    }), [cartItems, totalItems, cartId, isLoading, addToCart, removeItem, updateQuantity, refetchCart, totalPrice,clearCart]);
 
     return (
         <CartContext.Provider value={contextValue}>

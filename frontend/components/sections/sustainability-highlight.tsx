@@ -44,13 +44,13 @@ const SustainabilityHighlight = () => {
 
 
             <div className='grid grid-cols-3 md:gap-10 gap-5'>
-                <div className=' rounded-xl overflow-hidden  lg:h-[70vh]  h-[40vh] w-full    '>
+                <div className=' rounded-xl overflow-hidden  lg:h-[70vh]  h-[] w-full    '>
                     <Image src="https://images.pexels.com/photos/11031586/pexels-photo-11031586.jpeg" width={200} height={200} alt='iphone' className=' image h-full w-full object-cover' />
                 </div>
-                <div className='rounded-xl overflow-hidden   lg:h-[70vh] h-[40vh] w-full   '>
+                <div className='rounded-xl overflow-hidden   lg:h-[70vh] h-[] w-full   '>
                     <Image src="https://images.pexels.com/photos/21424626/pexels-photo-21424626.jpeg" width={200} height={200} alt='iphone' className=' image h-full w-full  object-cover' />
                 </div>
-                <div className='rounded-xl overflow-hidden   lg:h-[70vh] h-[40vh] w-full   '>
+                <div className='rounded-xl overflow-hidden   lg:h-[70vh] h-[] w-full   '>
                     <Image src="https://images.pexels.com/photos/10095767/pexels-photo-10095767.jpeg" width={200} height={200} alt='iphone' className=' image h-full w-full  object-cover' />
                 </div>
 
