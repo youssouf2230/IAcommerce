@@ -132,7 +132,8 @@ IAcommerce(commerce intelligent 90% automatisé).
 
     Français
     Anglais
-    Arabe
+<img width="405" height="218" alt="image" src="https://github.com/user-attachments/assets/0e1e9dc5-0d1c-4752-b1ff-71e72e5c26fd" />
+
 
 🧠 12. Analyse de sentiment dans des commentaire:
     
