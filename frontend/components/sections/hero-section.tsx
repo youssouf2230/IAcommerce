@@ -162,7 +162,7 @@ const HeroSection = () => {
 
         <div
           ref={textRef}
-          className="bg-secondary/25 backdrop-blur-2xl lg:text-[3rem] md:text-4xl font-medium sm:text-3xl max-sm:leading-7  text-2xl rounded-xl text-foreground/90 md:leading-18 leading-12 z-20 px-7 py-20 relative font-serif"
+          className="bg-secondary/25 backdrop-blur-2xl lg:text-[3rem] md:text-4xl  sm:text-3xl max-sm:leading-7  text-2xl rounded-xl text-foreground/90 md:leading-18 leading-12 z-20 px-7 py-20 relative "
         >
           <Image src="https://images.pexels.com/photos/28706295/pexels-photo-28706295.jpeg" alt="Logo" width={200}  height={200}  className='rounded-4xl object-cover md:w-42 md:h-20 w-32 h-16  m-auto mb-4' />
           {t('overlayText')}

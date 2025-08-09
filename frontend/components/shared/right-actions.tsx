@@ -7,7 +7,7 @@ import UserProfile from './user-profile';
 import { useSession } from '../../hooks/use-session';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import ShopCart from './shop-cart';
+import ShopCart from '../cart/shop-cart';
 
 const RightActions = () => {
     const t = useTranslations('Header');

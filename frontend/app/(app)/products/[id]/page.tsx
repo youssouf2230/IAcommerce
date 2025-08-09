@@ -5,7 +5,7 @@ import { Rating } from "@/components/shared/rating";
 import { ImageProduct } from "./image-product";
 import { getSingleProduct } from "@/actions/product-actions";
 import RecentlyViewed from "./recently-viewed";
-import AddToCartButton from "@/components/shared/add-to-cart";
+import AddToCartButton from "@/components/cart/add-to-cart";
 import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {

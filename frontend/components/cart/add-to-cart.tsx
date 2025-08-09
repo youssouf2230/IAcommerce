@@ -1,6 +1,6 @@
 'use client'
 import React, { useTransition } from 'react';
-import { SubmitButton } from './submit-button';
+import { SubmitButton } from '../shared/submit-button';
 import { ShoppingCart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

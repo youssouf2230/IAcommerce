@@ -62,7 +62,12 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Reeltek</SidebarGroupLabel>
+          <SidebarGroupLabel asChild>
+            <Link href="/">
+              Reeltek
+            </Link>
+
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
