@@ -8,7 +8,7 @@ import { Product } from '../../types';
 import { Rating } from '../shared/rating';
 import { API_BASE_URL } from '@/lib/utils';
 import { useCart } from '@/hooks/use-cart';
-import AddToCartButton from '../shared/add-to-cart';
+import AddToCartButton from '../cart/add-to-cart';
 
 
 

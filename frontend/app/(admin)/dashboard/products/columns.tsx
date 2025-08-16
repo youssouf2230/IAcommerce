@@ -6,11 +6,11 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MoreHorizontal, Star, Trash } from "lucide-react"
+import { MoreHorizontal, SquarePen, Star } from "lucide-react"
 import { Product, Category } from "@/types"
+import { DeleteButton } from "../clients/columns"
 
 
 
@@ -67,15 +67,15 @@ export const columns: ColumnDef<Product>[] = [
             return <span>{stockQuantity}</span>;
         },
     },
-   
- 
+
+
     {
         accessorKey: "rating",
         header: "Rating",
         cell: ({ row }) => {
             const rating = row.getValue("rating") as number;
-           
-            return <span className="bg-amber-300/20 px-1.5 py-0.5   rounded-full text-xs text-amber-500 flex w-max items-center gap-0.5 font-semibold">{ rating.toFixed(1)} <Star size={11}/> </span>;
+
+            return <span className="bg-amber-300/20 px-1.5 py-0.5   rounded-full text-xs text-amber-500 flex w-max items-center gap-0.5 font-semibold">{rating.toFixed(1)} <Star size={11} /> </span>;
         },
     },
     {
@@ -94,8 +94,8 @@ export const columns: ColumnDef<Product>[] = [
             return <span>{numberOfLiked}</span>;
         },
     },
-   
-  
+
+
     {
         accessorKey: "date",
         header: "Date",
@@ -120,7 +120,7 @@ export const columns: ColumnDef<Product>[] = [
 
 
             return (
-                <DropdownMenu>
+                <DropdownMenu > 
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
@@ -129,23 +129,20 @@ export const columns: ColumnDef<Product>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="center" className="gap-4">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem  onClick={() => { navigator.clipboard.writeText(row.getValue("id") as string) }}>
-                            
+                        <DropdownMenuItem onClick={() => { navigator.clipboard.writeText(row.getValue("id") as string) }}>
+
                             Copy ID
                         </DropdownMenuItem>
-                        <DropdownMenuItem variant="destructive">
-                            <Trash className=" h-4 w-4" />
-                            Delete
-                        </DropdownMenuItem>
+
+                       <DeleteButton/>
+
                         <DropdownMenuItem variant="success">
-                            <Trash className=" h-4 w-4" />
+                            <SquarePen className=" h-4 w-4" />
                             Edit
                         </DropdownMenuItem>
 
 
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View Customer</DropdownMenuItem>
-                        <DropdownMenuItem>View Order Details</DropdownMenuItem>
+                        
                     </DropdownMenuContent>
                 </DropdownMenu>
             )

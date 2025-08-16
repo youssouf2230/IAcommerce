@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal, Trash } from "lucide-react"
 import { Client } from "@/types"
+import { AlertDialogDelete } from "@/components/dashboard/dialogue-delete"
 
 
 
@@ -63,11 +64,7 @@ export const columns: ColumnDef<Client>[] = [
                             
                             Copy ID
                         </DropdownMenuItem>
-                        <DropdownMenuItem variant="destructive">
-                            <Trash className=" h-4 w-4" />
-                            Delete
-                        </DropdownMenuItem>
-                        
+                              <DeleteButton/>  
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
@@ -75,3 +72,16 @@ export const columns: ColumnDef<Client>[] = [
     },
 ]
 
+
+
+
+export function DeleteButton() {
+    return (
+        <AlertDialogDelete action={() => { console.log("is clicked form delte button") }}>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()} variant="destructive">
+                <Trash className=" h-4 w-4" />
+                Delete
+            </DropdownMenuItem>
+        </AlertDialogDelete>
+    )
+}

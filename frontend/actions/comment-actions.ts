@@ -43,8 +43,7 @@ export async function addComment(prevState: FormState, formData: FormData): Prom
 
     const { content, productId, path } = validatedFields.data;
     const data = { content, authorName, userId, productId, };
-    console.log("data", data)
-
+   
     try {
         await axios.post(`${API_BASE_URL}/api/comments`, data, {
             withCredentials: true,

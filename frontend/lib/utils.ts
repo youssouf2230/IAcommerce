@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL 
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
 
 
@@ -69,10 +69,10 @@ export function getStatusStyles(status: string): string {
   }
 }
 
-   export const formattedPrice = (price:number)=>{
+export const formattedPrice = (price: number) => {
 
-    return new Intl.NumberFormat("fr-MA", {
-                  style: "currency",
-                  currency: "MAD",
-              }).format(price)
-   }
+  return new Intl.NumberFormat("fr-MA", {
+    style: "currency",
+    currency: "MAD",
+  }).format(price)
+}

@@ -2,12 +2,6 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 
 import TableSkeleton from "@/components/shared/table-skeleton";
-<<<<<<< HEAD
-import { OrdersTableClient } from "./OrdersTableClient";
-import { API_BASE_URL } from "@/lib/utils";
-
-export async function getOrders(): Promise<Order[]> {
-=======
 
 import { API_BASE_URL } from "@/lib/utils";
 import { Order } from "@/types";
@@ -16,7 +10,6 @@ import { columns } from "./columns";
 
 export async function getOrders(): Promise<Order[]> {
 
->>>>>>> 7ed5d017b1b1294ad56300c334688b451606e6ba
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React, { useState } from 'react';
@@ -15,7 +16,8 @@ import { ShoppingCart } from 'lucide-react';
 import CartCard from '../ui/cart-card';
 import Link from 'next/link';
 import { useCart } from '@/hooks/use-cart';
-import { CartButtonSkeleton } from './Cart-button-skeleton';
+import { CartButtonSkeleton } from './cart-button-skeleton';
+
 
 
 const ShopCart = () => {
@@ -25,6 +27,8 @@ const ShopCart = () => {
 
     const { totalPrice, cartItems, totalItems, cartId, isLoading } = useCart();
     // if (isLoading) return <CartButtonSkeleton />
+
+
     return (
         <Sheet onOpenChange={setOpen} >
             <SheetTrigger asChild>
@@ -62,14 +66,17 @@ const ShopCart = () => {
                     ))}
                 </div>
 
-                <SheetFooter>
-                    <SheetClose asChild>
-                        <Button asChild disabled={!cartId}>
-                            {/* redirect vs checkout/[cartId]/page.tsx */}
-                            <Link href={`/checkout/${cartId}`}>Checkout</Link>
-                        </Button>
-                    </SheetClose>
-                </SheetFooter>
+
+                {cartItems.length === 0 ? <h1 className=' text-xl text-foreground/30  flex  justify-center items-center h-2/3  '>Your cart is empty</h1>
+                    : <SheetFooter>
+                        <SheetClose asChild>
+                            <Button asChild disabled={!cartId}>
+
+                                <Link href={`/checkout/${cartId}`}>Checkout</Link>
+                            </Button>
+                        </SheetClose>
+                    </SheetFooter>}
+
             </SheetContent>
         </Sheet>
     );
