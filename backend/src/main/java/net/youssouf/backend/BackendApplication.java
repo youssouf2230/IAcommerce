@@ -176,23 +176,36 @@ public class BackendApplication {
 
                                 Product.builder()
                                         .name("JBL Charge 5")
-                                        .purchasePrice(80)
-                                        .sellPrice(150)
+                                        .purchasePrice(80.0)
+                                        .sellPrice(150.0)
+                                        .oldPrice(200.0)
                                         .stockQuantity(40)
-                                        .description("Portable Bluetooth speaker")
-                                        .oldPrice(0.0)
+                                        .description("Enceinte Bluetooth portable avec son puissant et design étanche.")
                                         .numberOfView(130)
                                         .rating(4.7)
                                         .numberOfComments(28)
                                         .numberOfLiked(110)
-                                        //.numberOfDisliked(3)
-                                        .colors(List.of("red","blue","green","yellow"))
+                                        .colors(List.of("red", "blue", "green", "yellow"))
+                                        .tags(List.of("Bluetooth", "Portable", "Étanche", "20W RMS"))
+                                        .features(List.of(
+                                                "Puissance audio : 20W RMS (réponse en fréquence : 63Hz – 20kHz)",
+                                                "Résistance à l'eau et à la poussière (norme IP67)",
+                                                "Autonomie jusqu'à 20 heures",
+                                                "Fonction Powerbank intégrée"
+                                        ))
+                                        .brand("JBL")
+                                        .material("Plastique renforcé")
+                                        .weight("960g")
+                                        .dimensions("22 x 9.6 x 9.3 cm")
+                                        .warranty("2 ans")
+                                        .deliveryInfo("Livraison gratuite sous 3 à 5 jours")
+                                        .returnPolicy("Retour possible sous 14 jours")
+                                        .imageUrls(List.of("https://www.mediazone.ma/product/images/11912-huOL0Ml8/enceinte-portable-sans-fil-bluetooth-jbl-charge-5-rouge.jpg"))
                                         .date(LocalDate.now())
                                         .category(audio)
-                                        .imageUrls(List.of("https://www.mediazone.ma/product/images/11912-huOL0Ml8/enceinte-portable-sans-fil-bluetooth-jbl-charge-5-rouge.jpg"))
                                         .build(),
 
-                                Product.builder()
+                        Product.builder()
                                         .name("Logitech MX Master 3")
                                         .purchasePrice(50)
                                         .sellPrice(90)
@@ -207,6 +220,7 @@ public class BackendApplication {
                                         .colors(List.of("red","blue","green","yellow"))
                                         .date(LocalDate.now())
                                         .category(accessories)
+                                        .features(List.of("Puissance audio : 20W RMS (réponse en fréquence : 63Hz – 20kHz)", "Résistance à l'eau et à la poussière (norme IP67)"))
                                         .imageUrls(List.of("https://www.ultrapc.ma/19003-large_default/logitech-mx-master-3-graphite.jpg"))
                                         .build(),
 

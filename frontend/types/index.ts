@@ -31,6 +31,7 @@ export interface Product {
     features?: string[];
     deliveryInfo?: string;
     returnPolicy?: string;
+    sku?:string;
     warranty?: string;
     material?: string;
     weight?: string;

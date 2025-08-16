@@ -21,4 +21,16 @@ public class ProductDTO {
     private int numberOfDisliked;
     private List<String> imageUrls;
     private String categoryName;
+
+    // ✅ Attributs supplémentaires
+    private String brand;
+    private List<String> colors;
+    private List<String> tags;
+    private List<String> features;
+    private String material;
+    private String weight;
+    private String dimensions;
+    private String warranty;
+    private String deliveryInfo;
+    private String returnPolicy;
 }

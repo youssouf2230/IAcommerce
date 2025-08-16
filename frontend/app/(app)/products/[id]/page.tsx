@@ -11,12 +11,24 @@ import { notFound } from "next/navigation";
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const res = await getSingleProduct(Number(id));
+  console.log("Produit brut reçu :", res);
 
   if ("message" in res) {
     return notFound();
   }
 
   const product: Product = res as Product;
+  console.log("Attributs du produit :", {
+    brand: product.brand,
+    colors: product.colors,
+    tags: product.tags,
+    material: product.material,
+    weight: product.weight,
+    dimensions: product.dimensions,
+    warranty: product.warranty,
+    deliveryInfo: product.deliveryInfo,
+    returnPolicy: product.returnPolicy,
+  });
 
   // Calcul du discount si oldPrice existe
   const discount =
@@ -34,7 +46,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           <div className="flex-1 min-w-sm space-y-4">
             <h1 className="sm:text-5xl text-4xl font-semibold">{product.name}</h1>
             <p className="text-sm text-muted-foreground">
-              {product.category?.name} • SKU: TRL-001-LOGI
+              {product.category?.name} • SKU: {product.sku} {/*TRL - 001 - LOGI*/}
             </p>
 
             {/* Rating */}
@@ -67,6 +79,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
               {product.features?.length
                   ? product.features.map((feature, i) => (
                       <li key={i}>{feature}</li>
+
                   ))
                   : <li>No features listed.</li>}
             </ul>

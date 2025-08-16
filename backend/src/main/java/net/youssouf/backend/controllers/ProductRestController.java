@@ -107,6 +107,7 @@ public class ProductRestController {
             return ResponseEntity.notFound().build();
         }
         ProductDTO dto = productMapper.toDto(product);
+        System.out.println(dto);
         return ResponseEntity.ok(dto);
     }
 

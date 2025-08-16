@@ -85,7 +85,6 @@ public ResponseEntity<?> createProduct(@RequestBody Product product) {
                     .badRequest()
                     .body(" Le champ 'name' est requis.");
         }
-
         // Appel au service pour générer les champs manquants via LLM
         Map<String, Object> generatedFields = productService.generateFromName(product.getName());
         System.out.println("Champs générés : " + generatedFields);
@@ -112,6 +111,19 @@ public ResponseEntity<?> createProduct(@RequestBody Product product) {
                 System.out.println("Aucun tags valides générés !");
             }
         }
+
+        assert generatedFields != null;
+        Object featuresRaw = generatedFields.get("features");
+        if (featuresRaw instanceof List<?> featureList) {
+            List<String> stringFeatures = featureList.stream()
+                    .map(Object::toString)
+                    .toList();
+            product.setFeatures(stringFeatures);
+            System.out.println("Features générés : " + stringFeatures);
+        } else {
+            System.out.println("Aucune feature valide générée !");
+        }
+
 
         // Enregistrement en base
         Product saved = productService.createProduct(product);
