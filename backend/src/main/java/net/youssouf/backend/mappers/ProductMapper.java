@@ -29,6 +29,17 @@ public class ProductMapper {
         if (product.getCategory() != null) {
             dto.setCategoryName(product.getCategory().getName());
         }
+            dto.setBrand(product.getBrand());
+        dto.setColors(product.getColors());
+        dto.setTags(product.getTags());
+        dto.setFeatures(product.getFeatures());
+        dto.setMaterial(product.getMaterial());
+        dto.setWeight(product.getWeight());
+        dto.setDimensions(product.getDimensions());
+        dto.setWarranty(product.getWarranty());
+        dto.setDeliveryInfo(product.getDeliveryInfo());
+        dto.setReturnPolicy(product.getReturnPolicy());
+
 
         return dto;
     }

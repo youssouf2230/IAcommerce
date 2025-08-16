@@ -12,7 +12,6 @@ const electronicsLogos = [
 
 const CompanyMarquee = () => (
 <div className='my-20'>
-  <h1 className='text-4xl font-semibold mb-8 text-center'>Top Electronics Brands</h1>
   <Marquee>
     <MarqueeContent>
       {electronicsLogos.map((comp, index) => (

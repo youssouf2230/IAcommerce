@@ -13,11 +13,11 @@ export default function Page() {
   return (
     <main className="">
      <HeroSection/>
+     <CompanyMarquee/>
      <FeaturesProducts/>
      <LatestSections/>
      <CategorySection/>
      <SustainabilityHighlight/>
-     <CompanyMarquee/>
      {/* <BannerSection/> */}
     </main>
   );
