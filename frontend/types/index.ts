@@ -22,6 +22,7 @@ export interface Product {
     oldPrice?: number;
     stockQuantity: number;
     rating: number;
+    hasLiked: boolean;
     imageUrls: string[];
     category?: { name: string };
     colors?: string[];

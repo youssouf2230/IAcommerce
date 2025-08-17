@@ -1,13 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Heart, ShoppingCart } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Heart } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '../../types';
 import { Rating } from '../shared/rating';
 import { API_BASE_URL } from '@/lib/utils';
-import { useCart } from '@/hooks/use-cart';
 import AddToCartButton from '../cart/add-to-cart';
 
 
@@ -38,7 +36,6 @@ const ProductCard = (props: Product) => {
   };
 
 
-  const { addToCart } = useCart()
 
 
   return (
