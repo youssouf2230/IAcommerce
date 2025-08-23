@@ -97,12 +97,12 @@ const HeroSection = () => {
   }, { scope: animationRef });
 
   return (
-    <section ref={animationRef} className="w-full px-4 pt-20 bg-background text-center relative">
+    <section ref={animationRef} className="w-full  pt-20 bg-background text-center relative">
       <div className="max-w-3xl mx-auto">
 
         <div className=' space-y-6 relative z-20   max-lg:bg-background/50  max-lg:backdrop-blur-md rounded-2xl p-6  ' >
 
-          <h1 className="sm:text-5xl text-4xl md:text-6xl font-bold tracking-tight md:leading-18 animate">
+          <h1 className="sm:text-5xl text-4xl md:text-6xl font-semibold tracking-tight md:leading-18 animate">
             {t('title')}
           </h1>
           <p className="text-muted-foreground text-base md:text-lg animate">

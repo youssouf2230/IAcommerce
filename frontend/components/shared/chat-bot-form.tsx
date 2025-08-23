@@ -71,7 +71,7 @@ const ChatBotForm = ({className}:{className?:string}) => {
                     size="icon"
                     variant="ghost"
                   
-                    className="absolute bottom-1.5 right-2"
+                    className="absolute bottom-2 right-2"
                 >
                     <SendHorizontal />
                 </Button>

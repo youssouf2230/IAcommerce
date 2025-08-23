@@ -18,7 +18,7 @@ async function verifyToken(token: string) {
     return payload;
   } catch (error) {
  
-    return null; // Token is invalid or expired
+    return null; 
   }
 }
 
@@ -56,7 +56,8 @@ export async function middleware(request: NextRequest) {
   }
 
 
-  if(payload && authenticatedRoutes){
+  if(payload &&  authenticatedRoutes.includes(pathname)){
+    console.log("pathnaem", pathname)
      return  NextResponse.next();
 
   }
